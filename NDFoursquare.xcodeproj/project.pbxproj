@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D3BF98198A8CFA00076B50 /* NDJSONParser.m */; };
 		22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC3198A565E00392806 /* Foundation.framework */; };
 		22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC5198A565E00392806 /* CoreGraphics.framework */; };
 		22FA0DC8198A565E00392806 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC7198A565E00392806 /* UIKit.framework */; };
@@ -21,6 +22,7 @@
 		22FA0DE5198A565E00392806 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC7198A565E00392806 /* UIKit.framework */; };
 		22FA0DED198A565E00392806 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FA0DEB198A565E00392806 /* InfoPlist.strings */; };
 		22FA0DEF198A565E00392806 /* NDFoursquareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA0DEE198A565E00392806 /* NDFoursquareTests.m */; };
+		22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA0E27198A7AC600392806 /* FSOAuth.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22D3BF97198A8CFA00076B50 /* NDJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDJSONParser.h; sourceTree = "<group>"; };
+		22D3BF98198A8CFA00076B50 /* NDJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDJSONParser.m; sourceTree = "<group>"; };
 		22FA0DC0198A565E00392806 /* NDFoursquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NDFoursquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FA0DC3198A565E00392806 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22FA0DC5198A565E00392806 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +57,8 @@
 		22FA0DEA198A565E00392806 /* NDFoursquareTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NDFoursquareTests-Info.plist"; sourceTree = "<group>"; };
 		22FA0DEC198A565E00392806 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22FA0DEE198A565E00392806 /* NDFoursquareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDFoursquareTests.m; sourceTree = "<group>"; };
+		22FA0E26198A7AC600392806 /* FSOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSOAuth.h; path = FoursquareFiles/FSOAuth.h; sourceTree = "<group>"; };
+		22FA0E27198A7AC600392806 /* FSOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSOAuth.m; path = FoursquareFiles/FSOAuth.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,9 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				22FA0E25198A7AB200392806 /* FoursquareFiles */,
+				22D3BF97198A8CFA00076B50 /* NDJSONParser.h */,
+				22D3BF98198A8CFA00076B50 /* NDJSONParser.m */,
 				22FA0DD2198A565E00392806 /* NDAppDelegate.h */,
 				22FA0DD3198A565E00392806 /* NDAppDelegate.m */,
 				22FA0DD5198A565E00392806 /* Main.storyboard */,
@@ -150,6 +159,15 @@
 				22FA0DEB198A565E00392806 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22FA0E25198A7AB200392806 /* FoursquareFiles */ = {
+			isa = PBXGroup;
+			children = (
+				22FA0E26198A7AC600392806 /* FSOAuth.h */,
+				22FA0E27198A7AC600392806 /* FSOAuth.m */,
+			);
+			name = FoursquareFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +270,8 @@
 			files = (
 				22FA0DDA198A565E00392806 /* NDViewController.m in Sources */,
 				22FA0DD4198A565E00392806 /* NDAppDelegate.m in Sources */,
+				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,
+				22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */,
 				22FA0DD0198A565E00392806 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +477,7 @@
 				22FA0DF4198A565E00392806 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22FA0DF5198A565E00392806 /* Build configuration list for PBXNativeTarget "NDFoursquareTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +486,7 @@
 				22FA0DF7198A565E00392806 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

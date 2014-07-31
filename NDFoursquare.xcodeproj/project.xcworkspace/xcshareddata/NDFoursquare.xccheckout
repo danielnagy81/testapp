@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A37AD9EA-B382-4FDC-8023-123593F06EF4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NDFoursquare</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>18B80D8B-2626-4ECA-AC25-855105AA7670</key>
+		<string>https://github.com/foursquare/foursquare-ios-oauth.git</string>
+		<key>29BE422A-51BA-4C66-B253-33605CA94F0E</key>
+		<string>https://bitbucket.org/danielnagy81/architecturetraining.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NDFoursquare.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>18B80D8B-2626-4ECA-AC25-855105AA7670</key>
+		<string>../../NDFoursquare/FoursquareFiles</string>
+		<key>29BE422A-51BA-4C66-B253-33605CA94F0E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/danielnagy81/architecturetraining.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>29BE422A-51BA-4C66-B253-33605CA94F0E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>29BE422A-51BA-4C66-B253-33605CA94F0E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>architecturetraining</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>18B80D8B-2626-4ECA-AC25-855105AA7670</string>
+			<key>IDESourceControlWCCName</key>
+			<string>FoursquareFiles</string>
+		</dict>
+	</array>
+</dict>
+</plist>
