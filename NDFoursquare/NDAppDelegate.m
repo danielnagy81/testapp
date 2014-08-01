@@ -9,6 +9,7 @@
 #import "NDAppDelegate.h"
 #import "NDAuthenticationService.h"
 #import "NDJSONParser.h"
+#import "NDURLRequestFactory.h"
 
 @implementation NDAppDelegate {
     
@@ -21,6 +22,8 @@
     [_authenticationService authenticate];
     NSString *urlString = @"https://api.foursquare.com/v2/users/11703949?oauth_token=1CUVPISLFOWVS0VZUC0VSTZWZ1QC2PWK2FYMICZM1MS4HAQG&v=20140731";
     [NDJSONParser parseUserInfoWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    
+    NSURL *url = [NDURLRequestFactory venueStatWithID:@"51d46179498eef355044bc21" authToken:[_authenticationService accessToken]];
     return YES;
 }
 
