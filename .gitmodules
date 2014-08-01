@@ -1,3 +1,0 @@
-[submodule "NDFoursquare/FoursquareFiles"]
-	path = NDFoursquare/FoursquareFiles
-	url = https://github.com/foursquare/foursquare-ios-oauth.git

@@ -7,6 +7,7 @@
 //
 
 #import "NDViewController.h"
+#import "NDAuthenticationService.h"
 
 @interface NDViewController ()
 
@@ -14,16 +15,10 @@
 
 @implementation NDViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	NDAuthenticationService *authenticationService = [[NDAuthenticationService alloc] init];
+    NSLog(@"%@", [authenticationService accessToken]);
 }
 
 @end

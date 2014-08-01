@@ -7,19 +7,27 @@
 //
 
 #import "NDAppDelegate.h"
-#import "FSOAuth.h"
+#import "NDAuthenticationService.h"
 #import "NDJSONParser.h"
 
-@implementation NDAppDelegate
-
-NSString *const ClientID = @"FWVVZO3UPNXWXRGL3E3D5FX4XRVBXO2VJHK02Z3CQEHVYLHF";
-NSString *const ClientSecret = @"CMC30AIKMH0MZ50COXVBHUSVH5RHUYDUD1ATAORFLI3RDQEN";
-NSString *const URIString = @"ndfoursquare://foursquare";
+@implementation NDAppDelegate {
+    
+    NDAuthenticationService *_authenticationService;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    _authenticationService = [[NDAuthenticationService alloc] init];
+    [_authenticationService authenticate];
     NSString *urlString = @"https://api.foursquare.com/v2/users/11703949?oauth_token=1CUVPISLFOWVS0VZUC0VSTZWZ1QC2PWK2FYMICZM1MS4HAQG&v=20140731";
     [NDJSONParser parseUserInfoWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    _authenticationService = [[NDAuthenticationService alloc] init];
+    [_authenticationService handleURL:url];
     return YES;
 }
 
