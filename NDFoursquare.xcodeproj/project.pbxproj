@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
+		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
 		22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D3BF98198A8CFA00076B50 /* NDJSONParser.m */; };
 		22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC3198A565E00392806 /* Foundation.framework */; };
 		22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC5198A565E00392806 /* CoreGraphics.framework */; };
@@ -42,6 +43,8 @@
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
 		22249218198BAC3000EC59BE /* NDURLRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDURLRequestFactory.m; sourceTree = "<group>"; };
+		2224921B198BE01700EC59BE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
+		2224921C198BE01700EC59BE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
 		22D3BF97198A8CFA00076B50 /* NDJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDJSONParser.h; sourceTree = "<group>"; };
 		22D3BF98198A8CFA00076B50 /* NDJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDJSONParser.m; sourceTree = "<group>"; };
 		22FA0DC0198A565E00392806 /* NDFoursquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NDFoursquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +112,15 @@
 			name = URLRequestFactory;
 			sourceTree = "<group>";
 		};
+		2224921A198BDF6500EC59BE /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				2224921B198BE01700EC59BE /* Reachability.h */,
+				2224921C198BE01700EC59BE /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		22FA0DB7198A565E00392806 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +154,7 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				2224921A198BDF6500EC59BE /* Reachability */,
 				22249216198BABEC00EC59BE /* URLRequestFactory */,
 				22249212198B83E600EC59BE /* Services */,
 				22FA0E25198A7AB200392806 /* FoursquareFiles */,
@@ -296,6 +309,7 @@
 			files = (
 				22FA0DDA198A565E00392806 /* NDViewController.m in Sources */,
 				22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */,
+				2224921D198BE01700EC59BE /* Reachability.m in Sources */,
 				22FA0DD4198A565E00392806 /* NDAppDelegate.m in Sources */,
 				22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */,
 				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,

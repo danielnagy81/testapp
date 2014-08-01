@@ -1,0 +1,3 @@
+[submodule "NDFoursquare/Reachability"]
+	path = NDFoursquare/Reachability
+	url = https://github.com/tonymillion/Reachability.git

@@ -14,6 +14,8 @@
 		<string>https://github.com/foursquare/foursquare-ios-oauth.git</string>
 		<key>29BE422A-51BA-4C66-B253-33605CA94F0E</key>
 		<string>https://bitbucket.org/danielnagy81/architecturetraining.git</string>
+		<key>DC572CC6-DE09-4866-9984-A04E239D5C74</key>
+		<string>https://github.com/tonymillion/Reachability.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>NDFoursquare.xcodeproj/project.xcworkspace</string>
@@ -23,6 +25,8 @@
 		<string>../../NDFoursquare/FoursquareFiles</string>
 		<key>29BE422A-51BA-4C66-B253-33605CA94F0E</key>
 		<string>../..</string>
+		<key>DC572CC6-DE09-4866-9984-A04E239D5C74</key>
+		<string>../../NDFoursquare/Reachability</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://bitbucket.org/danielnagy81/architecturetraining.git</string>
@@ -47,6 +51,14 @@
 			<string>18B80D8B-2626-4ECA-AC25-855105AA7670</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FoursquareFiles</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DC572CC6-DE09-4866-9984-A04E239D5C74</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Reachability</string>
 		</dict>
 	</array>
 </dict>

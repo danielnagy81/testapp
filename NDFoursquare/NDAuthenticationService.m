@@ -8,13 +8,25 @@
 
 #import "NDAuthenticationService.h"
 #import "FSOAuth.h"
+#import "Reachability.h"
 
 NSString *const ClientID = @"FWVVZO3UPNXWXRGL3E3D5FX4XRVBXO2VJHK02Z3CQEHVYLHF";
 NSString *const ClientSecret = @"CMC30AIKMH0MZ50COXVBHUSVH5RHUYDUD1ATAORFLI3RDQEN";
 NSString *const CallbackURIString = @"ndfoursquare://foursquare";
 NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
-@implementation NDAuthenticationService
+@implementation NDAuthenticationService {
+    
+    Reachability *_reachability;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _reachability = [[Reachability alloc] init];
+    }
+    return self;
+}
 
 - (NSString *)accessToken {
     
@@ -23,13 +35,19 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
 - (void)authenticate {
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenIsAlreadyProvidedUserDefaultsKey]) {
-        NSLog(@"Authentication required!");
-        NSUInteger authenticationResult = [FSOAuth authorizeUserUsingClientId:ClientID callbackURIString:CallbackURIString allowShowingAppStore:NO];
-        [self errorMessage:authenticationResult];
+    if ([_reachability currentReachabilityStatus] != NotReachable) {
+        NSLog(@"There is internet connection!");
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenIsAlreadyProvidedUserDefaultsKey]) {
+            NSLog(@"Authentication required!");
+            NSUInteger authenticationResult = [FSOAuth authorizeUserUsingClientId:ClientID callbackURIString:CallbackURIString allowShowingAppStore:NO];
+            [self errorMessage:authenticationResult];
+        }
+        else {
+            NSLog(@"Authentication is not required.");
+        }
     }
     else {
-        NSLog(@"Authentication is not required.");
+        NSLog(@"There is no internet connection right now.");
     }
 }
 
@@ -49,6 +67,13 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 - (void)requestAccessTokenWithAccessCode:(NSString *)accessCode {
     
     [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
+        
+        if ([NSThread isMainThread]) {
+            NSLog(@"We are on the main thread!");
+        }
+        else {
+            NSLog(@"We are on a background thread!");
+        }
         
         if (requestCompleted && errorCode == FSOAuthErrorNone) {
             [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AccessTokenIsAlreadyProvidedUserDefaultsKey];
