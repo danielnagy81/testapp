@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */; };
+		220D6BF8198FA58D00F5CB99 /* NDNetworkStatusService.m in Sources */ = {isa = PBXBuildFile; fileRef = 220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */; };
+		220D6BFB198FD63E00F5CB99 /* NDAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 220D6BFA198FD63E00F5CB99 /* NDAPIService.m */; };
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
@@ -41,6 +43,10 @@
 
 /* Begin PBXFileReference section */
 		220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		220D6BF6198FA58D00F5CB99 /* NDNetworkStatusService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDNetworkStatusService.h; sourceTree = "<group>"; };
+		220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDNetworkStatusService.m; sourceTree = "<group>"; };
+		220D6BF9198FD63E00F5CB99 /* NDAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAPIService.h; sourceTree = "<group>"; };
+		220D6BFA198FD63E00F5CB99 /* NDAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAPIService.m; sourceTree = "<group>"; };
 		22249213198B83FB00EC59BE /* NDAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAuthenticationService.h; sourceTree = "<group>"; };
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
@@ -102,6 +108,10 @@
 			children = (
 				22249213198B83FB00EC59BE /* NDAuthenticationService.h */,
 				22249214198B83FB00EC59BE /* NDAuthenticationService.m */,
+				220D6BF6198FA58D00F5CB99 /* NDNetworkStatusService.h */,
+				220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */,
+				220D6BF9198FD63E00F5CB99 /* NDAPIService.h */,
+				220D6BFA198FD63E00F5CB99 /* NDAPIService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -158,10 +168,10 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				22FA0E25198A7AB200392806 /* FoursquareFiles */,
 				2224921A198BDF6500EC59BE /* Reachability */,
 				22249216198BABEC00EC59BE /* URLRequestFactory */,
 				22249212198B83E600EC59BE /* Services */,
-				22FA0E25198A7AB200392806 /* FoursquareFiles */,
 				22D3BF97198A8CFA00076B50 /* NDJSONParser.h */,
 				22D3BF98198A8CFA00076B50 /* NDJSONParser.m */,
 				22FA0DD2198A565E00392806 /* NDAppDelegate.h */,
@@ -311,6 +321,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220D6BFB198FD63E00F5CB99 /* NDAPIService.m in Sources */,
+				220D6BF8198FA58D00F5CB99 /* NDNetworkStatusService.m in Sources */,
 				22FA0DDA198A565E00392806 /* NDViewController.m in Sources */,
 				22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */,
 				2224921D198BE01700EC59BE /* Reachability.m in Sources */,

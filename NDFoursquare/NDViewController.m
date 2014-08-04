@@ -8,8 +8,9 @@
 
 #import "NDViewController.h"
 #import "NDAuthenticationService.h"
+#import "Reachability.h"
 
-@interface NDViewController ()
+@interface NDViewController () 
 
 @end
 

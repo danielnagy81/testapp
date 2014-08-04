@@ -8,43 +8,39 @@
 
 #import "NDAuthenticationService.h"
 #import "FSOAuth.h"
-#import "Reachability.h"
+#import "NDNetworkStatusService.h"
 
 NSString *const ClientID = @"FWVVZO3UPNXWXRGL3E3D5FX4XRVBXO2VJHK02Z3CQEHVYLHF";
 NSString *const ClientSecret = @"CMC30AIKMH0MZ50COXVBHUSVH5RHUYDUD1ATAORFLI3RDQEN";
 NSString *const CallbackURIString = @"ndfoursquare://foursquare";
-NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
+NSString *const UserAccessTokenUserDefaultsKey = @"AccessToken";
+NSString *const URLScheme = @"ndfoursquare";
 
 @implementation NDAuthenticationService {
     
-    Reachability *_reachability;
-    NetworkStatus _isInternetReachable;
+    NDNetworkStatusService *_networkStatusService;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _reachability = [Reachability reachabilityForInternetConnection];
-        _isInternetReachable = [_reachability currentReachabilityStatus];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetStatusChanged) name:kReachabilityChangedNotification object:nil];
-        [_reachability startNotifier];
+        _networkStatusService = [NDNetworkStatusService networkStatusServiceIstance];
     }
     return self;
 }
 
 - (NSString *)accessToken {
     
-    return [[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenIsAlreadyProvidedUserDefaultsKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey];
 }
 
 - (void)authenticate {
     
-    if (_isInternetReachable != NotReachable) {
-        NSLog(@"There is internet connection!");
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenIsAlreadyProvidedUserDefaultsKey]) {
+    if ([_networkStatusService isNetworkReachable]) {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey]) {
             NSLog(@"Authentication required!");
             NSUInteger authenticationResult = [FSOAuth authorizeUserUsingClientId:ClientID callbackURIString:CallbackURIString allowShowingAppStore:NO];
-            [self errorMessage:authenticationResult];
+            NSLog(@"%@", [NDAuthenticationService errorMessage:authenticationResult]);
         }
         else {
             NSLog(@"Authentication is not required.");
@@ -58,10 +54,10 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
 - (void)handleURL:(NSURL *)url {
     
-    if ([url.scheme isEqualToString:@"ndfoursquare"]) {
+    if ([url.scheme isEqualToString:URLScheme]) {
         FSOAuthErrorCode errorCode;
         NSString *accessCode = [FSOAuth accessCodeForFSOAuthURL:url error:&errorCode];
-        [self errorMessage:errorCode];
+        NSLog(@"%@", [NDAuthenticationService errorMessage:errorCode]);
         
         if (errorCode == FSOAuthErrorNone) {
             [self requestAccessTokenWithAccessCode:accessCode];
@@ -71,11 +67,11 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
 - (void)requestAccessTokenWithAccessCode:(NSString *)accessCode {
     
-    if (_isInternetReachable != NotReachable) {
+    if ([_networkStatusService isNetworkReachable]) {
         [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
             
             if (requestCompleted && errorCode == FSOAuthErrorNone) {
-                [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AccessTokenIsAlreadyProvidedUserDefaultsKey];
+                [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:UserAccessTokenUserDefaultsKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 NSLog(@"The request is completed!");
                 NSLog(@"The authentication code is: %@", authToken);
@@ -91,42 +87,23 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
     }
 }
 
-- (void)errorMessage:(FSOAuthErrorCode)errorCode {
++ (NSString *)errorMessage:(FSOAuthErrorCode)errorCode {
     
     if (errorCode == FSOAuthStatusSuccess) {
-        NSLog(@"The authentication was successfull!");
+        return @"The authentication was successfull!";
     }
-    else if (errorCode == FSOAuthStatusErrorInvalidClientID){
-        NSLog(@"You did not provide a valid client ID to the method.");
+    else if (errorCode == FSOAuthStatusErrorInvalidClientID) {
+        return @"You did not provide a valid client ID to the method.";
     }
     else if (errorCode == FSOAuthStatusErrorInvalidCallback) {
-        NSLog(@"You did not provide a valid callback string that has been registered with the system.");
+        return @"You did not provide a valid callback string that has been registered with the system.";
     }
     else if (errorCode == FSOAuthStatusErrorFoursquareNotInstalled) {
-        NSLog(@"Foursquare is not installed on the user's iOS device.");
+        return @"Foursquare is not installed on the user's iOS device.";
     }
     else {
-        NSLog(@"The version of the Foursquare app installed on the user's iOS device is too old to support native auth.");
+        return @"The version of the Foursquare app installed on the user's iOS device is too old to support native auth.";
     }
-}
-
-- (void)internetStatusChanged {
-    
-    _isInternetReachable = [_reachability currentReachabilityStatus];
-    if (_isInternetReachable == NotReachable) {
-        NSLog(@"The internet is not reachable at the moment.");
-    }
-    else if (_isInternetReachable == ReachableViaWiFi) {
-        NSLog(@"There is internet via wifi.");
-    }
-    else {
-        NSLog(@"There is internet via wwan.");
-    }
-}
-
-- (void)dealloc {
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

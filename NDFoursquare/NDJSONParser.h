@@ -10,6 +10,7 @@
 
 @interface NDJSONParser : NSObject
 
-+ (void)parseUserInfoWithData:(NSData *)data;
+- (instancetype)initWithData:(NSData *)data;
+- (NSArray *)leaderboardArray;
 
 @end
