@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */; };
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22249213198B83FB00EC59BE /* NDAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAuthenticationService.h; sourceTree = "<group>"; };
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */,
 				22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */,
 				22FA0DC8198A565E00392806 /* UIKit.framework in Frameworks */,
 				22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */,
@@ -143,6 +146,7 @@
 		22FA0DC2198A565E00392806 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */,
 				22FA0DC3198A565E00392806 /* Foundation.framework */,
 				22FA0DC5198A565E00392806 /* CoreGraphics.framework */,
 				22FA0DC7198A565E00392806 /* UIKit.framework */,
@@ -442,6 +446,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NDFoursquare/NDFoursquare-Prefix.pch";
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -455,6 +460,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NDFoursquare/NDFoursquare-Prefix.pch";
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

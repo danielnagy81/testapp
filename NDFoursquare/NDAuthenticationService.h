@@ -10,8 +10,8 @@
 
 @interface NDAuthenticationService : NSObject
 
-- (NSString *)accessToken;
 - (void)authenticate;
+- (NSString *)accessToken;
 - (void)handleURL:(NSURL *)url;
 
 @end

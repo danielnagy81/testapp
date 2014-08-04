@@ -18,12 +18,16 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 @implementation NDAuthenticationService {
     
     Reachability *_reachability;
+    NetworkStatus _isInternetReachable;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _reachability = [[Reachability alloc] init];
+        _reachability = [Reachability reachabilityForInternetConnection];
+        _isInternetReachable = [_reachability currentReachabilityStatus];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(internetStatusChanged) name:kReachabilityChangedNotification object:nil];
+        [_reachability startNotifier];
     }
     return self;
 }
@@ -35,7 +39,7 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
 - (void)authenticate {
     
-    if ([_reachability currentReachabilityStatus] != NotReachable) {
+    if (_isInternetReachable != NotReachable) {
         NSLog(@"There is internet connection!");
         if (![[NSUserDefaults standardUserDefaults] objectForKey:AccessTokenIsAlreadyProvidedUserDefaultsKey]) {
             NSLog(@"Authentication required!");
@@ -47,7 +51,8 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
         }
     }
     else {
-        NSLog(@"There is no internet connection right now.");
+        NSLog(@"There is no internet connection at the moment.");
+        //TODO: Implement a user flow that redirects from here to one of the view controllers.
     }
 }
 
@@ -66,24 +71,24 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
 
 - (void)requestAccessTokenWithAccessCode:(NSString *)accessCode {
     
-    [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
-        
-        if ([NSThread isMainThread]) {
-            NSLog(@"We are on the main thread!");
-        }
-        else {
-            NSLog(@"We are on a background thread!");
-        }
-        
-        if (requestCompleted && errorCode == FSOAuthErrorNone) {
-            [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AccessTokenIsAlreadyProvidedUserDefaultsKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            NSLog(@"The request is completed!");
-        }
-        else {
-            NSLog(@"There was an error during the access token request process.");
-        }
-    }];
+    if (_isInternetReachable != NotReachable) {
+        [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
+            
+            if (requestCompleted && errorCode == FSOAuthErrorNone) {
+                [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AccessTokenIsAlreadyProvidedUserDefaultsKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                NSLog(@"The request is completed!");
+                NSLog(@"The authentication code is: %@", authToken);
+            }
+            else {
+                NSLog(@"There was an error during the access token request process.");
+            }
+        }];
+    }
+    else {
+        NSLog(@"There is no internet connection at the moment.");
+        //TODO: Implement a user flow that redirects from here to one of the view controllers.
+    }
 }
 
 - (void)errorMessage:(FSOAuthErrorCode)errorCode {
@@ -103,6 +108,25 @@ NSString *const AccessTokenIsAlreadyProvidedUserDefaultsKey = @"AccessToken";
     else {
         NSLog(@"The version of the Foursquare app installed on the user's iOS device is too old to support native auth.");
     }
+}
+
+- (void)internetStatusChanged {
+    
+    _isInternetReachable = [_reachability currentReachabilityStatus];
+    if (_isInternetReachable == NotReachable) {
+        NSLog(@"The internet is not reachable at the moment.");
+    }
+    else if (_isInternetReachable == ReachableViaWiFi) {
+        NSLog(@"There is internet via wifi.");
+    }
+    else {
+        NSLog(@"There is internet via wwan.");
+    }
+}
+
+- (void)dealloc {
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

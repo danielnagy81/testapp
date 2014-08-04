@@ -15,10 +15,4 @@
 
 @implementation NDViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	NDAuthenticationService *authenticationService = [[NDAuthenticationService alloc] init];
-    NSLog(@"%@", [authenticationService accessToken]);
-}
-
 @end
