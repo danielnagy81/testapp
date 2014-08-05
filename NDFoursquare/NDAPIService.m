@@ -8,54 +8,62 @@
 
 #import "NDAPIService.h"
 #import "NDJSONParser.h"
+#import "NDNetworkStatusService.h"
 
 @implementation NDAPIService {
     
-    NSString *_urlString;
+    NSURL *_url;
+    NDNetworkStatusService *_networkStatusService;
 }
 
-- (instancetype)initWithUrlString:(NSString *)urlString {
+- (instancetype)initWithURL:(NSURL *)url {
     self = [super init];
     if (self) {
-        _urlString = [[NSString alloc] init];
+        _url = url;
+        _networkStatusService = [NDNetworkStatusService networkStatusServiceIstance];
     }
     return self;
 }
 
-- (void)processURL {
+- (void)processURLWithCompletion:(NDCompletionBlock)completion {
     
-}
-
-- (NSDictionary *)jsonParserWithUrlStr {
-    
-    if ([_urlString rangeOfString:@"users"].location != NSNotFound) {
-        if ([_urlString rangeOfString:@"leaderboard"].location != NSNotFound) {
-            //TODO: returning the corresponding json parser.
-            NSLog(@"Leaderboard of users!");
-            return nil;
-        }
-        else {
-            NSLog(@"Users!");
-            //TODO: returning the corresponding json parser.
-            return nil;
-        }
-    }
-    else if ([_urlString rangeOfString:@"venues"].location != NSNotFound) {
-        if ([_urlString rangeOfString:@"trending"].location != NSNotFound) {
-            NSLog(@"Trending venue places!");
-            //TODO: returning the corresponding json parser.
-            return nil;
-        }
-        else {
-            NSLog(@"Venue stats!");
-            //TODO: returning the corresponding json parser.
-            return nil;
-        }
+    if ([_networkStatusService isNetworkReachable]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *dataWithURL = [NSData dataWithContentsOfURL:_url];
+            NSArray *resultArray = [self jsonParserWithData:dataWithURL];
+            
+            if (resultArray.count > 0) {
+                completion(resultArray, nil);
+            }
+            else {
+                NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The returned array was empty."};
+                NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:999 userInfo:errorDetails];
+                completion(resultArray, error);
+            }
+        });
     }
     else {
-        NSLog(@"Tips!");
-        //TODO: returning the corresponding json parser.
-        return nil;
+        NSLog(@"The network is not reachable at the moment.");
+    }
+}
+
+- (NSArray *)jsonParserWithData:(NSData *)data {
+    
+    NDJSONParser *jsonParser = [[NDJSONParser alloc] initWithData:data];
+    NSString *urlString = [_url absoluteString];
+    if ([urlString rangeOfString:@"users"].location != NSNotFound) {
+        if ([urlString rangeOfString:@"leaderboard"].location != NSNotFound) {
+            return [jsonParser parseLeaderboard];
+        }
+        else {
+            return [jsonParser parseUser];
+        }
+    }
+    else if ([urlString rangeOfString:@"venues"].location != NSNotFound) {
+        return [jsonParser parseTrendingPlaces];
+    }
+    else {
+        return [jsonParser parseTips];
     }
 }
 

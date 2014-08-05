@@ -12,6 +12,7 @@
 #import "NDJSONParser.h"
 #import "NDURLRequestFactory.h"
 #import "NDAPIService.h"
+#import "NDAPIService.h"
 //********TEST*********
 
 @implementation NDAppDelegate {
@@ -24,11 +25,16 @@
     _authenticationService = [[NDAuthenticationService alloc] init];
     [_authenticationService authenticate];
     //********TEST*********
-    NSURL *url = [NDURLRequestFactory trendingPlacesURLWithLocationString:@"47.507658,19.079491" authToken:[_authenticationService accessToken]];
-    NSData *dataWithURL = [NSData dataWithContentsOfURL:url];
-    
-    NDJSONParser *parser = [[NDJSONParser alloc] initWithData:dataWithURL];
-    NSArray *array = [parser parseTrendingPlaces];
+    NSURL *requestURL = [NDURLRequestFactory trendingPlacesURLWithLocationString:@"47.497453,19.076745" authToken:[_authenticationService accessToken]];
+    NDAPIService *apiService = [[NDAPIService alloc] initWithURL:requestURL];
+    [apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        else {
+            NSLog(@"%@", resultArray);
+        }
+    }];
     
     NSLog(@"%u", 17<<1);
     

@@ -10,7 +10,9 @@
 
 @interface NDAPIService : NSObject
 
-- (instancetype)initWithUrlString:(NSString *)urlString;
-- (void)processURL;
+typedef void (^NDCompletionBlock) (NSArray *resultArray, NSError *error);
+
+- (instancetype)initWithURL:(NSURL *)url;
+- (void)processURLWithCompletion:(NDCompletionBlock)completion;
 
 @end

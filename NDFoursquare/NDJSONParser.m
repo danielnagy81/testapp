@@ -128,6 +128,7 @@
                                      @"longitude": [[venueDictionary objectForKey:@"location"] objectForKey:@"lng"]}];
         }
     }
+    //This line is an not useful line!
     return resultArray;
 }
 
