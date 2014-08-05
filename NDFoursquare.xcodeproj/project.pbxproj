@@ -103,6 +103,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220F72761990E1BE00934A8E /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				22D3BF97198A8CFA00076B50 /* NDJSONParser.h */,
+				22D3BF98198A8CFA00076B50 /* NDJSONParser.m */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		220F72771990E1F300934A8E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				22FA0DD8198A565E00392806 /* NDViewController.h */,
+				22FA0DD9198A565E00392806 /* NDViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		22249212198B83E600EC59BE /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,17 +186,15 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				220F72771990E1F300934A8E /* ViewControllers */,
+				220F72761990E1BE00934A8E /* Parser */,
 				22FA0E25198A7AB200392806 /* FoursquareFiles */,
 				2224921A198BDF6500EC59BE /* Reachability */,
 				22249216198BABEC00EC59BE /* URLRequestFactory */,
 				22249212198B83E600EC59BE /* Services */,
-				22D3BF97198A8CFA00076B50 /* NDJSONParser.h */,
-				22D3BF98198A8CFA00076B50 /* NDJSONParser.m */,
 				22FA0DD2198A565E00392806 /* NDAppDelegate.h */,
 				22FA0DD3198A565E00392806 /* NDAppDelegate.m */,
 				22FA0DD5198A565E00392806 /* Main.storyboard */,
-				22FA0DD8198A565E00392806 /* NDViewController.h */,
-				22FA0DD9198A565E00392806 /* NDViewController.m */,
 				22FA0DDB198A565E00392806 /* Images.xcassets */,
 				22FA0DCA198A565E00392806 /* Supporting Files */,
 			);

@@ -10,6 +10,7 @@
 #import "NDAuthenticationService.h"
 //********TEST*********
 #import "NDJSONParser.h"
+#import "NDURLRequestFactory.h"
 #import "NDAPIService.h"
 //********TEST*********
 
@@ -20,19 +21,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    _authenticationService = [[NDAuthenticationService alloc] init];
+    [_authenticationService authenticate];
     //********TEST*********
-    NSData *contentOfURL = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://api.foursquare.com/v2/users/leaderboard?oauth_token=EXFFYIEEJK0WXP4AYXXP0OB2NPL3XE3O410VZEYBQ5GSY1IB&v=20140804"]];
-    NDAPIService *api = [[NDAPIService alloc] init];
-    [api jsonParserWithUrlString:@"https://api.foursquare.com/v2/users/leaderboard?oauth_token=1CUVPISLFOWVS0VZUC0VSTZWZ1QC2PWK2FYMICZM1MS4HAQG&v=20140804"];
-    NDJSONParser *parser = [[NDJSONParser alloc] initWithData:contentOfURL];
-    NSArray *array = [parser leaderboardArray];
+    NSURL *url = [NDURLRequestFactory trendingPlacesURLWithLocationString:@"47.507658,19.079491" authToken:[_authenticationService accessToken]];
+    NSData *dataWithURL = [NSData dataWithContentsOfURL:url];
+    
+    NDJSONParser *parser = [[NDJSONParser alloc] initWithData:dataWithURL];
+    NSArray *array = [parser parseTrendingPlaces];
     
     NSLog(@"%u", 17<<1);
     
     //********TEST*********
-    
-    _authenticationService = [[NDAuthenticationService alloc] init];
-    [_authenticationService authenticate];
+
     return YES;
 }
 

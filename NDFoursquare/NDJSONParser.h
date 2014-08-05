@@ -11,6 +11,9 @@
 @interface NDJSONParser : NSObject
 
 - (instancetype)initWithData:(NSData *)data;
-- (NSArray *)leaderboardArray;
+- (NSArray *)parseLeaderboard;
+- (NSArray *)parseTips;
+- (NSArray *)parseUser;
+- (NSArray *)parseTrendingPlaces;
 
 @end

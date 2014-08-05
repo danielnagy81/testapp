@@ -10,6 +10,7 @@
 
 @interface NDAPIService : NSObject
 
-- (NSDictionary *)jsonParserWithUrlString:(NSString *)urlString;
+- (instancetype)initWithUrlString:(NSString *)urlString;
+- (void)processURL;
 
 @end
