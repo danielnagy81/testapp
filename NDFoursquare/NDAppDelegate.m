@@ -8,11 +8,6 @@
 
 #import "NDAppDelegate.h"
 #import "NDAuthenticationService.h"
-//********TEST*********
-#import "NDJSONParser.h"
-#import "NDURLRequestFactory.h"
-#import "NDAPIService.h"
-//********TEST*********
 
 @implementation NDAppDelegate {
     
@@ -23,18 +18,6 @@
     
     _authenticationService = [[NDAuthenticationService alloc] init];
     [_authenticationService authenticate];
-    //********TEST*********
-    NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeVenuesTrending withOptionalParameter:@"47.495090,19.059048"];
-    [apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-        else {
-            NSLog(@"%@", resultArray);
-        }
-    }];
-    //********TEST*********
-
     return YES;
 }
 

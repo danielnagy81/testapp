@@ -41,7 +41,7 @@
             ++userRank;
             NSString *userName = [NSString stringWithFormat:@"%@ %@", [[userDictionary objectForKey:@"user"] objectForKey:@"lastName"], [[userDictionary objectForKey:@"user"] objectForKey:@"firstName"]];
             NSString *userScore = [NSString stringWithFormat:@"%@ %@ %@", [[userDictionary objectForKey:@"scores"] objectForKey:@"max"], [[userDictionary objectForKey:@"scores"] objectForKey:@"checkinsCount"], [[userDictionary objectForKey:@"scores"] objectForKey:@"recent"]];
-            NSDictionary *userEntry = @{@"name": [NSString stringWithFormat:@"%lu. %@:", (unsigned long)userRank, userName], @"scores": userScore};
+            NSDictionary *userEntry = @{@"name": [NSString stringWithFormat:@"%lu. %@", (unsigned long)userRank, userName], @"scores": userScore};
             [resultArray addObject:userEntry];
         }
     }

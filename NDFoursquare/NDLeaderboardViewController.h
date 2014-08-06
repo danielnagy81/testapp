@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NDViewController : UIViewController
+@interface NDLeaderboardViewController : UITableViewController
 
 @end
