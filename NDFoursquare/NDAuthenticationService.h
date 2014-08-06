@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const UserAccessTokenUserDefaultsKey;
+
 @interface NDAuthenticationService : NSObject
 
 - (void)authenticate;

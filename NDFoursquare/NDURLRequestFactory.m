@@ -14,30 +14,51 @@ NSString *const BaseURLString = @"https://api.foursquare.com/v2/";
 
 + (NSURL *)leaderboardURLWithAuthToken:(NSString *)authToken {
     
-    NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"users/self?oauth_token=%@&v=%@", authToken, [self requestVersion]]];
+    if (!authToken) {
+        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
+        return nil;
+    }
+    //TODO: this function is bad! correct it, it should return the leaderboard, not the user information
+    NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"users/leaderboard?oauth_token=%@&v=%@", authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)tipsURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken {
     
+    if (!locationString || !authToken) {
+        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"tips/search?ll=%@&oauth_token=%@&v=%@", locationString, authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)userInformationURLWithUserID:(NSString *)userID authToken:(NSString *)authToken {
     
+    if (!userID || !authToken) {
+        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"users/%@?oauth_token=%@&v=%@", userID, authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)trendingPlacesURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken {
     
+    if (!locationString || !authToken) {
+        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"venues/trending?ll=%@&oauth_token=%@&v=%@", locationString, authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)venuesURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken {
     
+    if (!locationString || !authToken) {
+        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
+        return nil;
+    }
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"venues/search?ll=%@&oauth_token=%@&v=%@", locationString, authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }

@@ -23,6 +23,7 @@
 
 - (NSArray *)parseLeaderboard {
     
+    [self errorMessage];
     NSError *error = nil;
     NSDictionary *parsedDictionary = [NSJSONSerialization JSONObjectWithData:_dataFromURL options:NSJSONReadingMutableContainers error:&error];
     //TODO: if the meta code is 200, there is a possible scenario, when there is no data from the url, but creating a new access token might help.
@@ -49,6 +50,7 @@
 
 - (NSArray *)parseTips {
     
+    [self errorMessage];
     NSError *error = nil;
     NSDictionary *parsedDictionary = [NSJSONSerialization JSONObjectWithData:_dataFromURL options:NSJSONReadingMutableContainers error:&error];
     //TODO: if the meta code is 200, there is a possible scenario, when there is no data from the url, but creating a new access token might help.
@@ -84,6 +86,7 @@
 
 - (NSArray *)parseUser {
     
+    [self errorMessage];
     NSError *error = nil;
     NSDictionary *parsedDictionary = [NSJSONSerialization JSONObjectWithData:_dataFromURL options:NSJSONReadingMutableContainers error:&error];
     //TODO: if the meta code is 200, there is a possible scenario, when there is no data from the url, but creating a new access token might help.
@@ -108,6 +111,7 @@
 
 - (NSArray *)parseTrendingPlaces {
     
+    [self errorMessage];
     NSError *error = nil;
     NSDictionary *parsedDictionary = [NSJSONSerialization JSONObjectWithData:_dataFromURL options:NSJSONReadingMutableContainers error:&error];
     //TODO: if the meta code is 200, there is a possible scenario, when there is no data from the url, but creating a new access token might help.
@@ -130,6 +134,12 @@
     }
     //This line is an not useful line!
     return resultArray;
+}
+
+- (void)errorMessage {
+    if (!_dataFromURL) {
+        NSLog(@"Error: the data is nil that should be parsed!");
+    }
 }
 
 @end
