@@ -70,7 +70,7 @@
         case NDServiceTypeTipsSearch:
             return [NDURLRequestFactory tipsURLWithLocationString:_optinalInputParameter authToken:authToken];
         case NDServiceTypeVenuesTrending:
-            return [NDURLRequestFactory venuesURLWithLocationString:_optinalInputParameter authToken:authToken];
+            return [NDURLRequestFactory trendingPlacesURLWithLocationString:_optinalInputParameter authToken:authToken];
         default:
             NSLog(@"Error, service type is incorrect in %s", __PRETTY_FUNCTION__);
             return nil;

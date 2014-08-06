@@ -14,6 +14,5 @@
 + (NSURL *)tipsURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken;
 + (NSURL *)userInformationURLWithUserID:(NSString *)userID authToken:(NSString *)authToken;
 + (NSURL *)trendingPlacesURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken;
-+ (NSURL *)venuesURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken;
 
 @end

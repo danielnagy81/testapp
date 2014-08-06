@@ -18,7 +18,6 @@ NSString *const BaseURLString = @"https://api.foursquare.com/v2/";
         NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
         return nil;
     }
-    //TODO: this function is bad! correct it, it should return the leaderboard, not the user information
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"users/leaderboard?oauth_token=%@&v=%@", authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
@@ -50,16 +49,6 @@ NSString *const BaseURLString = @"https://api.foursquare.com/v2/";
         return nil;
     }
     NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"venues/trending?ll=%@&oauth_token=%@&v=%@", locationString, authToken, [self requestVersion]]];
-    return [NSURL URLWithString:urlString];
-}
-
-+ (NSURL *)venuesURLWithLocationString:(NSString *)locationString authToken:(NSString *)authToken {
-    
-    if (!locationString || !authToken) {
-        NSLog(@"Error: there was not enough input parameters in %s.", __PRETTY_FUNCTION__);
-        return nil;
-    }
-    NSString *urlString = [BaseURLString stringByAppendingString:[NSString stringWithFormat:@"venues/search?ll=%@&oauth_token=%@&v=%@", locationString, authToken, [self requestVersion]]];
     return [NSURL URLWithString:urlString];
 }
 

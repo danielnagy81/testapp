@@ -71,6 +71,9 @@
                 [currentVenuesTips addObject:[tipDictionary objectForKey:@"text"]];
             }
             else {
+                if (!currentVenueName) {
+                    currentVenueName = [NSString stringWithFormat:@"Venue name %lu", (unsigned long)[tipsArray indexOfObject:tipDictionary]];
+                }
                 [resultArray addObject:@{currentVenueName: [currentVenuesTips copy]}];
                 currentVenueName = [[tipDictionary objectForKey:@"venue"] objectForKey:@"name"];
                 [currentVenuesTips removeAllObjects];

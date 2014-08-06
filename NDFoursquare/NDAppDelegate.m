@@ -24,7 +24,7 @@
     _authenticationService = [[NDAuthenticationService alloc] init];
     [_authenticationService authenticate];
     //********TEST*********
-    NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:@"47.494930,19.060201"];
+    NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeVenuesTrending withOptionalParameter:@"47.495090,19.059048"];
     [apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
