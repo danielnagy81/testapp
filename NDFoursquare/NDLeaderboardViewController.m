@@ -13,7 +13,7 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 
 @interface NDLeaderboardViewController () {
     
-    NSMutableArray *_leaderboardArray;
+    NSMutableArray *_leaderboard;
     NDAPIService *_apiService;
 }
 
@@ -25,14 +25,14 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
     
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:TableViewCellIdentifier];
-    _leaderboardArray = [[NSMutableArray alloc] init];
+    _leaderboard = [[NSMutableArray alloc] init];
     _apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeUsersLeaderboard withOptionalParameter:nil];
     [_apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
         }
         else {
-            _leaderboardArray = [NSMutableArray arrayWithArray:resultArray];
+            _leaderboard = [NSMutableArray arrayWithArray:resultArray];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
             });
@@ -42,14 +42,14 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _leaderboardArray.count;
+    return _leaderboard.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableViewCellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [[_leaderboardArray objectAtIndex:indexPath.row] objectForKey:@"name"], [[_leaderboardArray objectAtIndex:indexPath.row] objectForKey:@"scores"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [[_leaderboard objectAtIndex:indexPath.row] objectForKey:@"name"], [[_leaderboard objectAtIndex:indexPath.row] objectForKey:@"scores"]];
     return cell;
 }
 

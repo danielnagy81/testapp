@@ -10,6 +10,9 @@
 		220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */; };
 		220D6BF8198FA58D00F5CB99 /* NDNetworkStatusService.m in Sources */ = {isa = PBXBuildFile; fileRef = 220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */; };
 		220D6BFB198FD63E00F5CB99 /* NDAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 220D6BFA198FD63E00F5CB99 /* NDAPIService.m */; };
+		2221FC0E19925AF500CAC58E /* NDTipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221FC0D19925AF500CAC58E /* NDTipsViewController.m */; };
+		2221FC121992648600CAC58E /* NDGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221FC111992648600CAC58E /* NDGeocoder.m */; };
+		2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221FC13199264C100CAC58E /* CoreLocation.framework */; };
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
@@ -47,6 +50,11 @@
 		220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDNetworkStatusService.m; sourceTree = "<group>"; };
 		220D6BF9198FD63E00F5CB99 /* NDAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAPIService.h; sourceTree = "<group>"; };
 		220D6BFA198FD63E00F5CB99 /* NDAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAPIService.m; sourceTree = "<group>"; };
+		2221FC0C19925AF500CAC58E /* NDTipsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTipsViewController.h; sourceTree = "<group>"; };
+		2221FC0D19925AF500CAC58E /* NDTipsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTipsViewController.m; sourceTree = "<group>"; };
+		2221FC101992648600CAC58E /* NDGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDGeocoder.h; sourceTree = "<group>"; };
+		2221FC111992648600CAC58E /* NDGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDGeocoder.m; sourceTree = "<group>"; };
+		2221FC13199264C100CAC58E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		22249213198B83FB00EC59BE /* NDAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAuthenticationService.h; sourceTree = "<group>"; };
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
@@ -83,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */,
 				220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */,
 				22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */,
 				22FA0DC8198A565E00392806 /* UIKit.framework in Frameworks */,
@@ -117,8 +126,19 @@
 			children = (
 				22FA0DD8198A565E00392806 /* NDLeaderboardViewController.h */,
 				22FA0DD9198A565E00392806 /* NDLeaderboardViewController.m */,
+				2221FC0C19925AF500CAC58E /* NDTipsViewController.h */,
+				2221FC0D19925AF500CAC58E /* NDTipsViewController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2221FC0F1992647200CAC58E /* Geocoder */ = {
+			isa = PBXGroup;
+			children = (
+				2221FC101992648600CAC58E /* NDGeocoder.h */,
+				2221FC111992648600CAC58E /* NDGeocoder.m */,
+			);
+			name = Geocoder;
 			sourceTree = "<group>";
 		};
 		22249212198B83E600EC59BE /* Services */ = {
@@ -174,6 +194,7 @@
 		22FA0DC2198A565E00392806 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2221FC13199264C100CAC58E /* CoreLocation.framework */,
 				220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */,
 				22FA0DC3198A565E00392806 /* Foundation.framework */,
 				22FA0DC5198A565E00392806 /* CoreGraphics.framework */,
@@ -186,6 +207,7 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				2221FC0F1992647200CAC58E /* Geocoder */,
 				220F72771990E1F300934A8E /* ViewControllers */,
 				220F72761990E1BE00934A8E /* Parser */,
 				22FA0E25198A7AB200392806 /* FoursquareFiles */,
@@ -338,11 +360,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				220D6BFB198FD63E00F5CB99 /* NDAPIService.m in Sources */,
+				2221FC121992648600CAC58E /* NDGeocoder.m in Sources */,
 				220D6BF8198FA58D00F5CB99 /* NDNetworkStatusService.m in Sources */,
 				22FA0DDA198A565E00392806 /* NDLeaderboardViewController.m in Sources */,
 				22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */,
 				2224921D198BE01700EC59BE /* Reachability.m in Sources */,
 				22FA0DD4198A565E00392806 /* NDAppDelegate.m in Sources */,
+				2221FC0E19925AF500CAC58E /* NDTipsViewController.m in Sources */,
 				22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */,
 				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,
 				22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */,

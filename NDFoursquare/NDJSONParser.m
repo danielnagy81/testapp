@@ -64,6 +64,9 @@
     
     if (tipsArray.count > 0) {
         NSString *currentVenueName = [[[tipsArray firstObject] objectForKey:@"venue"] objectForKey:@"name"];
+        if (!currentVenueName) {
+            currentVenueName = @"Venue name 0";
+        }
         NSMutableArray *currentVenuesTips = [[NSMutableArray alloc] init];
         for (NSDictionary *tipDictionary in tipsArray) {
             
@@ -81,6 +84,9 @@
             }
         }
         if (currentVenuesTips.count > 0) {
+            if (!currentVenueName) {
+                currentVenueName = [NSString stringWithFormat:@"Venue name %lu", (unsigned long)tipsArray.count];
+            }
             [resultArray addObject:@{currentVenueName: currentVenuesTips}];
         }
     }
