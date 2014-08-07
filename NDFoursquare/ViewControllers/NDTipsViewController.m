@@ -72,12 +72,18 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [self.view endEditing:YES];
     UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
     NSString *contentOfCell = cell.textLabel.text;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerIdentifier];
     [tipContentViewController tipContentWithText:contentOfCell];
     [self presentViewController:tipContentViewController animated:YES completion:nil];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+    [self.view endEditing:YES];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
