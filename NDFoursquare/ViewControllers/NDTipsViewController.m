@@ -115,23 +115,7 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
         NSLog(@"%@", error);
     }
     else {
-        NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
-        [apiService processURLWithCompletion:^(id result, NSError *error) {
-            if (error) {
-                NSLog(@"%@", error);
-            }
-            else {
-                if ([result isKindOfClass:[NSArray class]]) {
-                    _tips = [NSMutableArray arrayWithArray:result];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [_tableView reloadData];
-                    });
-                }
-                else {
-                    NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
-                }
-            }
-        }];
+        [self startAPIServiceWithLocationString:locationString];
     }
 }
 
@@ -146,8 +130,19 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
-    CLLocation *lastLocation = locations.lastObject;
-    NSString *locationString = [NSString stringWithFormat:@"%f,%f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
+    if (locations.count > 0) {
+        CLLocation *lastLocation = locations.lastObject;
+        NSString *locationString = [NSString stringWithFormat:@"%f,%f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
+        [self startAPIServiceWithLocationString:locationString];
+        [_locationService stopMonitoring];
+    }
+    else {
+        NSLog(@"Error: The location array was empty in %s", __PRETTY_FUNCTION__);
+    }
+}
+
+- (void)startAPIServiceWithLocationString:(NSString *)locationString {
+    
     NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
     [apiService processURLWithCompletion:^(id result, NSError *error) {
         if (error) {
@@ -165,7 +160,6 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
             }
         }
     }];
-    [_locationService stopMonitoring];
 }
 
 @end
