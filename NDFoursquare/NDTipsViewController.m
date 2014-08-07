@@ -7,10 +7,12 @@
 //
 
 #import "NDTipsViewController.h"
+#import "NDTipContentViewController.h"
 #import "NDGeocoder.h"
 #import "NDAPIService.h"
 
 NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
+NSString *const TipContentViewControllerIdentifier = @"TipContentViewController";
 
 @interface NDTipsViewController () {
     
@@ -38,7 +40,8 @@ NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[_tips objectAtIndex:section] count];
+    NSArray *tipsOfPlace = [[[_tips objectAtIndex:section] allValues] firstObject];
+    return tipsOfPlace.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -67,6 +70,16 @@ NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
         break;
     }
     return titleString;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+    NSString *contentOfCell = cell.textLabel.text;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerIdentifier];
+    [tipContentViewController tipContentWithText:contentOfCell];
+    [self presentViewController:tipContentViewController animated:YES completion:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

@@ -92,6 +92,62 @@
             </objects>
             <point key="canvasLocation" x="547" y="601"/>
         </scene>
+        <!--Tip Content View Controller-->
+        <scene sceneID="6QU-0I-35V">
+            <objects>
+                <viewController storyboardIdentifier="TipContentViewController" id="4MT-sr-k2Q" customClass="NDTipContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ook-cO-s2r"/>
+                        <viewControllerLayoutGuide type="bottom" id="ObF-eC-vv9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ib4-rw-Tat">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-KX-5ht">
+                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="TBY-rQ-IJX"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-7n-DuG">
+                                <rect key="frame" x="20" y="375" width="280" height="173"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="N0q-ro-TiN"/>
+                                    <constraint firstAttribute="height" constant="173" id="mZR-Ta-Ly4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="124"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="4MT-sr-k2Q" eventType="touchUpInside" id="cZv-Sp-1Hj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mpk-7n-DuG" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="HDY-Yz-NEi"/>
+                            <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="SEb-g7-9kJ"/>
+                            <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" constant="20" id="XJy-3U-2Mh"/>
+                            <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="uYx-cY-D0W"/>
+                            <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" id="ucM-ye-14a"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_tipContentTextView" destination="PHq-KX-5ht" id="q8R-Kv-Wea"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q7G-Ca-blG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="943" y="601"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

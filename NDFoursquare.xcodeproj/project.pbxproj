@@ -13,6 +13,7 @@
 		2221FC0E19925AF500CAC58E /* NDTipsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221FC0D19925AF500CAC58E /* NDTipsViewController.m */; };
 		2221FC121992648600CAC58E /* NDGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221FC111992648600CAC58E /* NDGeocoder.m */; };
 		2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221FC13199264C100CAC58E /* CoreLocation.framework */; };
+		2223A31119935C7A00E5AC48 /* NDTipContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A31019935C7A00E5AC48 /* NDTipContentViewController.m */; };
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
@@ -55,6 +56,8 @@
 		2221FC101992648600CAC58E /* NDGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDGeocoder.h; sourceTree = "<group>"; };
 		2221FC111992648600CAC58E /* NDGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDGeocoder.m; sourceTree = "<group>"; };
 		2221FC13199264C100CAC58E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		2223A30F19935C7A00E5AC48 /* NDTipContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTipContentViewController.h; sourceTree = "<group>"; };
+		2223A31019935C7A00E5AC48 /* NDTipContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTipContentViewController.m; sourceTree = "<group>"; };
 		22249213198B83FB00EC59BE /* NDAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAuthenticationService.h; sourceTree = "<group>"; };
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				22FA0DD9198A565E00392806 /* NDLeaderboardViewController.m */,
 				2221FC0C19925AF500CAC58E /* NDTipsViewController.h */,
 				2221FC0D19925AF500CAC58E /* NDTipsViewController.m */,
+				2223A30F19935C7A00E5AC48 /* NDTipContentViewController.h */,
+				2223A31019935C7A00E5AC48 /* NDTipContentViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */,
 				2224921D198BE01700EC59BE /* Reachability.m in Sources */,
 				22FA0DD4198A565E00392806 /* NDAppDelegate.m in Sources */,
+				2223A31119935C7A00E5AC48 /* NDTipContentViewController.m in Sources */,
 				2221FC0E19925AF500CAC58E /* NDTipsViewController.m in Sources */,
 				22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */,
 				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,
