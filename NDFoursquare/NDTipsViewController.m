@@ -10,16 +10,19 @@
 #import "NDTipContentViewController.h"
 #import "NDGeocoder.h"
 #import "NDAPIService.h"
+#import "NDVenueTips.h"
 
 NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
 NSString *const TipContentViewControllerIdentifier = @"TipContentViewController";
 
 @interface NDTipsViewController () {
     
+    __weak IBOutlet UIButton *_nearbyButton;
     IBOutlet UITableView *_tableView;
     NSMutableArray *_tips;
     NDGeocoder *_geocoder;
     __weak IBOutlet UITextField *_searchTextField;
+    __weak IBOutlet NSLayoutConstraint *_searchTextFieldWidthConstraint;
 }
 
 @end
@@ -40,8 +43,8 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSArray *tipsOfPlace = [[[_tips objectAtIndex:section] allValues] firstObject];
-    return tipsOfPlace.count;
+    NDVenueTips *venueTips = [_tips objectAtIndex:section];
+    return venueTips.tips.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -52,24 +55,15 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:TipTableViewCellIdentifier];
-    NSDictionary *placeTips = [_tips objectAtIndex:indexPath.section];
-    for (NSString *key in placeTips) {
-        NSArray *tips = [placeTips objectForKey:key];
-        cell.textLabel.text = [tips objectAtIndex:indexPath.row];
-        break;
-    }
+    NDVenueTips *placeTips = [_tips objectAtIndex:indexPath.section];
+    cell.textLabel.text = [placeTips.tips objectAtIndex:indexPath.row];
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    NSString *titleString = nil;
-    NSDictionary *venueTips = [_tips objectAtIndex:section];
-    for (NSString *key in venueTips) {
-        titleString = key;
-        break;
-    }
-    return titleString;
+    NDVenueTips *venueTips = [_tips objectAtIndex:section];
+    return venueTips.venueName;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -80,6 +74,28 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
     NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerIdentifier];
     [tipContentViewController tipContentWithText:contentOfCell];
     [self presentViewController:tipContentViewController animated:YES completion:nil];
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
+    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:.2f animations:^{
+        _nearbyButton.alpha = .0f;;
+        _searchTextFieldWidthConstraint.constant = 280.0f;
+        [self.view layoutIfNeeded];
+    }];
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    [self.view layoutIfNeeded];
+    [UIView animateWithDuration:.2f animations:^{
+        _nearbyButton.alpha = 1.0f;
+        _searchTextFieldWidthConstraint.constant = 230.0f;
+        [self.view layoutIfNeeded];
+    }];
+    return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -96,15 +112,20 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
     }
     else {
         NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
-        [apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
+        [apiService processURLWithCompletion:^(id result, NSError *error) {
             if (error) {
                 NSLog(@"%@", error);
             }
             else {
-                _tips = [NSMutableArray arrayWithArray:resultArray];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_tableView reloadData];
-                });
+                if ([result isKindOfClass:[NSArray class]]) {
+                    _tips = [NSMutableArray arrayWithArray:result];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_tableView reloadData];
+                    });
+                }
+                else {
+                    NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+                }
             }
         }];
     }

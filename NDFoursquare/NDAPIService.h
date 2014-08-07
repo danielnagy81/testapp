@@ -18,9 +18,9 @@ typedef NS_ENUM(NSInteger, NDServiceType) {
     NDServiceTypeVenuesTrending
 };
 
-typedef void (^NDCompletionBlock) (NSArray *resultArray, NSError *error);
+typedef void (^NDProcessCompletionBlock) (id result, NSError *error);
 
 - (instancetype)initWithServiceType:(NDServiceType)serviceType withOptionalParameter:(NSString *)optionalParameter;
-- (void)processURLWithCompletion:(NDCompletionBlock)completion;
+- (void)processURLWithCompletion:(NDProcessCompletionBlock)completion;
 
 @end

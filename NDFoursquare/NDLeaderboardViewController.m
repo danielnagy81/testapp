@@ -8,6 +8,7 @@
 
 #import "NDLeaderboardViewController.h"
 #import "NDAPIService.h"
+#import "NDLeaderboardEntry.h"
 
 NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 
@@ -27,15 +28,20 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:TableViewCellIdentifier];
     _leaderboard = [[NSMutableArray alloc] init];
     _apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeUsersLeaderboard withOptionalParameter:nil];
-    [_apiService processURLWithCompletion:^(NSArray *resultArray, NSError *error) {
+    [_apiService processURLWithCompletion:^(id result, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
         }
         else {
-            _leaderboard = [NSMutableArray arrayWithArray:resultArray];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            if ([result isKindOfClass:[NSArray class]]) {
+                _leaderboard = [NSMutableArray arrayWithArray:result];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+            else {
+                NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+            }
         }
     }];
 }
@@ -49,7 +55,8 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TableViewCellIdentifier];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", [[_leaderboard objectAtIndex:indexPath.row] objectForKey:@"name"], [[_leaderboard objectAtIndex:indexPath.row] objectForKey:@"scores"]];
+    NDLeaderboardEntry *leaderboardEntry = [_leaderboard objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", leaderboardEntry.userName, leaderboardEntry.userScore];
     return cell;
 }
 

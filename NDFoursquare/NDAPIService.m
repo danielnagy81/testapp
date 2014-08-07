@@ -7,14 +7,17 @@
 //
 
 #import "NDAPIService.h"
-#import "NDJSONParser.h"
+#import "NDTrendingPlacesParser.h"
+#import "NDTipsParser.h"
+#import "NDLeaderboardParser.h"
+#import "NDUserInformationParser.h"
 #import "NDNetworkStatusService.h"
 #import "NDURLRequestFactory.h"
 #import "NDAuthenticationService.h"
 
 @implementation NDAPIService {
     
-    NDServiceType _serviceType;
+    NDServiceType _requestType;
     /**
      *  _optinalInputParameter can be nil, a location or a UserID depending on the request.
      */
@@ -25,14 +28,14 @@
 - (instancetype)initWithServiceType:(NDServiceType)serviceType withOptionalParameter:(NSString *)optionalParameter {
     self = [super init];
     if (self) {
-        _serviceType = serviceType;
+        _requestType = serviceType;
         _optinalInputParameter = optionalParameter;
         _networkStatusService = [NDNetworkStatusService networkStatusServiceIstance];
     }
     return self;
 }
 
-- (void)processURLWithCompletion:(NDCompletionBlock)completion {
+- (void)processURLWithCompletion:(NDProcessCompletionBlock)completion {
     
     if ([_networkStatusService isNetworkReachable]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -62,7 +65,7 @@
 
 - (NSURL *)urlWithAuthToken:(NSString *)authToken {
     
-    switch (_serviceType) {
+    switch (_requestType) {
         case NDServiceTypeUsersLeaderboard:
             return [NDURLRequestFactory leaderboardURLWithAuthToken:authToken];
         case NDServiceTypeUsers:
@@ -77,21 +80,28 @@
     }
 }
 
-- (NSArray *)jsonParserWithData:(NSData *)data {
+- (id)jsonParserWithData:(NSData *)data {
     
     if (!data) {
         NSLog(@"Error, the data you pass in was nil in %s.", __PRETTY_FUNCTION__);
     }
-    NDJSONParser *jsonParser = [[NDJSONParser alloc] initWithData:data];
-    switch (_serviceType) {
-        case NDServiceTypeUsersLeaderboard:
-            return [jsonParser parseLeaderboard];
-        case NDServiceTypeUsers:
-            return [jsonParser parseUser];
-        case NDServiceTypeTipsSearch:
-            return [jsonParser parseTips];
-        case NDServiceTypeVenuesTrending:
-            return [jsonParser parseTrendingPlaces];
+    switch (_requestType) {
+        case NDServiceTypeUsersLeaderboard: {
+            NDLeaderboardParser *leaderboardParser = [[NDLeaderboardParser alloc] initWithData:data];
+            return [leaderboardParser parse];
+        }
+        case NDServiceTypeUsers: {
+            NDUserInformationParser *userInformationParser = [[NDUserInformationParser alloc] initWithData:data];
+            return [userInformationParser parse];
+        }
+        case NDServiceTypeTipsSearch: {
+            NDTipsParser *tipParser = [[NDTipsParser alloc] initWithData:data];
+            return [tipParser parse];
+        }
+        case NDServiceTypeVenuesTrending: {
+            NDTrendingPlacesParser *trendingPlacesParser = [[NDTrendingPlacesParser alloc] initWithData:data];
+            return [trendingPlacesParser parse];
+        }
         default:
             NSLog(@"Error, service type is incorrect in %s", __PRETTY_FUNCTION__);
             return nil;

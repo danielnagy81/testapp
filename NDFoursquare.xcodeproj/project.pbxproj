@@ -14,10 +14,18 @@
 		2221FC121992648600CAC58E /* NDGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 2221FC111992648600CAC58E /* NDGeocoder.m */; };
 		2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221FC13199264C100CAC58E /* CoreLocation.framework */; };
 		2223A31119935C7A00E5AC48 /* NDTipContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A31019935C7A00E5AC48 /* NDTipContentViewController.m */; };
+		2223A3161993693000E5AC48 /* NDLeaderboardEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A3151993693000E5AC48 /* NDLeaderboardEntry.m */; };
+		2223A31919936D9100E5AC48 /* NDLeaderboardParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A31819936D9100E5AC48 /* NDLeaderboardParser.m */; };
+		2223A31C19936FAD00E5AC48 /* NDVenueTips.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A31B19936FAD00E5AC48 /* NDVenueTips.m */; };
+		2223A31F19937A8900E5AC48 /* NDTipsParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A31E19937A8900E5AC48 /* NDTipsParser.m */; };
+		2223A32219937BE400E5AC48 /* NDUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A32119937BE400E5AC48 /* NDUser.m */; };
+		2223A32519937D6200E5AC48 /* NDUserInformationParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A32419937D6200E5AC48 /* NDUserInformationParser.m */; };
+		2223A328199381D800E5AC48 /* NDTrendingPlacesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A327199381D800E5AC48 /* NDTrendingPlacesParser.m */; };
+		2223A32B199381EB00E5AC48 /* NDTrendingPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A32A199381EB00E5AC48 /* NDTrendingPlace.m */; };
+		2223A32E19938DCE00E5AC48 /* NDLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A32D19938DCE00E5AC48 /* NDLocationService.m */; };
 		22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249214198B83FB00EC59BE /* NDAuthenticationService.m */; };
 		22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 22249218198BAC3000EC59BE /* NDURLRequestFactory.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
-		22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D3BF98198A8CFA00076B50 /* NDJSONParser.m */; };
 		22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC3198A565E00392806 /* Foundation.framework */; };
 		22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC5198A565E00392806 /* CoreGraphics.framework */; };
 		22FA0DC8198A565E00392806 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC7198A565E00392806 /* UIKit.framework */; };
@@ -58,14 +66,30 @@
 		2221FC13199264C100CAC58E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2223A30F19935C7A00E5AC48 /* NDTipContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTipContentViewController.h; sourceTree = "<group>"; };
 		2223A31019935C7A00E5AC48 /* NDTipContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTipContentViewController.m; sourceTree = "<group>"; };
+		2223A3141993693000E5AC48 /* NDLeaderboardEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDLeaderboardEntry.h; sourceTree = "<group>"; };
+		2223A3151993693000E5AC48 /* NDLeaderboardEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDLeaderboardEntry.m; sourceTree = "<group>"; };
+		2223A31719936D9100E5AC48 /* NDLeaderboardParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDLeaderboardParser.h; sourceTree = "<group>"; };
+		2223A31819936D9100E5AC48 /* NDLeaderboardParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDLeaderboardParser.m; sourceTree = "<group>"; };
+		2223A31A19936FAD00E5AC48 /* NDVenueTips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDVenueTips.h; sourceTree = "<group>"; };
+		2223A31B19936FAD00E5AC48 /* NDVenueTips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDVenueTips.m; sourceTree = "<group>"; };
+		2223A31D19937A8900E5AC48 /* NDTipsParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTipsParser.h; sourceTree = "<group>"; };
+		2223A31E19937A8900E5AC48 /* NDTipsParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTipsParser.m; sourceTree = "<group>"; };
+		2223A32019937BE400E5AC48 /* NDUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDUser.h; sourceTree = "<group>"; };
+		2223A32119937BE400E5AC48 /* NDUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDUser.m; sourceTree = "<group>"; };
+		2223A32319937D6200E5AC48 /* NDUserInformationParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDUserInformationParser.h; sourceTree = "<group>"; };
+		2223A32419937D6200E5AC48 /* NDUserInformationParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDUserInformationParser.m; sourceTree = "<group>"; };
+		2223A326199381D800E5AC48 /* NDTrendingPlacesParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTrendingPlacesParser.h; sourceTree = "<group>"; };
+		2223A327199381D800E5AC48 /* NDTrendingPlacesParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTrendingPlacesParser.m; sourceTree = "<group>"; };
+		2223A329199381EB00E5AC48 /* NDTrendingPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDTrendingPlace.h; sourceTree = "<group>"; };
+		2223A32A199381EB00E5AC48 /* NDTrendingPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDTrendingPlace.m; sourceTree = "<group>"; };
+		2223A32C19938DCE00E5AC48 /* NDLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDLocationService.h; sourceTree = "<group>"; };
+		2223A32D19938DCE00E5AC48 /* NDLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDLocationService.m; sourceTree = "<group>"; };
 		22249213198B83FB00EC59BE /* NDAuthenticationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDAuthenticationService.h; sourceTree = "<group>"; };
 		22249214198B83FB00EC59BE /* NDAuthenticationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDAuthenticationService.m; sourceTree = "<group>"; };
 		22249217198BAC3000EC59BE /* NDURLRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDURLRequestFactory.h; sourceTree = "<group>"; };
 		22249218198BAC3000EC59BE /* NDURLRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDURLRequestFactory.m; sourceTree = "<group>"; };
 		2224921B198BE01700EC59BE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
 		2224921C198BE01700EC59BE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
-		22D3BF97198A8CFA00076B50 /* NDJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDJSONParser.h; sourceTree = "<group>"; };
-		22D3BF98198A8CFA00076B50 /* NDJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDJSONParser.m; sourceTree = "<group>"; };
 		22FA0DC0198A565E00392806 /* NDFoursquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NDFoursquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22FA0DC3198A565E00392806 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22FA0DC5198A565E00392806 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,8 +142,14 @@
 		220F72761990E1BE00934A8E /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				22D3BF97198A8CFA00076B50 /* NDJSONParser.h */,
-				22D3BF98198A8CFA00076B50 /* NDJSONParser.m */,
+				2223A326199381D800E5AC48 /* NDTrendingPlacesParser.h */,
+				2223A327199381D800E5AC48 /* NDTrendingPlacesParser.m */,
+				2223A31D19937A8900E5AC48 /* NDTipsParser.h */,
+				2223A31E19937A8900E5AC48 /* NDTipsParser.m */,
+				2223A31719936D9100E5AC48 /* NDLeaderboardParser.h */,
+				2223A31819936D9100E5AC48 /* NDLeaderboardParser.m */,
+				2223A32319937D6200E5AC48 /* NDUserInformationParser.h */,
+				2223A32419937D6200E5AC48 /* NDUserInformationParser.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -146,6 +176,21 @@
 			name = Geocoder;
 			sourceTree = "<group>";
 		};
+		2223A3131993690500E5AC48 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2223A3141993693000E5AC48 /* NDLeaderboardEntry.h */,
+				2223A3151993693000E5AC48 /* NDLeaderboardEntry.m */,
+				2223A329199381EB00E5AC48 /* NDTrendingPlace.h */,
+				2223A32A199381EB00E5AC48 /* NDTrendingPlace.m */,
+				2223A31A19936FAD00E5AC48 /* NDVenueTips.h */,
+				2223A31B19936FAD00E5AC48 /* NDVenueTips.m */,
+				2223A32019937BE400E5AC48 /* NDUser.h */,
+				2223A32119937BE400E5AC48 /* NDUser.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		22249212198B83E600EC59BE /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +200,8 @@
 				220D6BF7198FA58D00F5CB99 /* NDNetworkStatusService.m */,
 				220D6BF9198FD63E00F5CB99 /* NDAPIService.h */,
 				220D6BFA198FD63E00F5CB99 /* NDAPIService.m */,
+				2223A32C19938DCE00E5AC48 /* NDLocationService.h */,
+				2223A32D19938DCE00E5AC48 /* NDLocationService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -212,6 +259,7 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
+				2223A3131993690500E5AC48 /* Models */,
 				2221FC0F1992647200CAC58E /* Geocoder */,
 				220F72771990E1F300934A8E /* ViewControllers */,
 				220F72761990E1BE00934A8E /* Parser */,
@@ -365,17 +413,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				220D6BFB198FD63E00F5CB99 /* NDAPIService.m in Sources */,
+				2223A31C19936FAD00E5AC48 /* NDVenueTips.m in Sources */,
+				2223A3161993693000E5AC48 /* NDLeaderboardEntry.m in Sources */,
 				2221FC121992648600CAC58E /* NDGeocoder.m in Sources */,
 				220D6BF8198FA58D00F5CB99 /* NDNetworkStatusService.m in Sources */,
 				22FA0DDA198A565E00392806 /* NDLeaderboardViewController.m in Sources */,
+				2223A32E19938DCE00E5AC48 /* NDLocationService.m in Sources */,
+				2223A32B199381EB00E5AC48 /* NDTrendingPlace.m in Sources */,
 				22249215198B83FB00EC59BE /* NDAuthenticationService.m in Sources */,
 				2224921D198BE01700EC59BE /* Reachability.m in Sources */,
 				22FA0DD4198A565E00392806 /* NDAppDelegate.m in Sources */,
+				2223A32519937D6200E5AC48 /* NDUserInformationParser.m in Sources */,
+				2223A31919936D9100E5AC48 /* NDLeaderboardParser.m in Sources */,
 				2223A31119935C7A00E5AC48 /* NDTipContentViewController.m in Sources */,
 				2221FC0E19925AF500CAC58E /* NDTipsViewController.m in Sources */,
+				2223A328199381D800E5AC48 /* NDTrendingPlacesParser.m in Sources */,
 				22249219198BAC3000EC59BE /* NDURLRequestFactory.m in Sources */,
+				2223A31F19937A8900E5AC48 /* NDTipsParser.m in Sources */,
 				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,
-				22D3BF99198A8CFA00076B50 /* NDJSONParser.m in Sources */,
+				2223A32219937BE400E5AC48 /* NDUser.m in Sources */,
 				22FA0DD0198A565E00392806 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
