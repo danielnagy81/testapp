@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface NDLocationService : NSObject
+
++ (NDLocationService *)locationService;
+- (void)currentLocation;
+- (void)stopMonitoring;
+- (void)setDelegate:(id<CLLocationManagerDelegate>)delegate;
 
 @end

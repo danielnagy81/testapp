@@ -11,12 +11,14 @@
 #import "NDGeocoder.h"
 #import "NDAPIService.h"
 #import "NDVenueTips.h"
+#import "NDLocationService.h"
 
 NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
 NSString *const TipContentViewControllerIdentifier = @"TipContentViewController";
 
 @interface NDTipsViewController () {
     
+    NDLocationService *_locationService;
     __weak IBOutlet UIButton *_nearbyButton;
     IBOutlet UITableView *_tableView;
     NSMutableArray *_tips;
@@ -39,6 +41,8 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
     _geocoder.delegate = self;
     _tips = [[NSMutableArray alloc] init];
     _searchTextField.delegate = self;
+    _locationService = [NDLocationService locationService];
+    [_locationService setDelegate:self];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,8 +135,37 @@ NSString *const TipContentViewControllerIdentifier = @"TipContentViewController"
     }
 }
 
+- (IBAction)nearbyButtonPressed:(id)sender {
+    
+    [_locationService currentLocation];
+}
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *lastLocation = locations.lastObject;
+    NSString *locationString = [NSString stringWithFormat:@"%f,%f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
+    NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
+    [apiService processURLWithCompletion:^(id result, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        else {
+            if ([result isKindOfClass:[NSArray class]]) {
+                _tips = [NSMutableArray arrayWithArray:result];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_tableView reloadData];
+                });
+            }
+            else {
+                NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+            }
+        }
+    }];
+    [_locationService stopMonitoring];
 }
 
 @end

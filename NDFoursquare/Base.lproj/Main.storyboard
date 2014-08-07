@@ -79,6 +79,9 @@
                                 <rect key="frame" x="258" y="10" width="53" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Nearby"/>
+                                <connections>
+                                    <action selector="nearbyButtonPressed:" destination="HVj-L4-r8u" eventType="touchUpInside" id="gDn-SX-Rvl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

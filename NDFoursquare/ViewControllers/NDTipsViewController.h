@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "NDGeocoder.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface NDTipsViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, NDGeocoderDelegate>
+@interface NDTipsViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, NDGeocoderDelegate, CLLocationManagerDelegate>
 
 @end
