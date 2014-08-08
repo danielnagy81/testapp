@@ -18,6 +18,9 @@
     
     _authenticationService = [[NDAuthenticationService alloc] init];
     [_authenticationService authenticate];
+    
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont boldSystemFontOfSize:19.0f]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f]} forState:UIControlStateNormal];
     return YES;
 }
 

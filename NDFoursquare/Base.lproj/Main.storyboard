@@ -19,6 +19,7 @@
                     <connections>
                         <segue destination="EEd-Oq-aeY" kind="relationship" relationship="viewControllers" id="ZRT-wI-U0W"/>
                         <segue destination="HVj-L4-r8u" kind="relationship" relationship="viewControllers" id="qrm-B2-vDf"/>
+                        <segue destination="I18-9k-wgV" kind="relationship" relationship="viewControllers" id="9K1-8C-Wbx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWH-U3-tNn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,7 +31,7 @@
             <objects>
                 <tableViewController id="EEd-Oq-aeY" customClass="NDLeaderboardViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lVJ-OS-InN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -39,12 +40,75 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Leaderboard" id="ETz-6l-eP5"/>
+                    <tabBarItem key="tabBarItem" title="Leaderboard" id="ETz-6l-eP5">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
+                    </tabBarItem>
                     <nil key="simulatedStatusBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dI-pu-yaq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="547" y="-235"/>
+        </scene>
+        <!--Trending Places View Controller - Trending-->
+        <scene sceneID="2IG-hG-l16">
+            <objects>
+                <viewController id="I18-9k-wgV" customClass="NDTrendingPlacesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oRB-Jh-bTd"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hty-kh-bXB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1MR-wy-0iF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="z40-DA-vwq">
+                                <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="266" id="VIS-yI-zbg"/>
+                                    <constraint firstAttribute="height" constant="44" id="XmN-3T-oTr"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="I18-9k-wgV" id="siz-82-P2i"/>
+                                </connections>
+                            </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-Ju-cDP">
+                                <rect key="frame" x="266" y="0.0" width="54" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Nearby">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="bmT-jO-mNH"/>
+                            <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="cpL-fP-4kY"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Trending" id="Ura-ZR-7el">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="_nearbyButton" destination="MTh-Ju-cDP" id="HAD-OT-Jut"/>
+                        <outlet property="_searchBar" destination="z40-DA-vwq" id="gjk-qJ-m82"/>
+                        <outlet property="_searchBarWidthConstraint" destination="VIS-yI-zbg" id="GXq-Pj-bp7"/>
+                        <outlet property="searchDisplayController" destination="NU0-Mu-Exy" id="qxG-ce-UaD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UkX-Pe-GaX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="NU0-Mu-Exy">
+                    <connections>
+                        <outlet property="delegate" destination="I18-9k-wgV" id="Cxt-5F-o9H"/>
+                        <outlet property="searchBar" destination="z40-DA-vwq" id="Nul-w5-vG5"/>
+                        <outlet property="searchContentsController" destination="I18-9k-wgV" id="gd6-ax-Low"/>
+                        <outlet property="searchResultsDataSource" destination="I18-9k-wgV" id="6pG-Y0-m6r"/>
+                        <outlet property="searchResultsDelegate" destination="I18-9k-wgV" id="6Ua-qu-ir5"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="547" y="1278"/>
         </scene>
         <!--Tips View Controller - Tips-->
         <scene sceneID="sZg-bB-e3e">
@@ -55,11 +119,11 @@
                         <viewControllerLayoutGuide type="bottom" id="m0m-Le-dJP"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="VJn-Lw-q5V">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-YM-hPo">
-                                <rect key="frame" x="0.0" y="49" width="320" height="470"/>
+                                <rect key="frame" x="0.0" y="49" width="320" height="382"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -94,7 +158,9 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
-                    <tabBarItem key="tabBarItem" title="Tips" id="A23-P5-4DQ"/>
+                    <tabBarItem key="tabBarItem" title="Tips" id="A23-P5-4DQ">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
+                    </tabBarItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="_nearbyButton" destination="wKf-cu-ZhE" id="aRr-kD-B1Z"/>
@@ -116,11 +182,11 @@
                         <viewControllerLayoutGuide type="bottom" id="ObF-eC-vv9"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ib4-rw-Tat">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-KX-5ht">
-                                <rect key="frame" x="0.0" y="72" width="320" height="496"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="408"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -131,7 +197,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-7n-DuG">
-                                <rect key="frame" x="20" y="375" width="280" height="173"/>
+                                <rect key="frame" x="20" y="287" width="280" height="173"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="N0q-ro-TiN"/>
@@ -167,6 +233,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
