@@ -216,7 +216,6 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
             }
             else {
                 if ([result isKindOfClass:[NSArray class]]) {
-                    [_tips removeAllObjects];
                     [_tips addObjectsFromArray:result];
                 }
                 else {
