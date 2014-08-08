@@ -12,10 +12,11 @@
 #import "NDAPIService.h"
 #import "NDVenueTips.h"
 #import "NDLocationService.h"
+#import "NDTip.h"
 
 NSString *const TipTableViewCellIdentifier = @"TipCellIdentifier";
 NSString *const TipSearcResultTableViewCellIdentifier = @"SearchResultTableViewCellIdentifier";
-NSString *const TipContentViewControllerIdentifier = @"TipContentViewController";
+NSString *const TipContentViewControllerStoryboardIdentifier = @"TipContentViewController";
 CGFloat const TipsSearchBarOpenStateWidth = 320.0f;
 CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
 
@@ -75,7 +76,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     if ([tableView isEqual:_tableView]) {
         UITableViewCell *cell = [_tableView dequeueReusableCellWithIdentifier:TipTableViewCellIdentifier];
         NDVenueTips *placeTips = [_tips objectAtIndex:indexPath.section];
-        cell.textLabel.text = [placeTips.tips objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[placeTips.tips objectAtIndex:indexPath.row] tipContent];
         return cell;
     }
     else {
@@ -116,7 +117,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
         UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
         NSString *contentOfCell = cell.textLabel.text;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerIdentifier];
+        NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerStoryboardIdentifier];
         [tipContentViewController tipContentWithText:contentOfCell];
         [self presentViewController:tipContentViewController animated:YES completion:nil];
     }
@@ -182,6 +183,8 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
 
 - (IBAction)nearbyButtonPressed:(id)sender {
     
+    [_loadingIndicator startAnimating];
+    [self.view bringSubviewToFront:_loadingIndicator];
     [_locationService currentLocation];
 }
 
@@ -215,12 +218,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
                 [_tips addObject:errorVenue ];
             }
             else {
-                if ([result isKindOfClass:[NSArray class]]) {
-                    [_tips addObjectsFromArray:result];
-                }
-                else {
-                    NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
-                }
+                [_tips addObjectsFromArray:result];
             }
             [_tableView reloadData];
             [_loadingIndicator stopAnimating];

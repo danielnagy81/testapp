@@ -8,6 +8,7 @@
 
 #import "NDTipsParser.h"
 #import "NDVenueTips.h"
+#import "NDTip.h"
 
 @implementation NDTipsParser {
     
@@ -48,7 +49,10 @@
         for (NSDictionary *tipDictionary in tipsArray) {
             
             if ([[[tipDictionary objectForKey:@"venue"] objectForKey:@"name"] isEqualToString:venueTips.venueName]) {
-                [venueTips.tips addObject:[tipDictionary objectForKey:@"text"]];
+                NDTip *aTip = [[NDTip alloc] init];
+                aTip.tipContent = [tipDictionary objectForKey:@"text"];
+                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@", [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"], [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"]];
+                [venueTips.tips addObject:aTip];
             }
             else {
                 if (!venueTips.venueName) {
@@ -57,7 +61,11 @@
                 [resultArray addObject:[venueTips copy]];
                 venueTips.venueName = [[tipDictionary objectForKey:@"venue"] objectForKey:@"name"];
                 [venueTips.tips removeAllObjects];
-                [venueTips.tips addObject:[tipDictionary objectForKey:@"text"]];
+                NDTip *aTip = [[NDTip alloc] init];
+                aTip.tipContent = [tipDictionary objectForKey:@"text"];
+                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@", [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"], [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"]];
+                [venueTips.tips addObject:aTip];
+
             }
         }
         if (venueTips.tips.count > 0) {
