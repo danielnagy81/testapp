@@ -9,6 +9,8 @@
 #import "NDTrendingPlacesViewController.h"
 
 NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdentifier";
+CGFloat const TrendingPlaceSearchBarOpenStateWidth = 320.0f;
+CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
 
 @interface NDTrendingPlacesViewController () {
     
@@ -31,7 +33,7 @@ NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdenti
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:.2f animations:^{
         _nearbyButton.alpha = .0f;
-        _searchBarWidthConstraint.constant = 320.0f;
+        _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth;
         [self.view layoutIfNeeded];
     }];
     
@@ -43,7 +45,7 @@ NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdenti
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:.2f animations:^{
         _nearbyButton.alpha = 1.0f;
-        _searchBarWidthConstraint.constant = 266.0f;
+        _searchBarWidthConstraint.constant = TrendingPlaceSearchBarClosedStateWidth;
         [self.view layoutIfNeeded];
     }];
 }

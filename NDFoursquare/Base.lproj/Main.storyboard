@@ -62,11 +62,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="z40-DA-vwq">
-                                <rect key="frame" x="0.0" y="0.0" width="266" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="258" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="266" id="VIS-yI-zbg"/>
-                                    <constraint firstAttribute="height" constant="44" id="XmN-3T-oTr"/>
+                                    <constraint firstAttribute="width" constant="258" id="8U8-68-wyK"/>
+                                    <constraint firstAttribute="height" constant="44" id="FKl-h1-SBT"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -74,7 +74,7 @@
                                 </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MTh-Ju-cDP">
-                                <rect key="frame" x="266" y="0.0" width="54" height="44"/>
+                                <rect key="frame" x="258" y="0.0" width="62" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Nearby">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,8 +83,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="bmT-jO-mNH"/>
-                            <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="cpL-fP-4kY"/>
+                            <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="WIZ-VG-OG9"/>
+                            <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="pVi-3P-DOl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Trending" id="Ura-ZR-7el">
@@ -93,7 +93,7 @@
                     <connections>
                         <outlet property="_nearbyButton" destination="MTh-Ju-cDP" id="HAD-OT-Jut"/>
                         <outlet property="_searchBar" destination="z40-DA-vwq" id="gjk-qJ-m82"/>
-                        <outlet property="_searchBarWidthConstraint" destination="VIS-yI-zbg" id="GXq-Pj-bp7"/>
+                        <outlet property="_searchBarWidthConstraint" destination="8U8-68-wyK" id="0q0-Zm-xcZ"/>
                         <outlet property="searchDisplayController" destination="NU0-Mu-Exy" id="qxG-ce-UaD"/>
                     </connections>
                 </viewController>
@@ -127,34 +127,37 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="tX4-xM-uhF"/>
+                                    <constraint firstAttribute="width" constant="320" id="res-6Y-Fm5"/>
                                 </constraints>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BRm-4N-iSC">
-                                <rect key="frame" x="20" y="10" width="230" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="230" id="dSB-kd-GiO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKf-cu-ZhE">
-                                <rect key="frame" x="258" y="10" width="53" height="30"/>
+                                <rect key="frame" x="258" y="0.0" width="62" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Nearby"/>
                                 <connections>
                                     <action selector="nearbyButtonPressed:" destination="HVj-L4-r8u" eventType="touchUpInside" id="gDn-SX-Rvl"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="i6e-IY-7Bq">
+                                <rect key="frame" x="0.0" y="0.0" width="258" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Eoz-C5-Kts"/>
+                                    <constraint firstAttribute="width" constant="258" id="qXx-4C-xV0"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="HVj-L4-r8u" id="k5X-Ga-yt0"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="BRm-4N-iSC" firstAttribute="top" secondItem="dse-HS-ZsS" secondAttribute="bottom" constant="10" id="3EG-BI-7gk"/>
-                            <constraint firstItem="BRm-4N-iSC" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" constant="20" id="4jP-2h-vdM"/>
-                            <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="b0n-YM-hPo" secondAttribute="bottom" id="5QB-RK-ddE"/>
-                            <constraint firstItem="b0n-YM-hPo" firstAttribute="top" secondItem="BRm-4N-iSC" secondAttribute="bottom" constant="9" id="KK5-EV-h9X"/>
-                            <constraint firstItem="b0n-YM-hPo" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="RKM-Jw-gQg"/>
+                            <constraint firstItem="i6e-IY-7Bq" firstAttribute="top" secondItem="dse-HS-ZsS" secondAttribute="bottom" id="4PD-n7-kaT"/>
+                            <constraint firstItem="b0n-YM-hPo" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="5" id="A50-3J-QFb"/>
+                            <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="b0n-YM-hPo" secondAttribute="bottom" id="e3y-i6-B7D"/>
+                            <constraint firstItem="b0n-YM-hPo" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="tgQ-z6-EwX"/>
+                            <constraint firstItem="i6e-IY-7Bq" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="ufK-DJ-Pjn"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
@@ -164,12 +167,22 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="_nearbyButton" destination="wKf-cu-ZhE" id="aRr-kD-B1Z"/>
-                        <outlet property="_searchTextField" destination="BRm-4N-iSC" id="Gip-Ne-Dk5"/>
-                        <outlet property="_searchTextFieldWidthConstraint" destination="dSB-kd-GiO" id="dK1-rL-ZF3"/>
+                        <outlet property="_searchBar" destination="i6e-IY-7Bq" id="3Gs-od-bqw"/>
+                        <outlet property="_searchBarWidthConstraint" destination="qXx-4C-xV0" id="p8I-YJ-qOh"/>
                         <outlet property="_tableView" destination="b0n-YM-hPo" id="NCq-JI-aD1"/>
+                        <outlet property="searchDisplayController" destination="KLx-3m-Sgn" id="TRt-b5-r6K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wln-xS-ew5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="KLx-3m-Sgn">
+                    <connections>
+                        <outlet property="delegate" destination="HVj-L4-r8u" id="HRR-oi-v6u"/>
+                        <outlet property="searchBar" destination="i6e-IY-7Bq" id="YyH-Na-hQG"/>
+                        <outlet property="searchContentsController" destination="HVj-L4-r8u" id="fSC-qC-nzG"/>
+                        <outlet property="searchResultsDataSource" destination="HVj-L4-r8u" id="Y0Z-Je-wUq"/>
+                        <outlet property="searchResultsDelegate" destination="HVj-L4-r8u" id="rB9-Dk-u2S"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="547" y="601"/>
         </scene>

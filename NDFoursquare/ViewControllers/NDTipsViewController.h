@@ -10,6 +10,6 @@
 #import "NDGeocoder.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface NDTipsViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, NDGeocoderDelegate, CLLocationManagerDelegate>
+@interface NDTipsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NDGeocoderDelegate, CLLocationManagerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @end

@@ -15,12 +15,7 @@
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
-        NSString *coordinatesString = @"";
-        if (placemarks.count > 0) {
-            CLPlacemark *placemark = [placemarks firstObject];
-            coordinatesString = [NSString stringWithFormat:@"%f,%f", placemark.location.coordinate.latitude, placemark.location.coordinate.longitude];
-        }
-        [_delegate geocoder:self didFinishGeocodingLocationString:coordinatesString withError:error];
+        [_delegate geocoder:self didFinishGeocodingWithLocationArray:placemarks withError:error];
     }];
 }
 

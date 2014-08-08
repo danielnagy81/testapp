@@ -11,7 +11,7 @@
 
 @protocol NDGeocoderDelegate <NSObject>
 
-- (void)geocoder:(NDGeocoder *)geocoder didFinishGeocodingLocationString:(NSString *)locationString withError:(NSError *)error;
+- (void)geocoder:(NDGeocoder *)geocoder didFinishGeocodingWithLocationArray:(NSArray *)locationArray withError:(NSError *)error;
 
 @end
 
