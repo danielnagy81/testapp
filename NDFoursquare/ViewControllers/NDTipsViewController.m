@@ -26,6 +26,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     __weak IBOutlet UIButton *_nearbyButton;
     IBOutlet UITableView *_tableView;
     IBOutlet UISearchBar *_searchBar;
+    __weak IBOutlet UIActivityIndicatorView *_loadingIndicator;
     NSMutableArray *_tips;
     NDGeocoder *_geocoder;
     __weak IBOutlet NSLayoutConstraint *_searchBarWidthConstraint;
@@ -82,8 +83,9 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TipSearcResultTableViewCellIdentifier];
         }
-        NSDictionary *addressDictionary = [[_geocodedLocations objectAtIndex:indexPath.row] addressDictionary];
         NSMutableString *titleString = [[NSMutableString alloc] init];
+        NSDictionary *addressDictionary = [[_geocodedLocations objectAtIndex:indexPath.row] addressDictionary];
+        
         if ([addressDictionary objectForKey:@"ZIP"]) {
             [titleString appendString:[NSString stringWithFormat:@"%@, ", [addressDictionary objectForKey:@"ZIP"]]];
         }
@@ -125,6 +127,8 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
         [self.searchDisplayController setActive:NO animated:YES];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         _searchBar.text = cell.textLabel.text;
+        [self.view bringSubviewToFront:_loadingIndicator];
+        [_loadingIndicator startAnimating];
     }
 }
 
@@ -163,17 +167,16 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
 }
 
 - (void)geocoder:(NDGeocoder *)geocoder didFinishGeocodingWithLocationArray:(NSArray *)locationArray withError:(NSError *)error {
+    
     if (error) {
         NSLog(@"%@", error);
     }
     else {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (_geocodedLocations.count > 0) {
-                [_geocodedLocations removeAllObjects];
-            }
-            [_geocodedLocations addObjectsFromArray:locationArray];
-            [self.searchDisplayController.searchResultsTableView reloadData];
-        });
+        if (_geocodedLocations.count > 0) {
+            [_geocodedLocations removeAllObjects];
+        }
+        [_geocodedLocations addObjectsFromArray:locationArray];
+        [self.searchDisplayController.searchResultsTableView reloadData];
     }
 }
 
@@ -203,20 +206,26 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     
     NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
     [apiService processURLWithCompletion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-        else {
-            if ([result isKindOfClass:[NSArray class]]) {
-                _tips = [NSMutableArray arrayWithArray:result];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_tableView reloadData];
-                });
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_tips removeAllObjects];
+            if (error) {
+                NSLog(@"%@ in %s", error, __PRETTY_FUNCTION__);
+                NDVenueTips *errorVenue = [[NDVenueTips alloc] init];
+                errorVenue.venueName = @"I can't find any venue here :(";
+                [_tips addObject:errorVenue ];
             }
             else {
-                NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+                if ([result isKindOfClass:[NSArray class]]) {
+                    [_tips removeAllObjects];
+                    [_tips addObjectsFromArray:result];
+                }
+                else {
+                    NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+                }
             }
-        }
+            [_tableView reloadData];
+            [_loadingIndicator stopAnimating];
+        });
     }];
 }
 

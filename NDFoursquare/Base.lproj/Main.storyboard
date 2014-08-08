@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cZV-x4-6De">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -122,6 +123,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-8l-7bP">
+                                <rect key="frame" x="0.0" y="206" width="320" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lvM-8l-7bP" secondAttribute="height" multiplier="16:1" id="mne-2a-dG7"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-YM-hPo">
                                 <rect key="frame" x="0.0" y="49" width="320" height="382"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,9 +163,13 @@
                         <constraints>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="top" secondItem="dse-HS-ZsS" secondAttribute="bottom" id="4PD-n7-kaT"/>
                             <constraint firstItem="b0n-YM-hPo" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="5" id="A50-3J-QFb"/>
+                            <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="lvM-8l-7bP" secondAttribute="bottom" constant="205" id="MBQ-Sx-vRw"/>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="Pq6-eW-cmJ"/>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="162" id="Q2d-FK-2tg"/>
                             <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="b0n-YM-hPo" secondAttribute="bottom" id="e3y-i6-B7D"/>
                             <constraint firstItem="b0n-YM-hPo" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="tgQ-z6-EwX"/>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="ufK-DJ-Pjn"/>
+                            <constraint firstAttribute="trailing" secondItem="lvM-8l-7bP" secondAttribute="trailing" id="yRU-0g-Jfp"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
@@ -166,6 +178,7 @@
                     </tabBarItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="_loadingIndicator" destination="lvM-8l-7bP" id="DHu-kD-fGl"/>
                         <outlet property="_nearbyButton" destination="wKf-cu-ZhE" id="aRr-kD-B1Z"/>
                         <outlet property="_searchBar" destination="i6e-IY-7Bq" id="3Gs-od-bqw"/>
                         <outlet property="_searchBarWidthConstraint" destination="qXx-4C-xV0" id="p8I-YJ-qOh"/>
