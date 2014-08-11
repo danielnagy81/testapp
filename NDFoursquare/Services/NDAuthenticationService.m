@@ -52,6 +52,13 @@ NSString *const URLScheme = @"ndfoursquare";
     }
 }
 
+- (void)forcedAuthenticate {
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserAccessTokenUserDefaultsKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self authenticate];
+}
+
 - (void)handleURL:(NSURL *)url {
     
     if ([url.scheme isEqualToString:URLScheme]) {

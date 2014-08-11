@@ -27,6 +27,7 @@
 		2223A3601993909700E5AC48 /* NDLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A35B1993909700E5AC48 /* NDLocationService.m */; };
 		2223A3611993909700E5AC48 /* NDNetworkStatusService.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A35D1993909700E5AC48 /* NDNetworkStatusService.m */; };
 		2224921D198BE01700EC59BE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2224921C198BE01700EC59BE /* Reachability.m */; };
+		2234C4541998A5110042D942 /* NDAuthenticationViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2234C4531998A5110042D942 /* NDAuthenticationViewViewController.m */; };
 		22F662E41994B8060008318F /* NDTrendingPlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F662E31994B8060008318F /* NDTrendingPlacesViewController.m */; };
 		22F662E7199500F80008318F /* NDTip.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F662E6199500F80008318F /* NDTip.m */; };
 		22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FA0DC3198A565E00392806 /* Foundation.framework */; };
@@ -94,6 +95,8 @@
 		2223A35D1993909700E5AC48 /* NDNetworkStatusService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDNetworkStatusService.m; path = Services/NDNetworkStatusService.m; sourceTree = "<group>"; };
 		2224921B198BE01700EC59BE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Reachability/Reachability.h; sourceTree = "<group>"; };
 		2224921C198BE01700EC59BE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Reachability/Reachability.m; sourceTree = "<group>"; };
+		2234C4521998A5110042D942 /* NDAuthenticationViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDAuthenticationViewViewController.h; path = ViewControllers/NDAuthenticationViewViewController.h; sourceTree = "<group>"; };
+		2234C4531998A5110042D942 /* NDAuthenticationViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDAuthenticationViewViewController.m; path = ViewControllers/NDAuthenticationViewViewController.m; sourceTree = "<group>"; };
 		22F662E21994B8060008318F /* NDTrendingPlacesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDTrendingPlacesViewController.h; path = ViewControllers/NDTrendingPlacesViewController.h; sourceTree = "<group>"; };
 		22F662E31994B8060008318F /* NDTrendingPlacesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDTrendingPlacesViewController.m; path = ViewControllers/NDTrendingPlacesViewController.m; sourceTree = "<group>"; };
 		22F662E5199500F80008318F /* NDTip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDTip.h; path = Models/NDTip.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				2223A33F19938FCA00E5AC48 /* NDLeaderboardViewController.m */,
 				2223A34019938FCA00E5AC48 /* NDTipContentViewController.h */,
 				2223A34119938FCA00E5AC48 /* NDTipContentViewController.m */,
+				2234C4521998A5110042D942 /* NDAuthenticationViewViewController.h */,
+				2234C4531998A5110042D942 /* NDAuthenticationViewViewController.m */,
 				22F662E21994B8060008318F /* NDTrendingPlacesViewController.h */,
 				22F662E31994B8060008318F /* NDTrendingPlacesViewController.m */,
 				2223A34219938FCA00E5AC48 /* NDTipsViewController.h */,
@@ -441,6 +446,7 @@
 				2223A33D19938F3A00E5AC48 /* NDGeocoder.m in Sources */,
 				2223A3511993902D00E5AC48 /* NDTrendingPlacesParser.m in Sources */,
 				2223A34619938FCA00E5AC48 /* NDTipsViewController.m in Sources */,
+				2234C4541998A5110042D942 /* NDAuthenticationViewViewController.m in Sources */,
 				2223A34419938FCA00E5AC48 /* NDLeaderboardViewController.m in Sources */,
 				22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */,
 				2223A33719938F0400E5AC48 /* NDLeaderboardEntry.m in Sources */,

@@ -115,9 +115,11 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     if ([tableView isEqual:_tableView]) {
         [self.view endEditing:YES];
         UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
+        //TODO: add the users name who did the tip!
         NSString *contentOfCell = cell.textLabel.text;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerStoryboardIdentifier];
+
         [tipContentViewController tipContentWithText:contentOfCell];
         [self presentViewController:tipContentViewController animated:YES completion:nil];
     }
@@ -221,6 +223,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
                 [_tips addObjectsFromArray:result];
             }
             [_tableView reloadData];
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             [_loadingIndicator stopAnimating];
         });
     }];

@@ -21,6 +21,7 @@
                         <segue destination="EEd-Oq-aeY" kind="relationship" relationship="viewControllers" id="ZRT-wI-U0W"/>
                         <segue destination="HVj-L4-r8u" kind="relationship" relationship="viewControllers" id="qrm-B2-vDf"/>
                         <segue destination="I18-9k-wgV" kind="relationship" relationship="viewControllers" id="9K1-8C-Wbx"/>
+                        <segue destination="meY-8e-Hvm" kind="relationship" relationship="viewControllers" id="OI4-cW-bMP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWH-U3-tNn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -49,6 +50,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dI-pu-yaq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="547" y="-235"/>
+        </scene>
+        <!--Authentication View View Controller - Authenticate-->
+        <scene sceneID="fqv-sM-w1A">
+            <objects>
+                <viewController id="meY-8e-Hvm" customClass="NDAuthenticationViewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qAF-OU-Jf3"/>
+                        <viewControllerLayoutGuide type="bottom" id="iS5-hj-gSb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YNy-Fp-Pi6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic3-5d-d8f">
+                                <rect key="frame" x="20" y="116" width="280" height="247"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <state key="normal" title="Authenticate">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="authenticate:" destination="meY-8e-Hvm" eventType="touchUpInside" id="BG9-Iy-Bjr"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ic3-5d-d8f" firstAttribute="top" secondItem="qAF-OU-Jf3" secondAttribute="bottom" constant="116" id="2Wn-Uc-Xyb"/>
+                            <constraint firstItem="Ic3-5d-d8f" firstAttribute="leading" secondItem="YNy-Fp-Pi6" secondAttribute="leading" constant="20" id="Hb5-eC-agR"/>
+                            <constraint firstItem="iS5-hj-gSb" firstAttribute="top" secondItem="Ic3-5d-d8f" secondAttribute="bottom" constant="68" id="JzH-DC-C1U"/>
+                            <constraint firstAttribute="trailing" secondItem="Ic3-5d-d8f" secondAttribute="trailing" constant="20" id="zud-oo-6IO"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Authenticate" id="QSC-2W-v5Z">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
+                    </tabBarItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sNV-TP-7RP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-25" y="794"/>
         </scene>
         <!--Trending Places View Controller - Trending-->
         <scene sceneID="2IG-hG-l16">
@@ -211,7 +252,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-KX-5ht">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-KX-5ht">
                                 <rect key="frame" x="0.0" y="72" width="320" height="408"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

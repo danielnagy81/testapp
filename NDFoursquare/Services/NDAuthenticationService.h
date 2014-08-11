@@ -13,6 +13,7 @@ extern NSString *const UserAccessTokenUserDefaultsKey;
 @interface NDAuthenticationService : NSObject
 
 - (void)authenticate;
+- (void)forcedAuthenticate;
 - (NSString *)accessToken;
 - (void)handleURL:(NSURL *)url;
 
