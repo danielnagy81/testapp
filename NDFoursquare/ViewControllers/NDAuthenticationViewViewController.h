@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NDAuthenticationService.h"
 
 @interface NDAuthenticationViewViewController : UIViewController
 

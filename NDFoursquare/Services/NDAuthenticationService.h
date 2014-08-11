@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+@class NDAuthenticationService;
 
 extern NSString *const UserAccessTokenUserDefaultsKey;
-
+extern NSString *const AuthenticationDidFinishedNotificationName;
 @interface NDAuthenticationService : NSObject
 
 - (void)authenticate;

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cZV-x4-6De">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -36,6 +35,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="PiF-25-TkV">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <connections>
                             <outlet property="dataSource" destination="EEd-Oq-aeY" id="4Dl-ws-i1s"/>
                             <outlet property="delegate" destination="EEd-Oq-aeY" id="3Be-ym-wf6"/>
@@ -46,6 +49,9 @@
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
                     </tabBarItem>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="_loadingIndicator" destination="PiF-25-TkV" id="lk2-Su-HWU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dI-pu-yaq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -167,9 +173,6 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-8l-7bP">
                                 <rect key="frame" x="0.0" y="206" width="320" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lvM-8l-7bP" secondAttribute="height" multiplier="16:1" id="mne-2a-dG7"/>
-                                </constraints>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-YM-hPo">
                                 <rect key="frame" x="0.0" y="49" width="320" height="382"/>
@@ -203,14 +206,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="top" secondItem="dse-HS-ZsS" secondAttribute="bottom" id="4PD-n7-kaT"/>
-                            <constraint firstItem="b0n-YM-hPo" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="5" id="A50-3J-QFb"/>
-                            <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="lvM-8l-7bP" secondAttribute="bottom" constant="205" id="MBQ-Sx-vRw"/>
-                            <constraint firstItem="lvM-8l-7bP" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="Pq6-eW-cmJ"/>
-                            <constraint firstItem="lvM-8l-7bP" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="162" id="Q2d-FK-2tg"/>
+                            <constraint firstAttribute="trailing" secondItem="lvM-8l-7bP" secondAttribute="trailing" id="LYM-W0-DeZ"/>
+                            <constraint firstItem="b0n-YM-hPo" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="5" id="cL9-sH-t95"/>
                             <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="b0n-YM-hPo" secondAttribute="bottom" id="e3y-i6-B7D"/>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="top" secondItem="i6e-IY-7Bq" secondAttribute="bottom" constant="162" id="sIe-Fh-0jw"/>
                             <constraint firstItem="b0n-YM-hPo" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="tgQ-z6-EwX"/>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="ufK-DJ-Pjn"/>
-                            <constraint firstAttribute="trailing" secondItem="lvM-8l-7bP" secondAttribute="trailing" id="yRU-0g-Jfp"/>
+                            <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="lvM-8l-7bP" secondAttribute="bottom" constant="205" id="ukH-86-4U2"/>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="yGa-c1-hgc"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>

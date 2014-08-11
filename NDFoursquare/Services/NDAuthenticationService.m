@@ -15,6 +15,7 @@ NSString *const ClientSecret = @"CMC30AIKMH0MZ50COXVBHUSVH5RHUYDUD1ATAORFLI3RDQE
 NSString *const CallbackURIString = @"ndfoursquare://foursquare";
 NSString *const UserAccessTokenUserDefaultsKey = @"AccessToken";
 NSString *const URLScheme = @"ndfoursquare";
+NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidFinished";
 
 @implementation NDAuthenticationService {
     
@@ -75,7 +76,9 @@ NSString *const URLScheme = @"ndfoursquare";
 - (void)requestAccessTokenWithAccessCode:(NSString *)accessCode {
     
     if ([_networkStatusService isNetworkReachable]) {
+        
         [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
+            NSDictionary *errorDetails = nil;
             
             if (requestCompleted && errorCode == FSOAuthErrorNone) {
                 [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:UserAccessTokenUserDefaultsKey];
@@ -85,12 +88,14 @@ NSString *const URLScheme = @"ndfoursquare";
             }
             else {
                 NSLog(@"There was an error during the access token request process.");
+                errorDetails = @{NSLocalizedDescriptionKey: @"There was an error during the authentication process."};
             }
+            //TODO: use a notification instead of the delegate.
+            [[NSNotificationCenter defaultCenter] postNotificationName:AuthenticationDidFinishedNotificationName object:self userInfo:errorDetails];
         }];
     }
     else {
         NSLog(@"There is no internet connection at the moment.");
-        //TODO: Implement a user flow that redirects from here to one of the view controllers.
     }
 }
 
