@@ -17,8 +17,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     _authenticationService = [[NDAuthenticationService alloc] init];
-    [_authenticationService authenticate];
+//    [_authenticationService authenticate];
     
+    
+    //******************TEST******************
+    [[NSUserDefaults standardUserDefaults] setObject:@"EXFFYIEEJK0WXP4AYXXP0OB2NPL3XE3O410VZEYBQ5GSY1IB" forKey:@"AccessToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //******************TEST******************
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[UIFont boldSystemFontOfSize:19.0f]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont boldSystemFontOfSize:13.0f]} forState:UIControlStateNormal];
     return YES;

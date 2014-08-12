@@ -267,13 +267,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-7n-DuG">
-                                <rect key="frame" x="20" y="287" width="280" height="173"/>
+                                <rect key="frame" x="170" y="400" width="130" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="N0q-ro-TiN"/>
-                                    <constraint firstAttribute="height" constant="173" id="mZR-Ta-Ly4"/>
+                                    <constraint firstAttribute="width" constant="130" id="5ib-NW-f8k"/>
+                                    <constraint firstAttribute="height" constant="80" id="fSC-hj-rxg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="124"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="57"/>
                                 <state key="normal" title="Back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -282,31 +282,62 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="SC1-IS-Li9">
-                                <rect key="frame" x="78" y="205" width="222" height="39"/>
+                                <rect key="frame" x="20" y="205" width="280" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="MCq-yF-MX1"/>
-                                    <constraint firstAttribute="width" constant="222" id="mzz-Ud-fvz"/>
+                                    <constraint firstAttribute="height" constant="39" id="0dM-ex-gYg"/>
+                                    <constraint firstAttribute="width" constant="280" id="GtO-Rz-5vy"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZr-Zd-JcS">
+                                <rect key="frame" x="92" y="311" width="136" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="136" id="6mv-le-GHX"/>
+                                    <constraint firstAttribute="height" constant="38" id="dlx-0Y-LWA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="Show on map">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showMapButtonPressed:" destination="4MT-sr-k2Q" eventType="touchUpInside" id="ITA-Dq-Jg8"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qp-63-pxx">
+                                <rect key="frame" x="20" y="252" width="280" height="151"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="FnJ-je-Wdj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="3pG-yF-Nvm"/>
-                            <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="5" id="H57-YA-awb"/>
-                            <constraint firstItem="mpk-7n-DuG" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="HDY-Yz-NEi"/>
+                            <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" id="A1f-ur-NYA"/>
+                            <constraint firstItem="4qp-63-pxx" firstAttribute="top" secondItem="SC1-IS-Li9" secondAttribute="bottom" constant="8" id="FuN-hX-WIO"/>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="Kh0-2O-GNo"/>
-                            <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" constant="20" id="XJy-3U-2Mh"/>
-                            <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="uL4-Jc-lGH"/>
+                            <constraint firstItem="4qp-63-pxx" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="KiQ-2g-b1m"/>
+                            <constraint firstItem="mpk-7n-DuG" firstAttribute="top" secondItem="4qp-63-pxx" secondAttribute="bottom" constant="-3" id="P1L-Tq-Crp"/>
+                            <constraint firstAttribute="trailing" secondItem="mpk-7n-DuG" secondAttribute="trailing" constant="20" id="QeP-wd-jED"/>
+                            <constraint firstItem="UZr-Zd-JcS" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="92" id="c57-pp-UrM"/>
+                            <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="5" id="iiI-HW-WGs"/>
+                            <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="imf-5s-76t"/>
+                            <constraint firstItem="UZr-Zd-JcS" firstAttribute="top" secondItem="SC1-IS-Li9" secondAttribute="bottom" constant="67" id="lbY-H0-34X"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="_authorTextView" destination="SC1-IS-Li9" id="zba-6e-qYW"/>
+                        <outlet property="_authorViewHeightConstraint" destination="0dM-ex-gYg" id="kuC-l4-1d5"/>
                         <outlet property="_contentViewHeightConstraint" destination="xwG-hn-wPd" id="hOv-it-kFn"/>
+                        <outlet property="_placeholderForMapView" destination="4qp-63-pxx" id="2yr-Ag-sJl"/>
+                        <outlet property="_showMapButton" destination="UZr-Zd-JcS" id="hec-MK-6QN"/>
                         <outlet property="_tipContentTextView" destination="PHq-KX-5ht" id="q8R-Kv-Wea"/>
                     </connections>
                 </viewController>
