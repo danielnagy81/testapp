@@ -20,7 +20,6 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationServiceDidFinishedAuthenticationWitNotification:) name:AuthenticationDidFinishedNotificationName object:nil];
     _authenticationService = [[NDAuthenticationService alloc] init];
 }

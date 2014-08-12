@@ -14,8 +14,8 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
 
 @interface NDTrendingPlacesViewController () {
     
-    IBOutlet UIButton *_nearbyButton;
-    IBOutlet UISearchBar *_searchBar;
+    __weak IBOutlet UIButton *_nearbyButton;
+    __weak IBOutlet UISearchBar *_searchBar;
     __weak IBOutlet NSLayoutConstraint *_searchBarWidthConstraint;
 }
 

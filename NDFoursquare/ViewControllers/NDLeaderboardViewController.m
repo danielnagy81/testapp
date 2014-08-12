@@ -16,7 +16,7 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
     
     NSMutableArray *_leaderboard;
     NDAPIService *_apiService;
-    IBOutlet UIActivityIndicatorView *_loadingIndicator;
+    __weak IBOutlet UIActivityIndicatorView *_loadingIndicator;
 }
 
 @end
@@ -62,6 +62,7 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
                 _leaderboard = [NSMutableArray arrayWithArray:result];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
+                    [_loadingIndicator stopAnimating];
                 });
             }
             else {
