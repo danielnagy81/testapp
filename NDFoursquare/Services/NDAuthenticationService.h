@@ -14,7 +14,7 @@ extern NSString *const AuthenticationDidFinishedNotificationName;
 @interface NDAuthenticationService : NSObject
 
 - (void)authenticate;
-- (void)forcedAuthenticate;
+- (NSError *)forcedAuthenticate;
 - (NSString *)accessToken;
 - (void)handleURL:(NSURL *)url;
 

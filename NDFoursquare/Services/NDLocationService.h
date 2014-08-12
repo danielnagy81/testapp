@@ -12,7 +12,7 @@
 @interface NDLocationService : NSObject
 
 + (NDLocationService *)locationService;
-- (void)currentLocation;
+- (NSError *)currentLocation;
 - (void)stopMonitoring;
 - (void)setDelegate:(id<CLLocationManagerDelegate>)delegate;
 

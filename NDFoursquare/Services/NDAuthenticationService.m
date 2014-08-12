@@ -53,11 +53,19 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
     }
 }
 
-- (void)forcedAuthenticate {
+- (NSError *)forcedAuthenticate {
     
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserAccessTokenUserDefaultsKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [self authenticate];
+    if ([_networkStatusService isNetworkReachable]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserAccessTokenUserDefaultsKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self authenticate];
+        return nil;
+    }
+    else {
+        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
+        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        return error;
+    }
 }
 
 - (void)handleURL:(NSURL *)url {

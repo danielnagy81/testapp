@@ -116,7 +116,6 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
         [self.view endEditing:YES];
         UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
         NSString *author = [[[[_tips objectAtIndex:indexPath.section] tips] objectAtIndex:indexPath.row] tipAuthor];
-        //TODO: add the users name who did the tip!
         NSString *contentOfCell = [NSString stringWithFormat:@"%@", cell.textLabel.text];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerStoryboardIdentifier];
@@ -172,7 +171,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
 
 - (void)geocoder:(NDGeocoder *)geocoder didFinishGeocodingWithLocationArray:(NSArray *)locationArray withError:(NSError *)error {
     
-    if (error) {
+    if (error.code == 1009) {
         NSLog(@"%@", error);
     }
     else {
@@ -188,7 +187,12 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     
     [_loadingIndicator startAnimating];
     [self.view bringSubviewToFront:_loadingIndicator];
-    [_locationService currentLocation];
+    NSError *error = [_locationService currentLocation];
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alert show];
+        [_loadingIndicator stopAnimating];
+    }
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -214,17 +218,23 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     [apiService processURLWithCompletion:^(id result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [_tips removeAllObjects];
-            if (error) {
+            if (error.code == 999) {
                 NSLog(@"%@ in %s", error, __PRETTY_FUNCTION__);
                 NDVenueTips *errorVenue = [[NDVenueTips alloc] init];
-                errorVenue.venueName = @"I can't find any venue here :(";
+                errorVenue.venueName = @"I can't find any venue there :(";
                 [_tips addObject:errorVenue ];
+                [_tableView reloadData];
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
+            if (error.code == 998) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                [alert show];
             }
             else {
                 [_tips addObjectsFromArray:result];
+                [_tableView reloadData];
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             }
-            [_tableView reloadData];
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             [_loadingIndicator stopAnimating];
         });
     }];

@@ -7,12 +7,14 @@
 //
 
 #import "NDLocationService.h"
+#import "NDNetworkStatusService.h"
 
 static NDLocationService *locationService;
 
 @implementation NDLocationService {
     
     BOOL _updating;
+    NDNetworkStatusService *_networkService;
     CLLocationManager *_locationManager;
 }
 
@@ -31,6 +33,7 @@ static NDLocationService *locationService;
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _networkService = [NDNetworkStatusService networkStatusServiceIstance];
         _locationManager = [[CLLocationManager alloc] init];
     }
     return self;
@@ -41,11 +44,19 @@ static NDLocationService *locationService;
     _locationManager.delegate = delegate;
 }
 
-- (void)currentLocation {
+- (NSError *)currentLocation {
     
-    if (!_updating) {
-        [_locationManager startUpdatingLocation];
-        _updating = YES;
+    if ([_networkService isNetworkReachable]) {
+        if (!_updating) {
+            [_locationManager startUpdatingLocation];
+            _updating = YES;
+        }
+        return nil;
+    }
+    else {
+        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
+        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        return error;
     }
 }
 

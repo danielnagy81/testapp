@@ -27,7 +27,11 @@
 
 - (IBAction)authenticate:(UIButton *)sender {
     
-    [_authenticationService forcedAuthenticate];
+    NSError *error = [_authenticationService forcedAuthenticate];
+    if (error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (void)authenticationServiceDidFinishedAuthenticationWitNotification:(NSNotification *)notification {

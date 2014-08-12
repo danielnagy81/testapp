@@ -70,6 +70,11 @@
     }
     else {
         NSLog(@"The network is not reachable at the moment.");
+        if (completion) {
+            NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
+            NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+            completion(nil, error);
+        }
     }
 }
 

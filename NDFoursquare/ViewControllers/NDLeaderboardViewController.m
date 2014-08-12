@@ -26,10 +26,22 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    [self setupRefreshControl];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticationServiceDidFinishedAuthenticationWitNotification:) name:AuthenticationDidFinishedNotificationName object:nil];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:TableViewCellIdentifier];
     _leaderboard = [[NSMutableArray alloc] init];
     _apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeUsersLeaderboard withOptionalParameter:nil];
+    [self startAPIService];
+}
+
+- (void)setupRefreshControl {
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshControlDragged) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)refreshControlDragged {
+    
     [self startAPIService];
 }
 
@@ -52,10 +64,20 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 }
 
 - (void)startAPIService {
-    [_loadingIndicator startAnimating];
+    if (![self.refreshControl isRefreshing]) {
+        [_loadingIndicator startAnimating];
+    }
     [_apiService processURLWithCompletion:^(id result, NSError *error) {
         if (error) {
             NSLog(@"%@", error);
+            if ([self.refreshControl isRefreshing]) {
+                [self.refreshControl endRefreshing];
+            }
+            else {
+                [_loadingIndicator stopAnimating];
+            }
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
         }
         else {
             if ([result isKindOfClass:[NSArray class]]) {
@@ -65,7 +87,12 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
-                    [_loadingIndicator stopAnimating];
+                    if ([self.refreshControl isRefreshing]) {
+                        [self.refreshControl endRefreshing];
+                    }
+                    else {
+                        [_loadingIndicator stopAnimating];
+                    }
                 });
             }
             else {
