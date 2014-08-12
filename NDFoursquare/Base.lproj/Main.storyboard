@@ -263,7 +263,7 @@
                                     <constraint firstAttribute="height" constant="128" id="xwG-hn-wPd"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-7n-DuG">
@@ -282,12 +282,12 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="SC1-IS-Li9">
-                                <rect key="frame" x="78" y="208" width="222" height="39"/>
+                                <rect key="frame" x="78" y="205" width="222" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="9Fu-pe-oBM"/>
-                                    <constraint firstAttribute="width" constant="222" id="XOn-SI-GDi"/>
+                                    <constraint firstAttribute="height" constant="39" id="MCq-yF-MX1"/>
+                                    <constraint firstAttribute="width" constant="222" id="mzz-Ud-fvz"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -297,11 +297,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="3pG-yF-Nvm"/>
+                            <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="5" id="H57-YA-awb"/>
                             <constraint firstItem="mpk-7n-DuG" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="HDY-Yz-NEi"/>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="Kh0-2O-GNo"/>
                             <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" constant="20" id="XJy-3U-2Mh"/>
-                            <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="8" id="Yxc-BB-0x6"/>
-                            <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="nzV-jm-rbR"/>
+                            <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="uL4-Jc-lGH"/>
                         </constraints>
                     </view>
                     <connections>

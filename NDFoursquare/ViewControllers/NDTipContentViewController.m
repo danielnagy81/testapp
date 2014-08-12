@@ -33,10 +33,10 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    _tipContentTextView.text = _tipContent;
+    _tipContentTextView.text = [NSString stringWithFormat:@"„%@”", _tipContent];
     CGSize correctContentViewSize = [_tipContentTextView sizeThatFits:_tipContentTextView.frame.size];
     _contentViewHeightConstraint.constant = correctContentViewSize.height;
-    _authorTextView.text = _tipAuthor;
+    _authorTextView.text = [NSString stringWithFormat:@"- %@", _tipAuthor];
 }
 
 - (void)tipContentWithText:(NSString *)text tipAuthorWithText:(NSString *)author {
