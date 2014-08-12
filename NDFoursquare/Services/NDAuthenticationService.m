@@ -36,7 +36,7 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
 }
 
 - (void)authenticate {
-    
+
     if ([_networkStatusService isNetworkReachable]) {
         if (![[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey]) {
             NSLog(@"Authentication required!");
@@ -49,23 +49,22 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
     }
     else {
         NSLog(@"There is no internet connection at the moment.");
-        //TODO: Implement a user flow that redirects from here to one of the view controllers.
     }
 }
 
 - (NSError *)forcedAuthenticate {
     
+    NSError *error = nil;
     if ([_networkStatusService isNetworkReachable]) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:UserAccessTokenUserDefaultsKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self authenticate];
-        return nil;
     }
     else {
         NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
-        return error;
+        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
     }
+    return error;
 }
 
 - (void)handleURL:(NSURL *)url {
@@ -84,7 +83,6 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
 - (void)requestAccessTokenWithAccessCode:(NSString *)accessCode {
     
     if ([_networkStatusService isNetworkReachable]) {
-        
         [FSOAuth requestAccessTokenForCode:accessCode clientId:ClientID callbackURIString:CallbackURIString clientSecret:ClientSecret completionBlock:^(NSString *authToken, BOOL requestCompleted, FSOAuthErrorCode errorCode) {
             NSDictionary *errorDetails = nil;
             
@@ -103,6 +101,8 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
     }
     else {
         NSLog(@"There is no internet connection at the moment.");
+        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
+        [[NSNotificationCenter defaultCenter] postNotificationName:AuthenticationDidFinishedNotificationName object:self userInfo:errorDetails];
     }
 }
 

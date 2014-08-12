@@ -19,6 +19,6 @@
 
 @property (weak, nonatomic) id<NDGeocoderDelegate>delegate;
 
-- (void)convertLocationStringWithAddress:(NSString *)address;
+- (NSError *)convertLocationStringWithAddress:(NSString *)address;
 
 @end

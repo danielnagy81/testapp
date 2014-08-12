@@ -7,16 +7,36 @@
 //
 
 #import "NDGeocoder.h"
+#import "NDNetworkStatusService.h"
 #import <CoreLocation/CoreLocation.h>
 
-@implementation NDGeocoder
-
-- (void)convertLocationStringWithAddress:(NSString *)address {
+@implementation NDGeocoder {
     
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
-        [_delegate geocoder:self didFinishGeocodingWithLocationArray:placemarks withError:error];
-    }];
+    NDNetworkStatusService *_networkService;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _networkService = [NDNetworkStatusService networkStatusServiceIstance];
+    }
+    return self;
+}
+
+- (NSError *)convertLocationStringWithAddress:(NSString *)address {
+    
+    NSError *error = nil;
+    if ([_networkService isNetworkReachable]) {
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
+            [_delegate geocoder:self didFinishGeocodingWithLocationArray:placemarks withError:error];
+        }];
+    }
+    else {
+        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
+        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+    }
+    return error;
 }
 
 @end

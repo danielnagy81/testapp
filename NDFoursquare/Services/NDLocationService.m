@@ -46,18 +46,18 @@ static NDLocationService *locationService;
 
 - (NSError *)currentLocation {
     
+    NSError *error = nil;
     if ([_networkService isNetworkReachable]) {
         if (!_updating) {
             [_locationManager startUpdatingLocation];
             _updating = YES;
         }
-        return nil;
     }
     else {
         NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
-        return error;
+        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
     }
+    return error;
 }
 
 - (void)stopMonitoring {

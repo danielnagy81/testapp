@@ -165,7 +165,11 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (![searchText isEqualToString:@""]) {
-        [_geocoder convertLocationStringWithAddress:searchText];
+        NSError *networkError = [_geocoder convertLocationStringWithAddress:searchText];
+        if (networkError) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[networkError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
+        }
     }
 }
 
@@ -187,9 +191,9 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     
     [_loadingIndicator startAnimating];
     [self.view bringSubviewToFront:_loadingIndicator];
-    NSError *error = [_locationService currentLocation];
-    if (error) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+    NSError *networkError = [_locationService currentLocation];
+    if (networkError) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[networkError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         [alert show];
         [_loadingIndicator stopAnimating];
     }

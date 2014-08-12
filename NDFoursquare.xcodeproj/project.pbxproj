@@ -168,14 +168,14 @@
 			children = (
 				2223A33E19938FCA00E5AC48 /* NDLeaderboardViewController.h */,
 				2223A33F19938FCA00E5AC48 /* NDLeaderboardViewController.m */,
-				2223A34019938FCA00E5AC48 /* NDTipContentViewController.h */,
-				2223A34119938FCA00E5AC48 /* NDTipContentViewController.m */,
 				2234C4521998A5110042D942 /* NDAuthenticationViewViewController.h */,
 				2234C4531998A5110042D942 /* NDAuthenticationViewViewController.m */,
 				22F662E21994B8060008318F /* NDTrendingPlacesViewController.h */,
 				22F662E31994B8060008318F /* NDTrendingPlacesViewController.m */,
 				2223A34219938FCA00E5AC48 /* NDTipsViewController.h */,
 				2223A34319938FCA00E5AC48 /* NDTipsViewController.m */,
+				2223A34019938FCA00E5AC48 /* NDTipContentViewController.h */,
+				2223A34119938FCA00E5AC48 /* NDTipContentViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
