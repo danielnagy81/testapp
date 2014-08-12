@@ -10,6 +10,5 @@
 
 @interface NDTipContentViewController : UIViewController
 
-- (void)tipContentWithText:(NSString *)text;
-
+- (void)tipContentWithText:(NSString *)text tipAuthorWithText:(NSString *)author;
 @end

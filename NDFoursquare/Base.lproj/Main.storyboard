@@ -256,11 +256,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-KX-5ht">
-                                <rect key="frame" x="0.0" y="72" width="320" height="408"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="128"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="TBY-rQ-IJX"/>
+                                    <constraint firstAttribute="width" constant="320" id="dbO-FD-lTc"/>
+                                    <constraint firstAttribute="height" constant="128" id="xwG-hn-wPd"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -281,17 +281,32 @@
                                     <action selector="backButtonPressed:" destination="4MT-sr-k2Q" eventType="touchUpInside" id="cZv-Sp-1Hj"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="SC1-IS-Li9">
+                                <rect key="frame" x="78" y="208" width="222" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="9Fu-pe-oBM"/>
+                                    <constraint firstAttribute="width" constant="222" id="XOn-SI-GDi"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="3pG-yF-Nvm"/>
                             <constraint firstItem="mpk-7n-DuG" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="HDY-Yz-NEi"/>
-                            <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="SEb-g7-9kJ"/>
+                            <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="Kh0-2O-GNo"/>
                             <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" constant="20" id="XJy-3U-2Mh"/>
-                            <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="uYx-cY-D0W"/>
-                            <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" id="ucM-ye-14a"/>
+                            <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="8" id="Yxc-BB-0x6"/>
+                            <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="nzV-jm-rbR"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="_authorTextView" destination="SC1-IS-Li9" id="zba-6e-qYW"/>
+                        <outlet property="_contentViewHeightConstraint" destination="xwG-hn-wPd" id="hOv-it-kFn"/>
                         <outlet property="_tipContentTextView" destination="PHq-KX-5ht" id="q8R-Kv-Wea"/>
                     </connections>
                 </viewController>

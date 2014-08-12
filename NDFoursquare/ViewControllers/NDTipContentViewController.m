@@ -10,8 +10,11 @@
 
 @interface NDTipContentViewController () {
     
+    __weak IBOutlet NSLayoutConstraint *_contentViewHeightConstraint;
+    __weak IBOutlet UITextView *_authorTextView;
     __weak IBOutlet UITextView *_tipContentTextView;
     NSString *_tipContent;
+    NSString *_tipAuthor;
 }
 
 @end
@@ -21,6 +24,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        _tipAuthor = [[NSString alloc] init];
         _tipContent = [[NSString alloc] init];
     }
     return self;
@@ -30,10 +34,14 @@
     
     [super viewDidLoad];
     _tipContentTextView.text = _tipContent;
+    CGSize correctContentViewSize = [_tipContentTextView sizeThatFits:_tipContentTextView.frame.size];
+    _contentViewHeightConstraint.constant = correctContentViewSize.height;
+    _authorTextView.text = _tipAuthor;
 }
 
-- (void)tipContentWithText:(NSString *)text {
+- (void)tipContentWithText:(NSString *)text tipAuthorWithText:(NSString *)author {
     
+    _tipAuthor = author;
     _tipContent = text;
 }
 

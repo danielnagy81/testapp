@@ -51,7 +51,12 @@
             if ([[[tipDictionary objectForKey:@"venue"] objectForKey:@"name"] isEqualToString:venueTips.venueName]) {
                 NDTip *aTip = [[NDTip alloc] init];
                 aTip.tipContent = [tipDictionary objectForKey:@"text"];
-                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@", [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"], [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"]];
+                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@",
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] ?
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] : @"",
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] ?
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] : @""];
+
                 [venueTips.tips addObject:aTip];
             }
             else {
@@ -63,9 +68,13 @@
                 [venueTips.tips removeAllObjects];
                 NDTip *aTip = [[NDTip alloc] init];
                 aTip.tipContent = [tipDictionary objectForKey:@"text"];
-                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@", [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"], [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"]];
+                [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] ? [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] : @"";
+                aTip.tipAuthor = [NSString stringWithFormat:@"%@ %@",
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] ?
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] : @"",
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] ?
+                                  [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] : @""];
                 [venueTips.tips addObject:aTip];
-
             }
         }
         if (venueTips.tips.count > 0) {
