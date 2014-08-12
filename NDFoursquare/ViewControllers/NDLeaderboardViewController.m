@@ -60,6 +60,9 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
         else {
             if ([result isKindOfClass:[NSArray class]]) {
                 _leaderboard = [NSMutableArray arrayWithArray:result];
+                if (_leaderboard.count > 0) {
+                    [[NSNotificationCenter defaultCenter] removeObserver:self];
+                }
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
                     [_loadingIndicator stopAnimating];

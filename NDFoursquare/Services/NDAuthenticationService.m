@@ -90,7 +90,6 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
                 NSLog(@"There was an error during the access token request process.");
                 errorDetails = @{NSLocalizedDescriptionKey: @"There was an error during the authentication process."};
             }
-            //TODO: use a notification instead of the delegate.
             [[NSNotificationCenter defaultCenter] postNotificationName:AuthenticationDidFinishedNotificationName object:self userInfo:errorDetails];
         }];
     }

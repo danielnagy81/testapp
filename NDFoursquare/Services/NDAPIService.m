@@ -45,12 +45,22 @@
                 NSData *dataFromURL = [NSData dataWithContentsOfURL:requestURL];
                 NSArray *resultArray = [self jsonParserWithData:dataFromURL];
                 if (resultArray.count > 0) {
-                    completion(resultArray, nil);
+                    if (completion) {
+                        completion(resultArray, nil);
+                    }
+                    else {
+                        NSLog(@"Error: The block is nil in %s.", __PRETTY_FUNCTION__);
+                    }
                 }
                 else {
-                    NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The returned array was empty."};
-                    NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:999 userInfo:errorDetails];
-                    completion(resultArray, error);
+                    if (completion) {
+                        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The returned array was empty."};
+                        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:999 userInfo:errorDetails];
+                        completion(resultArray, error);
+                    }
+                    else {
+                        NSLog(@"Error: The block is nil in %s.", __PRETTY_FUNCTION__);
+                    }
                 }
             }
             else {
