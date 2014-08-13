@@ -15,8 +15,6 @@
     if (self) {
         _name = [[NSString alloc] init];
         _address = [[NSString alloc] init];
-        _latitudeString = [[NSString alloc] init];
-        _longitudeString = [[NSString alloc] init];
     }
     return self;
 }

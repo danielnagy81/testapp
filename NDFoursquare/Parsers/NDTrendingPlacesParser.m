@@ -43,10 +43,12 @@
         for (NSDictionary *venueDictionary in venuesDictionary) {
             NDTrendingPlace *trendingPlace = [[NDTrendingPlace alloc] init];
             trendingPlace.name = [venueDictionary objectForKey:@"name"];
-            trendingPlace.address = [NSString stringWithFormat:@"%@. %@, %@", [[venueDictionary objectForKey:@"location"] objectForKey:@"postalCode"], [[venueDictionary objectForKey:@"location"] objectForKey:@"city"], [[venueDictionary objectForKey:@"location"] objectForKey:@"address"]];
-            trendingPlace.latitudeString = [[venueDictionary objectForKey:@"location"] objectForKey:@"lat"];
-            trendingPlace.longitudeString = [[venueDictionary objectForKey:@"location"] objectForKey:@"lng"];
-            [resultArray addObject:trendingPlace];
+            trendingPlace.address = [NSString stringWithFormat:@"%@. %@, %@",
+                                     [[venueDictionary objectForKey:@"location"] objectForKey:@"postalCode"] ? [[venueDictionary objectForKey:@"location"] objectForKey:@"postalCode"] : @"",
+                                     [[venueDictionary objectForKey:@"location"] objectForKey:@"city"] ? [[venueDictionary objectForKey:@"location"] objectForKey:@"city"] : @"",
+                                     [[venueDictionary objectForKey:@"location"] objectForKey:@"address"] ? [[venueDictionary objectForKey:@"location"] objectForKey:@"address"] : @""];
+            trendingPlace.coordinate = CLLocationCoordinate2DMake([[[venueDictionary objectForKey:@"location"] objectForKey:@"lat"] doubleValue], [[[venueDictionary objectForKey:@"location"] objectForKey:@"lng"] doubleValue]);
+             [resultArray addObject:trendingPlace];
         }
     }
     return resultArray;

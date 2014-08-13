@@ -127,21 +127,42 @@
                                 <state key="normal" title="Nearby">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="nearbyButtonPressed:" destination="I18-9k-wgV" eventType="touchUpInside" id="Zt1-Ce-oqU"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SbL-Zm-dXV">
+                                <rect key="frame" x="150" y="230" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUh-h7-ghq">
+                                <rect key="frame" x="0.0" y="44" width="320" height="388"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Hty-kh-bXB" firstAttribute="top" secondItem="SbL-Zm-dXV" secondAttribute="bottom" constant="181" id="3r8-69-dwk"/>
+                            <constraint firstItem="GUh-h7-ghq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" constant="44" id="CQ0-zU-4SD"/>
+                            <constraint firstItem="SbL-Zm-dXV" firstAttribute="top" secondItem="z40-DA-vwq" secondAttribute="bottom" constant="186" id="Jwv-Y1-wq1"/>
+                            <constraint firstItem="Hty-kh-bXB" firstAttribute="top" secondItem="GUh-h7-ghq" secondAttribute="bottom" constant="-1" id="WBc-sN-2Dp"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="WIZ-VG-OG9"/>
+                            <constraint firstAttribute="trailing" secondItem="GUh-h7-ghq" secondAttribute="trailing" id="caC-0s-MDj"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="pVi-3P-DOl"/>
+                            <constraint firstItem="GUh-h7-ghq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="sWD-F1-eAx"/>
+                            <constraint firstAttribute="trailing" secondItem="SbL-Zm-dXV" secondAttribute="trailing" constant="150" id="vcD-s5-DuB"/>
+                            <constraint firstItem="SbL-Zm-dXV" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" constant="150" id="x5e-fP-RSx"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Trending" id="Ura-ZR-7el">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="_loadingIndicator" destination="SbL-Zm-dXV" id="XSK-qo-dwV"/>
                         <outlet property="_nearbyButton" destination="MTh-Ju-cDP" id="HAD-OT-Jut"/>
                         <outlet property="_searchBar" destination="z40-DA-vwq" id="gjk-qJ-m82"/>
                         <outlet property="_searchBarWidthConstraint" destination="8U8-68-wyK" id="0q0-Zm-xcZ"/>
+                        <outlet property="_trendingPlacesMapView" destination="GUh-h7-ghq" id="MKd-YZ-ApB"/>
                         <outlet property="searchDisplayController" destination="NU0-Mu-Exy" id="qxG-ce-UaD"/>
                     </connections>
                 </viewController>

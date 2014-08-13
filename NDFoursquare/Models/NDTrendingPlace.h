@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface NDTrendingPlace : NSObject
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *address;
-@property (nonatomic) NSString *latitudeString;
-@property (nonatomic) NSString *longitudeString;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
 
 @end

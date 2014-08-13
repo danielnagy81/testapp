@@ -213,11 +213,12 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
         CLLocation *lastLocation = locations.lastObject;
         NSString *locationString = [NSString stringWithFormat:@"%f,%f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
         [self startAPIServiceWithLocationString:locationString];
-        [_locationService stopMonitoring];
     }
     else {
         NSLog(@"Error: The location array was empty in %s", __PRETTY_FUNCTION__);
+        [_loadingIndicator stopAnimating];
     }
+    [_locationService stopMonitoring];
 }
 
 - (void)startAPIServiceWithLocationString:(NSString *)locationString {
