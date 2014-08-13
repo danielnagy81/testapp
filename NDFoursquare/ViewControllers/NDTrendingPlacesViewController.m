@@ -26,6 +26,7 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
     
     NDLocationService *_locationService;
     NSMutableArray *_trendingPlaces;
+    CLLocationCoordinate2D _lastLocationCoorindate;
 }
 
 @end
@@ -93,6 +94,7 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
     
     if (locations.count > 0) {
         CLLocation *lastLocation = [locations lastObject];
+        _lastLocationCoorindate = lastLocation.coordinate;
         NSString *locationString = [NSString stringWithFormat:@"%f,%f", lastLocation.coordinate.latitude, lastLocation.coordinate.longitude];
         [self startAPIServiceWithLocationString:locationString];
     }
@@ -144,12 +146,17 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
 
 - (void)zoomToTrendingPlaces {
     
-    NDTrendingPlace *firstTrendingPlace = [_trendingPlaces firstObject];
+    NSMutableArray *arrayToIterateOn = [[NSMutableArray alloc] initWithArray:_trendingPlaces];
+    NDTrendingPlace *tempTrendingPlaceForCurrentLocation = [[NDTrendingPlace alloc] init];
+    tempTrendingPlaceForCurrentLocation.coordinate = _lastLocationCoorindate;
+    [arrayToIterateOn addObject:tempTrendingPlaceForCurrentLocation];
+    NDTrendingPlace *firstTrendingPlace = [arrayToIterateOn firstObject];
+    
     CLLocationCoordinate2D lowerLeftCorner = firstTrendingPlace.coordinate;
     CLLocationCoordinate2D upperRightCorner = firstTrendingPlace.coordinate;
     
-    for (int i = 1; i < _trendingPlaces.count; ++i) {
-        NDTrendingPlace *currentTrendingPlace = [_trendingPlaces objectAtIndex:i];
+    for (int i = 1; i < arrayToIterateOn.count; ++i) {
+        NDTrendingPlace *currentTrendingPlace = [arrayToIterateOn objectAtIndex:i];
         
         if (currentTrendingPlace.coordinate.latitude < lowerLeftCorner.latitude) {
             lowerLeftCorner.latitude = currentTrendingPlace.coordinate.latitude;
