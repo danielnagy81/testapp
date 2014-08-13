@@ -15,6 +15,7 @@
     if (self) {
         _venueName = [[NSString alloc] init];
         _tips = [[NSMutableArray alloc] init];
+        _venueAddress = [[NSString alloc] init];
     }
     return self;
 }
@@ -23,8 +24,10 @@
     
     NDVenueTips *copy = [[NDVenueTips alloc] init];
     if (copy) {
-        copy.venueName = self.venueName;
+        copy.venueName = [self.venueName copy];
         copy.tips = [self.tips copy];
+        copy.venueCoordinate = self.venueCoordinate;
+        copy.venueAddress = [self.venueAddress copy];
     }
     return copy;
 }

@@ -43,6 +43,9 @@
     if (tipsArray.count > 0) {
         NDVenueTips *venueTips = [[NDVenueTips alloc] init];
         venueTips.venueName = [[[tipsArray firstObject] objectForKey:@"venue"] objectForKey:@"name"];
+        venueTips.venueCoordinate = CLLocationCoordinate2DMake([[[[[tipsArray firstObject] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue],
+                                                          [[[[[tipsArray firstObject] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue]);
+        venueTips.venueAddress = [[[[tipsArray firstObject] objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
         if (!venueTips.venueName) {
             venueTips.venueName = @"Venue name 0";
         }
@@ -65,6 +68,9 @@
                 }
                 [resultArray addObject:[venueTips copy]];
                 venueTips.venueName = [[tipDictionary objectForKey:@"venue"] objectForKey:@"name"];
+                venueTips.venueCoordinate = CLLocationCoordinate2DMake([[[[tipDictionary objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lat"] doubleValue],
+                                                                  [[[[tipDictionary objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"lng"] doubleValue]);
+                venueTips.venueAddress = [[[tipDictionary objectForKey:@"venue"] objectForKey:@"location"] objectForKey:@"address"];
                 [venueTips.tips removeAllObjects];
                 NDTip *aTip = [[NDTip alloc] init];
                 aTip.tipContent = [tipDictionary objectForKey:@"text"];
