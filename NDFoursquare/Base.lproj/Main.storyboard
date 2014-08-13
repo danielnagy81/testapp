@@ -308,24 +308,23 @@
                                     <action selector="showMapButtonPressed:" destination="4MT-sr-k2Q" eventType="touchUpInside" id="ITA-Dq-Jg8"/>
                                 </connections>
                             </button>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4qp-63-pxx">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YQc-ET-fdI">
                                 <rect key="frame" x="20" y="252" width="280" height="151"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="FnJ-je-Wdj"/>
+                                    <constraint firstAttribute="width" constant="280" id="7UR-AU-z0T"/>
                                 </constraints>
-                            </view>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" id="3pG-yF-Nvm"/>
                             <constraint firstItem="ObF-eC-vv9" firstAttribute="top" secondItem="mpk-7n-DuG" secondAttribute="bottom" id="A1f-ur-NYA"/>
-                            <constraint firstItem="4qp-63-pxx" firstAttribute="top" secondItem="SC1-IS-Li9" secondAttribute="bottom" constant="8" id="FuN-hX-WIO"/>
                             <constraint firstItem="PHq-KX-5ht" firstAttribute="top" secondItem="Ook-cO-s2r" secondAttribute="bottom" constant="52" id="Kh0-2O-GNo"/>
-                            <constraint firstItem="4qp-63-pxx" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="KiQ-2g-b1m"/>
-                            <constraint firstItem="mpk-7n-DuG" firstAttribute="top" secondItem="4qp-63-pxx" secondAttribute="bottom" constant="-3" id="P1L-Tq-Crp"/>
+                            <constraint firstItem="YQc-ET-fdI" firstAttribute="top" secondItem="SC1-IS-Li9" secondAttribute="bottom" constant="8" id="LWU-PN-Jby"/>
                             <constraint firstAttribute="trailing" secondItem="mpk-7n-DuG" secondAttribute="trailing" constant="20" id="QeP-wd-jED"/>
+                            <constraint firstItem="mpk-7n-DuG" firstAttribute="top" secondItem="YQc-ET-fdI" secondAttribute="bottom" constant="-3" id="SSD-XR-g1i"/>
+                            <constraint firstItem="YQc-ET-fdI" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="20" id="Tg3-kg-IeB"/>
                             <constraint firstItem="UZr-Zd-JcS" firstAttribute="leading" secondItem="ib4-rw-Tat" secondAttribute="leading" constant="92" id="c57-pp-UrM"/>
                             <constraint firstItem="SC1-IS-Li9" firstAttribute="top" secondItem="PHq-KX-5ht" secondAttribute="bottom" constant="5" id="iiI-HW-WGs"/>
                             <constraint firstAttribute="trailing" secondItem="SC1-IS-Li9" secondAttribute="trailing" constant="20" id="imf-5s-76t"/>
@@ -336,9 +335,9 @@
                         <outlet property="_authorTextView" destination="SC1-IS-Li9" id="zba-6e-qYW"/>
                         <outlet property="_authorViewHeightConstraint" destination="0dM-ex-gYg" id="kuC-l4-1d5"/>
                         <outlet property="_contentViewHeightConstraint" destination="xwG-hn-wPd" id="hOv-it-kFn"/>
-                        <outlet property="_placeholderForMapView" destination="4qp-63-pxx" id="2yr-Ag-sJl"/>
                         <outlet property="_showMapButton" destination="UZr-Zd-JcS" id="hec-MK-6QN"/>
                         <outlet property="_tipContentTextView" destination="PHq-KX-5ht" id="q8R-Kv-Wea"/>
+                        <outlet property="_tipLocationMapView" destination="YQc-ET-fdI" id="fgI-S6-cfB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q7G-Ca-blG" userLabel="First Responder" sceneMemberID="firstResponder"/>

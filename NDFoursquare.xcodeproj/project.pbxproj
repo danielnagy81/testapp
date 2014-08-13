@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */; };
 		22164A4D199A42660016A5A9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22164A4C199A42660016A5A9 /* MapKit.framework */; };
-		22164A51199A629F0016A5A9 /* NDMapViewProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 22164A50199A629F0016A5A9 /* NDMapViewProvider.m */; };
 		2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2221FC13199264C100CAC58E /* CoreLocation.framework */; };
 		2223A33719938F0400E5AC48 /* NDLeaderboardEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A33019938F0400E5AC48 /* NDLeaderboardEntry.m */; };
 		2223A33819938F0400E5AC48 /* NDTrendingPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2223A33219938F0400E5AC48 /* NDTrendingPlace.m */; };
@@ -61,8 +60,6 @@
 /* Begin PBXFileReference section */
 		220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22164A4C199A42660016A5A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		22164A4F199A629F0016A5A9 /* NDMapViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDMapViewProvider.h; path = Providers/NDMapViewProvider.h; sourceTree = "<group>"; };
-		22164A50199A629F0016A5A9 /* NDMapViewProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDMapViewProvider.m; path = Providers/NDMapViewProvider.m; sourceTree = "<group>"; };
 		2221FC13199264C100CAC58E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2223A32F19938F0400E5AC48 /* NDLeaderboardEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDLeaderboardEntry.h; path = Models/NDLeaderboardEntry.h; sourceTree = "<group>"; };
 		2223A33019938F0400E5AC48 /* NDLeaderboardEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDLeaderboardEntry.m; path = Models/NDLeaderboardEntry.m; sourceTree = "<group>"; };
@@ -186,15 +183,6 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		22164A4E199A62860016A5A9 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				22164A4F199A629F0016A5A9 /* NDMapViewProvider.h */,
-				22164A50199A629F0016A5A9 /* NDMapViewProvider.m */,
-			);
-			name = Providers;
-			sourceTree = "<group>";
-		};
 		2221FC0F1992647200CAC58E /* Geocoder */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +278,6 @@
 		22FA0DC9198A565E00392806 /* NDFoursquare */ = {
 			isa = PBXGroup;
 			children = (
-				22164A4E199A62860016A5A9 /* Providers */,
 				2223A3131993690500E5AC48 /* Models */,
 				2221FC0F1992647200CAC58E /* Geocoder */,
 				220F72771990E1F300934A8E /* ViewControllers */,
@@ -444,7 +431,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22164A51199A629F0016A5A9 /* NDMapViewProvider.m in Sources */,
 				2223A3501993902D00E5AC48 /* NDTipsParser.m in Sources */,
 				2223A3551993906400E5AC48 /* NDURLRequestFactory.m in Sources */,
 				2223A33819938F0400E5AC48 /* NDTrendingPlace.m in Sources */,

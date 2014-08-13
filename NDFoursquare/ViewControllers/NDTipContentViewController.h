@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "NDTip.h"
 
 @interface NDTipContentViewController : UIViewController
 
-- (void)tipContentWithText:(NSString *)text tipAuthorWithText:(NSString *)author;
+@property (nonatomic) NDTip *tip;
+@property (nonatomic) CLLocationCoordinate2D tipCoordinate;
+@property (nonatomic) NSString *tipAddress;
+
 @end

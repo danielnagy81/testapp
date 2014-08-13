@@ -7,7 +7,6 @@
 //
 
 #import "NDTipContentViewController.h"
-#import "NDMapViewProvider.h"
 #import <MapKit/MapKit.h>
 
 @interface NDTipContentViewController () {
@@ -16,21 +15,18 @@
     __weak IBOutlet NSLayoutConstraint *_authorViewHeightConstraint;
     __weak IBOutlet UITextView *_authorTextView;
     __weak IBOutlet UITextView *_tipContentTextView;
-    __weak IBOutlet UIView *_placeholderForMapView;
     __weak IBOutlet UIButton *_showMapButton;
-    NSString *_tipContent;
-    NSString *_tipAuthor;
+    __weak IBOutlet MKMapView *_tipLocationMapView;
 }
 
 @end
 
 @implementation NDTipContentViewController
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        _tipAuthor = [[NSString alloc] init];
-        _tipContent = [[NSString alloc] init];
+        _tip = [[NDTip alloc] init];
     }
     return self;
 }
@@ -38,48 +34,55 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    _tipContentTextView.text = [NSString stringWithFormat:@"„%@”", _tipContent];
+    [self zoomToLocation];
+    _tipLocationMapView.hidden = YES;
+    _tipContentTextView.text = [NSString stringWithFormat:@"„%@”", self.tip.tipContent];
     CGSize correctContentViewSize = [_tipContentTextView sizeThatFits:_tipContentTextView.frame.size];
     _contentViewHeightConstraint.constant = correctContentViewSize.height;
-    _authorTextView.text = [NSString stringWithFormat:@"- %@", _tipAuthor];
+    _authorTextView.text = [NSString stringWithFormat:@"- %@", self.tip.tipAuthor];
     CGSize correctAuthorViewSize = [_authorTextView sizeThatFits:_authorTextView.frame.size];
     _authorViewHeightConstraint.constant = correctAuthorViewSize.height;
-
-}
-
-- (void)tipContentWithText:(NSString *)text tipAuthorWithText:(NSString *)author {
-    
-    _tipAuthor = author;
-    _tipContent = text;
 }
 
 - (IBAction)showMapButtonPressed:(id)sender {
     
+    
+    [self markLocation];
     CGFloat halfAnimationTime = .2f;
     
-    MKMapView *tipLocationMapView = [NDMapViewProvider mapView];
-    tipLocationMapView.frame = _placeholderForMapView.frame;
-    tipLocationMapView.hidden = YES;
-    tipLocationMapView.layer.borderWidth = 5.0f;
-    tipLocationMapView.layer.borderColor = [UIColor blackColor].CGColor;
-    [self.view addSubview:tipLocationMapView];
+    _tipLocationMapView.layer.borderWidth = 5.0f;
+    _tipLocationMapView.layer.borderColor = [UIColor blackColor].CGColor;
     
     CATransform3D viewToShowStartingTransformation = CATransform3DMakeRotation(3.0f * M_PI / 2.0f, .0f, 1.0f, .0f);
     CATransform3D viewToHideEndingTransformation = CATransform3DMakeRotation(M_PI / 2.0f, .0f, 1.0f, .0f);
     CATransform3D viewToShowEndingTransformation = CATransform3DIdentity;
     
-    tipLocationMapView.layer.transform = viewToShowStartingTransformation;
+    _tipLocationMapView.layer.transform = viewToShowStartingTransformation;
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:halfAnimationTime animations:^{
         _showMapButton.layer.transform = viewToHideEndingTransformation;
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         _showMapButton.hidden = YES;
-        tipLocationMapView.hidden = NO;
+        _tipLocationMapView.hidden = NO;
         [UIView animateWithDuration:halfAnimationTime animations:^{
-            tipLocationMapView.layer.transform = viewToShowEndingTransformation;
+            _tipLocationMapView.layer.transform = viewToShowEndingTransformation;
         }];
     }];
+}
+
+- (void)markLocation {
+
+    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+    pointAnnotation.coordinate = self.tipCoordinate;
+    pointAnnotation.title = self.tipAddress;
+    [_tipLocationMapView addAnnotation:pointAnnotation];
+}
+
+- (void)zoomToLocation {
+    
+    MKCoordinateRegion regionToZoom = MKCoordinateRegionMake(self.tipCoordinate, MKCoordinateSpanMake(0.001f, 0.001f));
+    [_tipLocationMapView setRegion:regionToZoom animated:NO];
 }
 
 - (IBAction)backButtonPressed:(id)sender {
