@@ -25,7 +25,7 @@
 
 - (NSError *)convertLocationStringWithAddress:(NSString *)address {
     
-    NSError *error = nil;
+    NSError *geocoderError = nil;
     if ([_networkService isNetworkReachable]) {
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
         [geocoder geocodeAddressString:address completionHandler:^(NSArray *placemarks, NSError *error) {
@@ -34,9 +34,9 @@
     }
     else {
         NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        geocoderError = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
     }
-    return error;
+    return geocoderError;
 }
 
 @end

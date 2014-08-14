@@ -15,7 +15,7 @@
 NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdentifier";
 CGFloat const TrendingPlaceSearchBarOpenStateWidth = 320.0f;
 CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
-double const MKCoordinateSpanMultiplier = 1.25;
+double const CoordinateSpanMultiplier = 1.25;
 
 @interface NDTrendingPlacesViewController () {
     
@@ -25,8 +25,10 @@ double const MKCoordinateSpanMultiplier = 1.25;
     __weak IBOutlet UIActivityIndicatorView *_loadingIndicator;
     __weak IBOutlet MKMapView *_trendingPlacesMapView;
     
+    NDGeocoder *_geocoder;
     NDLocationService *_locationService;
     NSMutableArray *_trendingPlaces;
+    NSMutableArray *_geocodedLocations;
     CLLocationCoordinate2D _lastLocationCoorindate;
 }
 
@@ -37,8 +39,11 @@ double const MKCoordinateSpanMultiplier = 1.25;
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    _geocoder = [[NDGeocoder alloc] init];
+    _geocoder.delegate = self;
     _trendingPlaces = [[NSMutableArray alloc] init];
     _locationService = [NDLocationService locationService];
+    _geocodedLocations = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,6 +67,31 @@ double const MKCoordinateSpanMultiplier = 1.25;
     }
 }
 
+- (void)geocoder:(NDGeocoder *)geocoder didFinishGeocodingWithLocationArray:(NSArray *)locationArray withError:(NSError *)error {
+    
+    if (error.code == 1009) {
+        NSLog(@"%@", error);
+    }
+    else {
+        if (_geocodedLocations.count > 0) {
+            [_geocodedLocations removeAllObjects];
+        }
+        [_geocodedLocations addObjectsFromArray:locationArray];
+        [self.searchDisplayController.searchResultsTableView reloadData];
+    }
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (![searchText isEqualToString:@""]) {
+        NSError *geocoderError = [_geocoder convertLocationStringWithAddress:searchText];
+        if (geocoderError) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[geocoderError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+}
+
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     
     [self.view layoutIfNeeded];
@@ -70,7 +100,6 @@ double const MKCoordinateSpanMultiplier = 1.25;
         _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth;
         [self.view layoutIfNeeded];
     }];
-    
     return YES;
 }
 
@@ -90,13 +119,37 @@ double const MKCoordinateSpanMultiplier = 1.25;
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TrendingPlaceTableViewCellIdentifier];
     }
-    cell.textLabel.text = @"Test title";
+    NSMutableString *titleString = [[NSMutableString alloc] init];
+    NSDictionary *addressDictionary = [[_geocodedLocations objectAtIndex:indexPath.row] addressDictionary];
+    
+    if ([addressDictionary objectForKey:@"ZIP"]) {
+        [titleString appendString:[NSString stringWithFormat:@"%@, ", [addressDictionary objectForKey:@"ZIP"]]];
+    }
+    if ([addressDictionary objectForKey:@"State"]) {
+        [titleString appendString:[addressDictionary objectForKey:@"State"]];
+    }
+    if ([addressDictionary objectForKey:@"Street"]) {
+        [titleString appendString:[NSString stringWithFormat:@", %@", [addressDictionary objectForKey:@"Street"]]];
+    }
+    cell.textLabel.text = titleString;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CLPlacemark *selectedPlacemark = [_geocodedLocations objectAtIndex:indexPath.row];
+    NSString *locationString = [NSString stringWithFormat:@"%f,%f", selectedPlacemark.location.coordinate.latitude, selectedPlacemark.location.coordinate.longitude];
+    [self startAPIServiceWithLocationString:locationString];
+    [_loadingIndicator startAnimating];
+    [self.view bringSubviewToFront:_loadingIndicator];
+    [self.searchDisplayController setActive:NO animated:YES];
+    UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:indexPath];
+    self.searchDisplayController.searchBar.text = cell.textLabel.text;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 20;
+    return _geocodedLocations.count;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
@@ -163,11 +216,13 @@ double const MKCoordinateSpanMultiplier = 1.25;
 - (void)zoomToTrendingPlaces {
     
     NSMutableArray *arrayToIterateOn = [[NSMutableArray alloc] initWithArray:_trendingPlaces];
-    NDTrendingPlace *tempTrendingPlaceForCurrentLocation = [[NDTrendingPlace alloc] init];
-    tempTrendingPlaceForCurrentLocation.coordinate = _lastLocationCoorindate;
-    [arrayToIterateOn addObject:tempTrendingPlaceForCurrentLocation];
+    if (!(_lastLocationCoorindate.latitude == 0.0 && _lastLocationCoorindate.longitude == 0.0)) {
+        NDTrendingPlace *tempTrendingPlaceForCurrentLocation = [[NDTrendingPlace alloc] init];
+        tempTrendingPlaceForCurrentLocation.coordinate = _lastLocationCoorindate;
+        [arrayToIterateOn addObject:tempTrendingPlaceForCurrentLocation];
+        
+    }
     NDTrendingPlace *firstTrendingPlace = [arrayToIterateOn firstObject];
-    
     CLLocationCoordinate2D lowerLeftCorner = firstTrendingPlace.coordinate;
     CLLocationCoordinate2D upperRightCorner = firstTrendingPlace.coordinate;
     
@@ -188,9 +243,10 @@ double const MKCoordinateSpanMultiplier = 1.25;
         }
     }
     
-    MKCoordinateSpan centerSpan = MKCoordinateSpanMake((upperRightCorner.latitude - lowerLeftCorner.latitude) * MKCoordinateSpanMultiplier, (upperRightCorner.longitude - lowerLeftCorner.longitude) * MKCoordinateSpanMultiplier);
+    MKCoordinateSpan centerSpan = MKCoordinateSpanMake((upperRightCorner.latitude - lowerLeftCorner.latitude) * CoordinateSpanMultiplier, (upperRightCorner.longitude - lowerLeftCorner.longitude) * CoordinateSpanMultiplier);
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((upperRightCorner.latitude + lowerLeftCorner.latitude) / 2.0, (upperRightCorner.longitude + lowerLeftCorner.longitude) / 2.0);
     [_trendingPlacesMapView setRegion:MKCoordinateRegionMake(centerCoordinate, centerSpan) animated:YES];
+    _lastLocationCoorindate = CLLocationCoordinate2DMake(0.0, 0.0);
 }
 
 @end
