@@ -119,14 +119,11 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     
     if ([tableView isEqual:_tableView]) {
         [self.view endEditing:YES];
-        UITableViewCell *cell = [_tableView cellForRowAtIndexPath:indexPath];
-        NSString *author = [[[[_tips objectAtIndex:indexPath.section] tips] objectAtIndex:indexPath.row] tipAuthor];
-        NSString *contentOfCell = [NSString stringWithFormat:@"%@", cell.textLabel.text];
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        NDTip *tip = [[[_tips objectAtIndex:indexPath.section] tips] objectAtIndex:indexPath.row];
         
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         NDTipContentViewController *tipContentViewController = [storyboard instantiateViewControllerWithIdentifier:TipContentViewControllerStoryboardIdentifier];
-        tipContentViewController.tip.tipAuthor = author;
-        tipContentViewController.tip.tipContent = contentOfCell;
+        tipContentViewController.tip = tip;
         tipContentViewController.tipCoordinate = [[_tips objectAtIndex:indexPath.section] venueCoordinate];
         tipContentViewController.tipAddress = [[_tips objectAtIndex:indexPath.section] venueAddress];
         

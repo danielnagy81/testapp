@@ -59,7 +59,7 @@
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] : @"",
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] ?
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] : @""];
-
+                aTip.timeStamp = [NSDate dateWithTimeIntervalSince1970:[[tipDictionary objectForKey:@"createdAt"] doubleValue]];
                 [venueTips.tips addObject:aTip];
             }
             else {
@@ -80,6 +80,7 @@
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"firstName"] : @"",
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] ?
                                   [[tipDictionary objectForKey:@"user"] objectForKey:@"lastName"] : @""];
+                aTip.timeStamp = [NSDate dateWithTimeIntervalSince1970:[[tipDictionary objectForKey:@"createdAt"] doubleValue]];
                 [venueTips.tips addObject:aTip];
             }
         }

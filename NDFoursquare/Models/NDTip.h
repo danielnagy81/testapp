@@ -12,5 +12,6 @@
 
 @property (nonatomic) NSString *tipContent;
 @property (nonatomic) NSString *tipAuthor;
+@property (nonatomic) NSDate *timeStamp;
 
 @end

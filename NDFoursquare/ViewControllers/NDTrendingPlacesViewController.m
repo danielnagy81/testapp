@@ -15,6 +15,7 @@
 NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdentifier";
 CGFloat const TrendingPlaceSearchBarOpenStateWidth = 320.0f;
 CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
+double const MKCoordinateSpanMultiplier = 1.25;
 
 @interface NDTrendingPlacesViewController () {
     
@@ -187,7 +188,7 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
         }
     }
     
-    MKCoordinateSpan centerSpan = MKCoordinateSpanMake((upperRightCorner.latitude - lowerLeftCorner.latitude) * 1.1, (upperRightCorner.longitude - lowerLeftCorner.longitude) * 1.1);
+    MKCoordinateSpan centerSpan = MKCoordinateSpanMake((upperRightCorner.latitude - lowerLeftCorner.latitude) * MKCoordinateSpanMultiplier, (upperRightCorner.longitude - lowerLeftCorner.longitude) * MKCoordinateSpanMultiplier);
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((upperRightCorner.latitude + lowerLeftCorner.latitude) / 2.0, (upperRightCorner.longitude + lowerLeftCorner.longitude) / 2.0);
     [_trendingPlacesMapView setRegion:MKCoordinateRegionMake(centerCoordinate, centerSpan) animated:YES];
 }

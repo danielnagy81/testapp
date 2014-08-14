@@ -39,13 +39,16 @@
     _tipContentTextView.text = [NSString stringWithFormat:@"„%@”", self.tip.tipContent];
     CGSize correctContentViewSize = [_tipContentTextView sizeThatFits:_tipContentTextView.frame.size];
     _contentViewHeightConstraint.constant = correctContentViewSize.height;
-    _authorTextView.text = [NSString stringWithFormat:@"- %@", self.tip.tipAuthor];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy.MM.dd.";
+    
+    _authorTextView.text = [NSString stringWithFormat:@"%@ - %@", [dateFormatter stringFromDate:self.tip.timeStamp], self.tip.tipAuthor];
     CGSize correctAuthorViewSize = [_authorTextView sizeThatFits:_authorTextView.frame.size];
     _authorViewHeightConstraint.constant = correctAuthorViewSize.height;
 }
 
 - (IBAction)showMapButtonPressed:(id)sender {
-    
     
     [self markLocation];
     CGFloat halfAnimationTime = .2f;

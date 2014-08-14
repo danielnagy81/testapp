@@ -15,6 +15,7 @@
     if (self) {
         _tipContent = [[NSString alloc] init];
         _tipAuthor = [[NSString alloc] init];
+        _timeStamp = [[NSDate alloc] init];
     }
     return self;
 }
