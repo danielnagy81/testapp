@@ -106,7 +106,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Hty-kh-bXB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1MR-wy-0iF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="z40-DA-vwq">
@@ -136,24 +136,25 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUh-h7-ghq">
-                                <rect key="frame" x="0.0" y="44" width="320" height="388"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="387"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GUh-h7-ghq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" constant="44" id="3SV-uG-Hlh"/>
                             <constraint firstItem="Hty-kh-bXB" firstAttribute="top" secondItem="SbL-Zm-dXV" secondAttribute="bottom" constant="181" id="3r8-69-dwk"/>
-                            <constraint firstItem="GUh-h7-ghq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" constant="44" id="CQ0-zU-4SD"/>
                             <constraint firstItem="SbL-Zm-dXV" firstAttribute="top" secondItem="z40-DA-vwq" secondAttribute="bottom" constant="186" id="Jwv-Y1-wq1"/>
-                            <constraint firstItem="Hty-kh-bXB" firstAttribute="top" secondItem="GUh-h7-ghq" secondAttribute="bottom" constant="-1" id="WBc-sN-2Dp"/>
+                            <constraint firstItem="Hty-kh-bXB" firstAttribute="top" secondItem="GUh-h7-ghq" secondAttribute="bottom" id="UQW-MN-zEG"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="WIZ-VG-OG9"/>
-                            <constraint firstAttribute="trailing" secondItem="GUh-h7-ghq" secondAttribute="trailing" id="caC-0s-MDj"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="pVi-3P-DOl"/>
-                            <constraint firstItem="GUh-h7-ghq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="sWD-F1-eAx"/>
+                            <constraint firstItem="GUh-h7-ghq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="rVh-0U-QPH"/>
                             <constraint firstAttribute="trailing" secondItem="SbL-Zm-dXV" secondAttribute="trailing" constant="150" id="vcD-s5-DuB"/>
                             <constraint firstItem="SbL-Zm-dXV" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" constant="150" id="x5e-fP-RSx"/>
+                            <constraint firstAttribute="trailing" secondItem="GUh-h7-ghq" secondAttribute="trailing" id="xlj-41-wXM"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" title="Trending" id="Ura-ZR-7el">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="-17"/>
                     </tabBarItem>

@@ -38,6 +38,11 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
     [super viewDidLoad];
     _trendingPlaces = [[NSMutableArray alloc] init];
     _locationService = [NDLocationService locationService];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     [_locationService setDelegate:self];
 }
 
@@ -45,10 +50,13 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
     
     [_loadingIndicator startAnimating];
     [self.view bringSubviewToFront:_loadingIndicator];
-    NSError *networkError = [_locationService currentLocation];
-    if (networkError) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[networkError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alert show];
+    NSError *locationServiceError = [_locationService currentLocation];
+    
+    if (locationServiceError) {
+        if (locationServiceError.code == 998) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[locationServiceError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
+        }
         [_loadingIndicator stopAnimating];
     }
 }
@@ -115,15 +123,22 @@ CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
     [apiService processURLWithCompletion:^(id result, NSError *error) {
         [_trendingPlaces removeAllObjects];
         if (!error) {
-            [_trendingPlaces addObjectsFromArray:result];
-            NSArray *annotationsToRemove = [NSArray arrayWithArray:_trendingPlacesMapView.annotations];
-            [_trendingPlacesMapView removeAnnotations:annotationsToRemove];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [_loadingIndicator stopAnimating];
-                [self addTrendingPlacesToMap];
-                [self zoomToTrendingPlaces];
-            });
+            if ([[result firstObject] isKindOfClass:[NDTrendingPlace class]]) {
+                [_trendingPlaces addObjectsFromArray:result];
+                NSArray *annotationsToRemove = [NSArray arrayWithArray:_trendingPlacesMapView.annotations];
+                if (annotationsToRemove.count > 0) {
+                    [_trendingPlacesMapView removeAnnotations:annotationsToRemove];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [_loadingIndicator stopAnimating];
+                    [self addTrendingPlacesToMap];
+                    [self zoomToTrendingPlaces];
+                });
+            }
+            else {
+                NSLog(@"Error: the returned array not contains NDTrendingPlaces in %s.", __PRETTY_FUNCTION__);
+            }
         }
         else {
             NSLog(@"%@", error);

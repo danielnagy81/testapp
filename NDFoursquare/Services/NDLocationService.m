@@ -52,6 +52,10 @@ static NDLocationService *locationService;
             [_locationManager startUpdatingLocation];
             _updating = YES;
         }
+        else {
+            NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The location manager is already updating the location."};
+            error = [NSError errorWithDomain:@"com.ndani.foursquare" code:997 userInfo:errorDetails];
+        }
     }
     else {
         NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};

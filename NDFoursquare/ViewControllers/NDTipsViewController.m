@@ -48,6 +48,11 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     _geocoder.delegate = self;
     _tips = [[NSMutableArray alloc] init];
     _locationService = [NDLocationService locationService];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
     [_locationService setDelegate:self];
 }
 
@@ -195,10 +200,13 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     
     [_loadingIndicator startAnimating];
     [self.view bringSubviewToFront:_loadingIndicator];
-    NSError *networkError = [_locationService currentLocation];
-    if (networkError) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[networkError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alert show];
+    NSError *locationServiceError = [_locationService currentLocation];
+    
+    if (locationServiceError) {
+        if (locationServiceError.code == 998) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[locationServiceError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
+        }
         [_loadingIndicator stopAnimating];
     }
 }
@@ -240,9 +248,14 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
                 [alert show];
             }
             else {
-                [_tips addObjectsFromArray:result];
-                [_tableView reloadData];
-                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                if ([[result firstObject] isKindOfClass:[NDVenueTips class]]) {
+                    [_tips addObjectsFromArray:result];
+                    [_tableView reloadData];
+                    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                }
+                else {
+                    NSLog(@"Error: The returned array not contains NDVenueTips in %s.", __PRETTY_FUNCTION__);
+                }
             }
             [_loadingIndicator stopAnimating];
         });
