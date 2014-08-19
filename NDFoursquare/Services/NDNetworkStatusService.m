@@ -20,10 +20,7 @@ static NDNetworkStatusService *networkStatusService;
     
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        
-        if (!networkStatusService) {
-            networkStatusService = [[NDNetworkStatusService alloc] init];
-        }
+        networkStatusService = [[NDNetworkStatusService alloc] init];
     });
     return networkStatusService;
 }

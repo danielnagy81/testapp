@@ -11,7 +11,7 @@
 
 @interface NDLocationService : NSObject
 
-+ (NDLocationService *)locationService;
++ (NDLocationService *)sharedInstance;
 - (NSError *)currentLocation;
 - (void)stopMonitoring;
 - (void)setDelegate:(id<CLLocationManagerDelegate>)delegate;

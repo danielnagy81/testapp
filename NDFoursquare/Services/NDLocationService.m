@@ -18,14 +18,11 @@ static NDLocationService *locationService;
     CLLocationManager *_locationManager;
 }
 
-+ (NDLocationService *)locationService {
++ (NDLocationService *)sharedInstance {
     
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-        
-        if (!locationService) {
-            locationService = [[NDLocationService alloc] init];
-        }
+        locationService = [[NDLocationService alloc] init];
     });
     return locationService;
 }

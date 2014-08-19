@@ -47,7 +47,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     _geocoder = [[NDGeocoder alloc] init];
     _geocoder.delegate = self;
     _tips = [[NSMutableArray alloc] init];
-    _locationService = [NDLocationService locationService];
+    _locationService = [NDLocationService sharedInstance];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

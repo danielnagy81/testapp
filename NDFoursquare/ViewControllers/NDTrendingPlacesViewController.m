@@ -7,12 +7,14 @@
 //
 
 #import "NDTrendingPlacesViewController.h"
+#import "NDAugmentedRealityViewController.h"
 #import "NDLocationService.h"
 #import "NDAPIService.h"
 #import "NDTrendingPlace.h"
 #import <MapKit/MapKit.h>
 
 NSString *const TrendingPlaceTableViewCellIdentifier = @"TrendingPlaceCellIdentifier";
+NSString *const AugmentedRealityViewControllerIdentifier = @"AugmentedRealityViewController";
 CGFloat const TrendingPlaceSearchBarOpenStateWidth = 320.0f;
 CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
 double const CoordinateSpanMultiplier = 1.25;
@@ -42,7 +44,7 @@ double const CoordinateSpanMultiplier = 1.25;
     _geocoder = [[NDGeocoder alloc] init];
     _geocoder.delegate = self;
     _trendingPlaces = [[NSMutableArray alloc] init];
-    _locationService = [NDLocationService locationService];
+    _locationService = [NDLocationService sharedInstance];
     _geocodedLocations = [[NSMutableArray alloc] init];
 }
 
@@ -50,6 +52,20 @@ double const CoordinateSpanMultiplier = 1.25;
     
     [super viewDidAppear:animated];
     [_locationService setDelegate:self];
+}
+
+- (IBAction)augmentedRealityButtonPressed:(id)sender {
+    
+    if (_trendingPlaces.count > 0) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        NDAugmentedRealityViewController *arViewController = [storyboard instantiateViewControllerWithIdentifier:AugmentedRealityViewControllerIdentifier];
+        arViewController.locations = _trendingPlaces;
+        [self.tabBarController presentViewController:arViewController animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There are no locations to show in the camera." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (IBAction)nearbyButtonPressed:(id)sender {
@@ -247,6 +263,11 @@ double const CoordinateSpanMultiplier = 1.25;
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((upperRightCorner.latitude + lowerLeftCorner.latitude) / 2.0, (upperRightCorner.longitude + lowerLeftCorner.longitude) / 2.0);
     [_trendingPlacesMapView setRegion:MKCoordinateRegionMake(centerCoordinate, centerSpan) animated:YES];
     _lastLocationCoorindate = CLLocationCoordinate2DMake(0.0, 0.0);
+}
+
+- (void)dismissModalViewController {
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

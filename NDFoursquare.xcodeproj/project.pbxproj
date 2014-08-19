@@ -45,6 +45,9 @@
 		22FA0DED198A565E00392806 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22FA0DEB198A565E00392806 /* InfoPlist.strings */; };
 		22FA0DEF198A565E00392806 /* NDFoursquareTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA0DEE198A565E00392806 /* NDFoursquareTests.m */; };
 		22FA0E28198A7AC600392806 /* FSOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FA0E27198A7AC600392806 /* FSOAuth.m */; };
+		22FF779F19A22E0C00A47F26 /* NDAugmentedRealityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FF779E19A22E0C00A47F26 /* NDAugmentedRealityViewController.m */; };
+		22FF77A119A237F900A47F26 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FF77A019A237F900A47F26 /* CoreMotion.framework */; };
+		56F0A3CAF0BC414691AC0EAB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 101B75F8B22C44B2ABBC1DA2 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		101B75F8B22C44B2ABBC1DA2 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		22164A4C199A42660016A5A9 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		2221FC13199264C100CAC58E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -122,6 +126,10 @@
 		22FA0DEE198A565E00392806 /* NDFoursquareTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDFoursquareTests.m; sourceTree = "<group>"; };
 		22FA0E26198A7AC600392806 /* FSOAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSOAuth.h; path = FoursquareFiles/FSOAuth.h; sourceTree = "<group>"; };
 		22FA0E27198A7AC600392806 /* FSOAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSOAuth.m; path = FoursquareFiles/FSOAuth.m; sourceTree = "<group>"; };
+		22FF779D19A22E0C00A47F26 /* NDAugmentedRealityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDAugmentedRealityViewController.h; path = ViewControllers/NDAugmentedRealityViewController.h; sourceTree = "<group>"; };
+		22FF779E19A22E0C00A47F26 /* NDAugmentedRealityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NDAugmentedRealityViewController.m; path = ViewControllers/NDAugmentedRealityViewController.m; sourceTree = "<group>"; };
+		22FF77A019A237F900A47F26 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		5CFFCB6AB6494DC0A523F0A3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,12 +137,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22FF77A119A237F900A47F26 /* CoreMotion.framework in Frameworks */,
 				22164A4D199A42660016A5A9 /* MapKit.framework in Frameworks */,
 				2221FC14199264C100CAC58E /* CoreLocation.framework in Frameworks */,
 				220D6BF5198F66FD00F5CB99 /* SystemConfiguration.framework in Frameworks */,
 				22FA0DC6198A565E00392806 /* CoreGraphics.framework in Frameworks */,
 				22FA0DC8198A565E00392806 /* UIKit.framework in Frameworks */,
 				22FA0DC4198A565E00392806 /* Foundation.framework in Frameworks */,
+				56F0A3CAF0BC414691AC0EAB /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,6 +189,8 @@
 				2223A34319938FCA00E5AC48 /* NDTipsViewController.m */,
 				2223A34019938FCA00E5AC48 /* NDTipContentViewController.h */,
 				2223A34119938FCA00E5AC48 /* NDTipContentViewController.m */,
+				22FF779D19A22E0C00A47F26 /* NDAugmentedRealityViewController.h */,
+				22FF779E19A22E0C00A47F26 /* NDAugmentedRealityViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -249,6 +261,7 @@
 				22FA0DE8198A565E00392806 /* NDFoursquareTests */,
 				22FA0DC2198A565E00392806 /* Frameworks */,
 				22FA0DC1198A565E00392806 /* Products */,
+				5CFFCB6AB6494DC0A523F0A3 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -264,6 +277,7 @@
 		22FA0DC2198A565E00392806 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22FF77A019A237F900A47F26 /* CoreMotion.framework */,
 				22164A4C199A42660016A5A9 /* MapKit.framework */,
 				2221FC13199264C100CAC58E /* CoreLocation.framework */,
 				220D6BF4198F66FD00F5CB99 /* SystemConfiguration.framework */,
@@ -271,6 +285,7 @@
 				22FA0DC5198A565E00392806 /* CoreGraphics.framework */,
 				22FA0DC7198A565E00392806 /* UIKit.framework */,
 				22FA0DE2198A565E00392806 /* XCTest.framework */,
+				101B75F8B22C44B2ABBC1DA2 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -340,9 +355,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22FA0DF2198A565E00392806 /* Build configuration list for PBXNativeTarget "NDFoursquare" */;
 			buildPhases = (
+				B8CBEA9342344FE28017CE04 /* Check Pods Manifest.lock */,
 				22FA0DBC198A565E00392806 /* Sources */,
 				22FA0DBD198A565E00392806 /* Frameworks */,
 				22FA0DBE198A565E00392806 /* Resources */,
+				B2847AA1F51A40BBB9FD64F9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -426,6 +443,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B2847AA1F51A40BBB9FD64F9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8CBEA9342344FE28017CE04 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		22FA0DBC198A565E00392806 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -448,6 +498,7 @@
 				2223A33A19938F0400E5AC48 /* NDVenueTips.m in Sources */,
 				2223A35F1993909700E5AC48 /* NDAuthenticationService.m in Sources */,
 				2223A33D19938F3A00E5AC48 /* NDGeocoder.m in Sources */,
+				22FF779F19A22E0C00A47F26 /* NDAugmentedRealityViewController.m in Sources */,
 				2223A3511993902D00E5AC48 /* NDTrendingPlacesParser.m in Sources */,
 				2223A34619938FCA00E5AC48 /* NDTipsViewController.m in Sources */,
 				2234C4541998A5110042D942 /* NDAuthenticationViewViewController.m in Sources */,
@@ -576,7 +627,9 @@
 		};
 		22FA0DF3198A565E00392806 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CFFCB6AB6494DC0A523F0A3 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -584,13 +637,16 @@
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		22FA0DF4198A565E00392806 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CFFCB6AB6494DC0A523F0A3 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -598,6 +654,7 @@
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7s armv7 arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
