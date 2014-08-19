@@ -40,7 +40,7 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
     if ([_networkStatusService isNetworkReachable]) {
         if (![[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey]) {
             NSLog(@"Authentication required!");
-            NSUInteger authenticationResult = [FSOAuth authorizeUserUsingClientId:ClientID callbackURIString:CallbackURIString allowShowingAppStore:NO];
+            NSUInteger authenticationResult = [FSOAuth authorizeUserUsingClientId:ClientID callbackURIString:CallbackURIString];
             NSLog(@"%@", [NDAuthenticationService errorMessage:authenticationResult]);
         }
         else {
