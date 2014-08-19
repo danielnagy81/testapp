@@ -86,7 +86,7 @@
 
 - (IBAction)backButtonPressed:(id)sender {
     
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

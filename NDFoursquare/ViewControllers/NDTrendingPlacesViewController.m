@@ -59,8 +59,8 @@ double const CoordinateSpanMultiplier = 1.25;
     if (_trendingPlaces.count > 0) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         NDAugmentedRealityViewController *arViewController = [storyboard instantiateViewControllerWithIdentifier:AugmentedRealityViewControllerIdentifier];
-        arViewController.locations = _trendingPlaces;
-        [self.tabBarController presentViewController:arViewController animated:YES completion:nil];
+        arViewController.locations = [_trendingPlaces copy];
+        [self presentViewController:arViewController animated:YES completion:nil];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There are no locations to show in the camera." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
@@ -263,11 +263,6 @@ double const CoordinateSpanMultiplier = 1.25;
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((upperRightCorner.latitude + lowerLeftCorner.latitude) / 2.0, (upperRightCorner.longitude + lowerLeftCorner.longitude) / 2.0);
     [_trendingPlacesMapView setRegion:MKCoordinateRegionMake(centerCoordinate, centerSpan) animated:YES];
     _lastLocationCoorindate = CLLocationCoordinate2DMake(0.0, 0.0);
-}
-
-- (void)dismissModalViewController {
-    
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -11,14 +11,14 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="FGY-kD-ml4">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="FGY-kD-ml4">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="EEd-Oq-aeY" kind="relationship" relationship="viewControllers" id="ZRT-wI-U0W"/>
                         <segue destination="HVj-L4-r8u" kind="relationship" relationship="viewControllers" id="qrm-B2-vDf"/>
+                        <segue destination="EEd-Oq-aeY" kind="relationship" relationship="viewControllers" id="ZRT-wI-U0W"/>
                         <segue destination="I18-9k-wgV" kind="relationship" relationship="viewControllers" id="9K1-8C-Wbx"/>
                         <segue destination="meY-8e-Hvm" kind="relationship" relationship="viewControllers" id="OI4-cW-bMP"/>
                     </connections>
@@ -76,10 +76,10 @@
                         <viewControllerLayoutGuide type="bottom" id="iS5-hj-gSb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YNy-Fp-Pi6">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic3-5d-d8f">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ic3-5d-d8f">
                                 <rect key="frame" x="20" y="116" width="280" height="247"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
