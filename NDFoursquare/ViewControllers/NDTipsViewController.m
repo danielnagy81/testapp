@@ -151,7 +151,7 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:.2f animations:^{
         _nearbyButton.alpha = .0f;
-        _searchBarWidthConstraint.constant = TipsSearchBarOpenStateWidth;
+        _searchBarWidthConstraint.constant = TipsSearchBarOpenStateWidth + (self.view.frame.size.width - TipsSearchBarOpenStateWidth);
         [self.view layoutIfNeeded];
     }];
     
@@ -208,10 +208,6 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     }
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     if (locations.count > 0) {
@@ -257,6 +253,15 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
             [_loadingIndicator stopAnimating];
         });
     }];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        if (_searchBarWidthConstraint.constant > TipsSearchBarOpenStateWidth) {
+            _searchBarWidthConstraint.constant = TipsSearchBarOpenStateWidth;
+        }
+    }
 }
 
 @end

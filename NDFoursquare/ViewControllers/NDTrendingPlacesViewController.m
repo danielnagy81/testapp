@@ -113,7 +113,7 @@ double const CoordinateSpanMultiplier = 1.25;
     [self.view layoutIfNeeded];
     [UIView animateWithDuration:.2f animations:^{
         _nearbyButton.alpha = .0f;
-        _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth;
+        _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth + (self.view.frame.size.width - TrendingPlaceSearchBarOpenStateWidth);
         [self.view layoutIfNeeded];
     }];
     return YES;
@@ -181,10 +181,6 @@ double const CoordinateSpanMultiplier = 1.25;
         [_loadingIndicator stopAnimating];
     }
     [_locationService stopMonitoring];
-}
-
-- (BOOL)prefersStatusBarHidden {
-    return YES;
 }
 
 - (void)startAPIServiceWithLocationString:(NSString *)locationString {
@@ -263,6 +259,15 @@ double const CoordinateSpanMultiplier = 1.25;
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake((upperRightCorner.latitude + lowerLeftCorner.latitude) / 2.0, (upperRightCorner.longitude + lowerLeftCorner.longitude) / 2.0);
     [_trendingPlacesMapView setRegion:MKCoordinateRegionMake(centerCoordinate, centerSpan) animated:YES];
     _lastLocationCoorindate = CLLocationCoordinate2DMake(0.0, 0.0);
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    if (toInterfaceOrientation == UIInterfaceOrientationPortrait || toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        if (_searchBarWidthConstraint.constant > TrendingPlaceSearchBarOpenStateWidth) {
+            _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth;
+        }
+    }
 }
 
 @end

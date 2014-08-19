@@ -59,10 +59,6 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
     return cell;
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return YES;
-}
-
 - (void)startAPIService {
     if (![self.refreshControl isRefreshing]) {
         [_loadingIndicator startAnimating];
