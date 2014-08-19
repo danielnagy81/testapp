@@ -172,9 +172,13 @@
                                     <action selector="nearbyButtonPressed:" destination="I18-9k-wgV" eventType="touchUpInside" id="Zt1-Ce-oqU"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SbL-Zm-dXV">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="SbL-Zm-dXV">
                                 <rect key="frame" x="150" y="250" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="3Kr-fy-7ca"/>
+                                    <constraint firstAttribute="width" constant="20" id="Wu5-gK-E4o"/>
+                                </constraints>
                             </activityIndicatorView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUh-h7-ghq">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -203,8 +207,10 @@
                             <constraint firstItem="GUh-h7-ghq" firstAttribute="top" secondItem="z40-DA-vwq" secondAttribute="bottom" id="959-Bu-B6s"/>
                             <constraint firstItem="MTh-Ju-cDP" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="DUM-UM-HVS"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" id="LgJ-Gg-ZxM"/>
+                            <constraint firstItem="SbL-Zm-dXV" firstAttribute="leading" secondItem="1MR-wy-0iF" secondAttribute="leading" constant="150" id="ODA-xL-hQI"/>
                             <constraint firstAttribute="trailing" secondItem="MTh-Ju-cDP" secondAttribute="trailing" id="TKZ-L9-LYl"/>
                             <constraint firstAttribute="trailing" secondItem="GUh-h7-ghq" secondAttribute="trailing" id="UTr-Tl-j3u"/>
+                            <constraint firstItem="SbL-Zm-dXV" firstAttribute="top" secondItem="1MR-wy-0iF" secondAttribute="top" constant="250" id="avE-Hk-ARu"/>
                             <constraint firstItem="GUh-h7-ghq" firstAttribute="top" secondItem="MTh-Ju-cDP" secondAttribute="bottom" id="kx5-Vd-s6v"/>
                             <constraint firstItem="iRI-0L-aiq" firstAttribute="top" secondItem="MTh-Ju-cDP" secondAttribute="bottom" id="pBk-0b-Om5"/>
                             <constraint firstItem="z40-DA-vwq" firstAttribute="top" secondItem="oRB-Jh-bTd" secondAttribute="bottom" id="w6I-ez-Z3e"/>
@@ -218,6 +224,8 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="_loadingIndicator" destination="SbL-Zm-dXV" id="XSK-qo-dwV"/>
+                        <outlet property="_loadingIndicatorLeadingSpaceConstraint" destination="ODA-xL-hQI" id="8zW-Q0-u5F"/>
+                        <outlet property="_loadingIndicatorTopSpaceConstraint" destination="avE-Hk-ARu" id="Ebn-yR-s0n"/>
                         <outlet property="_nearbyButton" destination="MTh-Ju-cDP" id="HAD-OT-Jut"/>
                         <outlet property="_searchBar" destination="z40-DA-vwq" id="gjk-qJ-m82"/>
                         <outlet property="_searchBarWidthConstraint" destination="3LB-yj-8JY" id="3Rz-IA-fmp"/>
@@ -250,9 +258,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-8l-7bP">
-                                <rect key="frame" x="0.0" y="186" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lvM-8l-7bP">
+                                <rect key="frame" x="150" y="186" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="5F8-4w-ONT"/>
+                                    <constraint firstAttribute="width" constant="20" id="IzT-kF-V18"/>
+                                </constraints>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="b0n-YM-hPo">
                                 <rect key="frame" x="0.0" y="64" width="320" height="367"/>
@@ -291,8 +303,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="top" secondItem="VJn-Lw-q5V" secondAttribute="top" constant="186" id="1QM-yx-0lw"/>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="top" secondItem="dse-HS-ZsS" secondAttribute="bottom" id="1fe-lU-ZAM"/>
                             <constraint firstItem="m0m-Le-dJP" firstAttribute="top" secondItem="b0n-YM-hPo" secondAttribute="bottom" id="GwT-6Y-sec"/>
+                            <constraint firstItem="lvM-8l-7bP" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" constant="150" id="HkV-g8-x7D"/>
                             <constraint firstItem="b0n-YM-hPo" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="Xqg-fh-UjU"/>
                             <constraint firstItem="wKf-cu-ZhE" firstAttribute="leading" secondItem="i6e-IY-7Bq" secondAttribute="trailing" id="gK2-3H-nXy"/>
                             <constraint firstItem="i6e-IY-7Bq" firstAttribute="leading" secondItem="VJn-Lw-q5V" secondAttribute="leading" id="guJ-Ra-nwd"/>
@@ -310,6 +324,8 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="_loadingIndicator" destination="lvM-8l-7bP" id="DHu-kD-fGl"/>
+                        <outlet property="_loadingIndicatorLeadingSpaceConstraint" destination="HkV-g8-x7D" id="sKk-Pk-ViR"/>
+                        <outlet property="_loadingIndicatorTopSpaceConstraint" destination="1QM-yx-0lw" id="t25-Ix-8nB"/>
                         <outlet property="_nearbyButton" destination="wKf-cu-ZhE" id="aRr-kD-B1Z"/>
                         <outlet property="_searchBar" destination="i6e-IY-7Bq" id="3Gs-od-bqw"/>
                         <outlet property="_searchBarWidthConstraint" destination="OEO-kw-c2e" id="VWU-gf-BKV"/>

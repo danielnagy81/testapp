@@ -19,6 +19,7 @@ NSString *const TipSearcResultTableViewCellIdentifier = @"SearchResultTableViewC
 NSString *const TipContentViewControllerStoryboardIdentifier = @"TipContentViewController";
 CGFloat const TipsSearchBarOpenStateWidth = 320.0f;
 CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
+CGFloat const TipsLoadingIndicatorWidthAndHeight = 20.0f;
 
 @interface NDTipsViewController () {
     
@@ -31,6 +32,8 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     NSMutableArray *_tips;
     NDGeocoder *_geocoder;
     __weak IBOutlet NSLayoutConstraint *_searchBarWidthConstraint;
+    __weak IBOutlet NSLayoutConstraint *_loadingIndicatorTopSpaceConstraint;
+    __weak IBOutlet NSLayoutConstraint *_loadingIndicatorLeadingSpaceConstraint;
 }
 
 @end
@@ -48,6 +51,9 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
     _geocoder.delegate = self;
     _tips = [[NSMutableArray alloc] init];
     _locationService = [NDLocationService sharedInstance];
+    
+    _loadingIndicatorLeadingSpaceConstraint.constant = self.view.frame.size.width / 2.0f - TipsLoadingIndicatorWidthAndHeight / 2.0f;
+    _loadingIndicatorTopSpaceConstraint.constant = self.view.frame.size.height / 2.0f - TipsLoadingIndicatorWidthAndHeight / 2.0f;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -262,6 +268,12 @@ CGFloat const TipsSearchBarClosedStateWidth = 258.0f;
             _searchBarWidthConstraint.constant = TipsSearchBarOpenStateWidth;
         }
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    _loadingIndicatorLeadingSpaceConstraint.constant = self.view.frame.size.width / 2.0f - TipsLoadingIndicatorWidthAndHeight / 2.0f;
+    _loadingIndicatorTopSpaceConstraint.constant = self.view.frame.size.height / 2.0f - TipsLoadingIndicatorWidthAndHeight / 2.0f;
 }
 
 @end

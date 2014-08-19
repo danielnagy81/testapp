@@ -18,6 +18,7 @@ NSString *const AugmentedRealityViewControllerIdentifier = @"AugmentedRealityVie
 CGFloat const TrendingPlaceSearchBarOpenStateWidth = 320.0f;
 CGFloat const TrendingPlaceSearchBarClosedStateWidth = 258.0f;
 double const CoordinateSpanMultiplier = 1.25;
+CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
 
 @interface NDTrendingPlacesViewController () {
     
@@ -32,6 +33,9 @@ double const CoordinateSpanMultiplier = 1.25;
     NSMutableArray *_trendingPlaces;
     NSMutableArray *_geocodedLocations;
     CLLocationCoordinate2D _lastLocationCoorindate;
+    
+    __weak IBOutlet NSLayoutConstraint *_loadingIndicatorTopSpaceConstraint;
+    __weak IBOutlet NSLayoutConstraint *_loadingIndicatorLeadingSpaceConstraint;
 }
 
 @end
@@ -46,6 +50,9 @@ double const CoordinateSpanMultiplier = 1.25;
     _trendingPlaces = [[NSMutableArray alloc] init];
     _locationService = [NDLocationService sharedInstance];
     _geocodedLocations = [[NSMutableArray alloc] init];
+    
+    _loadingIndicatorLeadingSpaceConstraint.constant = self.view.frame.size.width / 2.0f - TrendingPlacesLoadingIndicatorWidthAndHeight / 2.0f;
+    _loadingIndicatorTopSpaceConstraint.constant = self.view.frame.size.height / 2.0f - TrendingPlacesLoadingIndicatorWidthAndHeight / 2.0f;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -268,6 +275,12 @@ double const CoordinateSpanMultiplier = 1.25;
             _searchBarWidthConstraint.constant = TrendingPlaceSearchBarOpenStateWidth;
         }
     }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    
+    _loadingIndicatorLeadingSpaceConstraint.constant = self.view.frame.size.width / 2.0f - TrendingPlacesLoadingIndicatorWidthAndHeight / 2.0f;
+    _loadingIndicatorTopSpaceConstraint.constant = self.view.frame.size.height / 2.0f - TrendingPlacesLoadingIndicatorWidthAndHeight / 2.0f;
 }
 
 @end
