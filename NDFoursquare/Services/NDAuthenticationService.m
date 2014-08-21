@@ -9,6 +9,7 @@
 #import "NDAuthenticationService.h"
 #import "FSOAuth.h"
 #import "NDNetworkStatusService.h"
+#import "NDErrorFactory.h"
 
 NSString *const ClientID = @"FWVVZO3UPNXWXRGL3E3D5FX4XRVBXO2VJHK02Z3CQEHVYLHF";
 NSString *const ClientSecret = @"CMC30AIKMH0MZ50COXVBHUSVH5RHUYDUD1ATAORFLI3RDQEN";
@@ -61,8 +62,7 @@ NSString *const AuthenticationDidFinishedNotificationName = @"AuthenticationDidF
         [self authenticate];
     }
     else {
-        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        error = [NDErrorFactory errorWithDetails:@"The network is not reachable at the moment." withCode:998];
     }
     return error;
 }

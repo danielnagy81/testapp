@@ -8,6 +8,7 @@
 
 #import "NDLocationService.h"
 #import "NDNetworkStatusService.h"
+#import "NDErrorFactory.h"
 
 static NDLocationService *locationService;
 
@@ -50,13 +51,11 @@ static NDLocationService *locationService;
             _updating = YES;
         }
         else {
-            NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The location manager is already updating the location."};
-            error = [NSError errorWithDomain:@"com.ndani.foursquare" code:997 userInfo:errorDetails];
+            error = [NDErrorFactory errorWithDetails:@"The location manager is already updating the location." withCode:997];
         }
     }
     else {
-        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        error = [NDErrorFactory errorWithDetails:@"The network is not reachable at the moment." withCode:998];
     }
     return error;
 }

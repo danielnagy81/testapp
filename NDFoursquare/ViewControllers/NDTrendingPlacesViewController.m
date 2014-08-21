@@ -9,7 +9,6 @@
 #import "NDTrendingPlacesViewController.h"
 #import "NDAugmentedRealityViewController.h"
 #import "NDLocationService.h"
-#import "NDAPIService.h"
 #import "NDTrendingPlace.h"
 #import <MapKit/MapKit.h>
 
@@ -193,32 +192,31 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
 - (void)startAPIServiceWithLocationString:(NSString *)locationString {
     
     NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeVenuesTrending withOptionalParameter:locationString];
-    [apiService processURLWithCompletion:^(id result, NSError *error) {
-        [_trendingPlaces removeAllObjects];
-        if (!error) {
-            if ([[result firstObject] isKindOfClass:[NDTrendingPlace class]]) {
-                [_trendingPlaces addObjectsFromArray:result];
-                NSArray *annotationsToRemove = [NSArray arrayWithArray:_trendingPlacesMapView.annotations];
+    [apiService processRequestWithCompletion:^(id result) {
+        if ([result isKindOfClass:[NSArray class]]) {
+            [_trendingPlaces removeAllObjects];
+            [_trendingPlaces addObjectsFromArray:result];
+            NSArray *annotationsToRemove = [NSArray arrayWithArray:_trendingPlacesMapView.annotations];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
                 if (annotationsToRemove.count > 0) {
                     [_trendingPlacesMapView removeAnnotations:annotationsToRemove];
                 }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [_loadingIndicator stopAnimating];
-                    [self addTrendingPlacesToMap];
-                    [self zoomToTrendingPlaces];
-                });
-            }
-            else {
-                NSLog(@"Error: the returned array not contains NDTrendingPlaces in %s.", __PRETTY_FUNCTION__);
-            }
-        }
-        else {
-            NSLog(@"%@", error);
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [_loadingIndicator stopAnimating];
+                [self addTrendingPlacesToMap];
+                [self zoomToTrendingPlaces];
             });
         }
+        else {
+            NSLog(@"Error: the result is not an array in %s.", __PRETTY_FUNCTION__);
+        }
+        
+    } withFailureHandler:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            [alert show];
+            [_loadingIndicator stopAnimating];
+        });
     }];
 }
 

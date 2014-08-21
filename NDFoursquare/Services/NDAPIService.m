@@ -7,6 +7,7 @@
 //
 
 #import "NDAPIService.h"
+#import "NDDownloader.h"
 #import "NDTrendingPlacesParser.h"
 #import "NDTipsParser.h"
 #import "NDLeaderboardParser.h"
@@ -14,6 +15,7 @@
 #import "NDNetworkStatusService.h"
 #import "NDURLRequestFactory.h"
 #import "NDAuthenticationService.h"
+#import "NDErrorFactory.h"
 
 @implementation NDAPIService {
     
@@ -35,46 +37,76 @@
     return self;
 }
 
-- (void)processURLWithCompletion:(NDProcessCompletionBlock)completion {
+- (void)processRequestWithCompletion:(NDProcessCompletion)completion withFailureHandler:(NDProcessFailureHandler)failureHandler {
     
+    NSError *processError = nil;
     if ([_networkStatusService isNetworkReachable]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey];
-            if (authToken) {
-                NSURL *requestURL = [self urlWithAuthToken:authToken];
-                NSData *dataFromURL = [NSData dataWithContentsOfURL:requestURL];
-                NSArray *resultArray = [self jsonParserWithData:dataFromURL];
-                if (resultArray.count > 0) {
-                    if (completion) {
-                        completion(resultArray, nil);
-                    }
-                    else {
-                        NSLog(@"Error: The block is nil in %s.", __PRETTY_FUNCTION__);
-                    }
-                }
-                else {
-                    if (completion) {
-                        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The returned array was empty."};
-                        NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:999 userInfo:errorDetails];
-                        completion(resultArray, error);
-                    }
-                    else {
-                        NSLog(@"Error: The block is nil in %s.", __PRETTY_FUNCTION__);
-                    }
-                }
+        NSString *authToken = [[NSUserDefaults standardUserDefaults] objectForKey:UserAccessTokenUserDefaultsKey];
+        if (authToken) {
+            NSURL *requestURL = [self urlWithAuthToken:authToken];
+            if (requestURL) {
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self downloadDataFromURL:requestURL withCompletion:^(NSData *data, NSError *error) {
+                        if (!error) {
+                            NSArray *results = [self jsonParserWithData:data];
+                            if (results.count > 0) {
+                                if (completion) {
+                                    completion(results);
+                                }
+                            }
+                            else {
+                                if (failureHandler) {
+                                    NSError *error = [NDErrorFactory errorWithDetails:@"The returned array is empty." withCode:995];
+                                    failureHandler(error);
+                                }
+                            }
+                        }
+                        else {
+                            if (failureHandler) {
+                                failureHandler(error);
+                            }
+                        }
+                    }];
+                    
+                });
             }
             else {
-                NSLog(@"Error: There was no auth token in the user defaults.");
+                processError = [NDErrorFactory errorWithDetails:@"The generated URL was nil." withCode:990];
             }
-        });
+        }
+        else {
+            processError = [NDErrorFactory errorWithDetails:@"There is no auth token." withCode:991];
+        }
     }
     else {
-        NSLog(@"The network is not reachable at the moment.");
-        if (completion) {
-            NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-            NSError *error = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
-            completion(nil, error);
+        processError = [NDErrorFactory errorWithDetails:@"The network is not reachable at the moment." withCode:998];
+    }
+    if (processError) {
+        if (failureHandler) {
+            failureHandler(processError);
         }
+        else {
+            NSLog(@"Error: the failure handler block is nil in %s", __PRETTY_FUNCTION__);
+        }
+    }
+}
+
+- (void)downloadDataFromURL:(NSURL *)url withCompletion:(NDDownloadCompletion)completion {
+    
+    if (completion) {
+        NDDownloader *downloader = [[NDDownloader alloc] init];
+        [downloader downloadDataFromURL:url withCompletion:^(NSData *data, NSError *error) {
+            if (!error) {
+                completion(data, nil);
+            }
+            else {
+                completion(nil, error);
+            }
+        }];
+    }
+    else {
+        NSLog(@"Error: the completion block is nil in %s", __PRETTY_FUNCTION__);
     }
 }
 
@@ -99,6 +131,7 @@
     
     if (!data) {
         NSLog(@"Error, the data you pass in was nil in %s.", __PRETTY_FUNCTION__);
+        return nil;
     }
     switch (_requestType) {
         case NDServiceTypeUsersLeaderboard: {

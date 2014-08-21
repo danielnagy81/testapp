@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "NDGeocoder.h"
+#import "NDAPIService.h"
 
 @interface NDTrendingPlacesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate, NDGeocoderDelegate>
 

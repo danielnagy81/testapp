@@ -8,6 +8,7 @@
 
 #import "NDGeocoder.h"
 #import "NDNetworkStatusService.h"
+#import "NDErrorFactory.h"
 #import <CoreLocation/CoreLocation.h>
 
 @implementation NDGeocoder {
@@ -33,8 +34,7 @@
         }];
     }
     else {
-        NSDictionary *errorDetails = @{NSLocalizedDescriptionKey: @"The network is not reachable at the moment."};
-        geocoderError = [NSError errorWithDomain:@"com.ndani.foursquare" code:998 userInfo:errorDetails];
+        geocoderError = [NDErrorFactory errorWithDetails:@"The network is not reachable at the moment." withCode:998];
     }
     return geocoderError;
 }

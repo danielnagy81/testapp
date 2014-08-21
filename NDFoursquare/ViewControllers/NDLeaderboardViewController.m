@@ -60,12 +60,41 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
 }
 
 - (void)startAPIService {
+    
     if (![self.refreshControl isRefreshing]) {
         [_loadingIndicator startAnimating];
     }
-    [_apiService processURLWithCompletion:^(id result, NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
+    [_apiService processRequestWithCompletion:^(id result) {
+        
+        if ([result isKindOfClass:[NSArray class]]) {
+            _leaderboard = [NSMutableArray arrayWithArray:result];
+            if (_leaderboard.count > 0) {
+                [[NSNotificationCenter defaultCenter] removeObserver:self];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+                if ([self.refreshControl isRefreshing]) {
+                    [self.refreshControl endRefreshing];
+                }
+                else {
+                    [_loadingIndicator stopAnimating];
+                }
+            });
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([self.refreshControl isRefreshing]) {
+                    [self.refreshControl endRefreshing];
+                }
+                else {
+                    [_loadingIndicator stopAnimating];
+                }
+            });
+            NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
+        }
+    } withFailureHandler:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
             if ([self.refreshControl isRefreshing]) {
                 [self.refreshControl endRefreshing];
             }
@@ -74,27 +103,7 @@ NSString *const TableViewCellIdentifier = @"LeaderboardCellIdentifier";
             }
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
             [alert show];
-        }
-        else {
-            if ([result isKindOfClass:[NSArray class]]) {
-                _leaderboard = [NSMutableArray arrayWithArray:result];
-                if (_leaderboard.count > 0) {
-                    [[NSNotificationCenter defaultCenter] removeObserver:self];
-                }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.tableView reloadData];
-                    if ([self.refreshControl isRefreshing]) {
-                        [self.refreshControl endRefreshing];
-                    }
-                    else {
-                        [_loadingIndicator stopAnimating];
-                    }
-                });
-            }
-            else {
-                NSLog(@"Error: the returned object wasn't an array in %s.", __PRETTY_FUNCTION__);
-            }
-        }
+        });
     }];
 }
 

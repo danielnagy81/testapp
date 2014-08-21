@@ -231,34 +231,65 @@ CGFloat const TipsLoadingIndicatorWidthAndHeight = 20.0f;
 - (void)startAPIServiceWithLocationString:(NSString *)locationString {
     
     NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
-    [apiService processURLWithCompletion:^(id result, NSError *error) {
+    [apiService processRequestWithCompletion:^(id result) {
+        
+        if ([result isKindOfClass:[NSArray class]]) {
+            [_tips addObjectsFromArray:result];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tableView reloadData];
+                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                [_loadingIndicator stopAnimating];
+            });
+        }
+        else {
+            NSLog(@"Error: the result is not an array in %s.", __PRETTY_FUNCTION__);
+        }
+    } withFailureHandler:^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_tips removeAllObjects];
             if (error.code == 999) {
-                NSLog(@"%@ in %s", error, __PRETTY_FUNCTION__);
                 NDVenueTips *errorVenue = [[NDVenueTips alloc] init];
                 errorVenue.venueName = @"I can't find any venue there :(";
                 [_tips addObject:errorVenue ];
                 [_tableView reloadData];
                 [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             }
-            if (error.code == 998) {
+            else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                 [alert show];
-            }
-            else {
-                if ([[result firstObject] isKindOfClass:[NDVenueTips class]]) {
-                    [_tips addObjectsFromArray:result];
-                    [_tableView reloadData];
-                    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                }
-                else {
-                    NSLog(@"Error: The returned array not contains NDVenueTips in %s.", __PRETTY_FUNCTION__);
-                }
             }
             [_loadingIndicator stopAnimating];
         });
     }];
+    
+    //    NDAPIService *apiService = [[NDAPIService alloc] initWithServiceType:NDServiceTypeTipsSearch withOptionalParameter:locationString];
+    //    [apiService processURLWithCompletion:^(id result, NSError *error) {
+    //        dispatch_async(dispatch_get_main_queue(), ^{
+//            [_tips removeAllObjects];
+//            if (error.code == 999) {
+//                NSLog(@"%@ in %s", error, __PRETTY_FUNCTION__);
+//                NDVenueTips *errorVenue = [[NDVenueTips alloc] init];
+//                errorVenue.venueName = @"I can't find any venue there :(";
+//                [_tips addObject:errorVenue ];
+//                [_tableView reloadData];
+//                [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//            }
+//            if (error.code == 998) {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+//                [alert show];
+//            }
+//            else {
+//                if ([[result firstObject] isKindOfClass:[NDVenueTips class]]) {
+//                    [_tips addObjectsFromArray:result];
+//                    [_tableView reloadData];
+//                    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//                }
+//                else {
+//                    NSLog(@"Error: The returned array not contains NDVenueTips in %s.", __PRETTY_FUNCTION__);
+//                }
+//            }
+//            [_loadingIndicator stopAnimating];
+//        });
+//    }];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
