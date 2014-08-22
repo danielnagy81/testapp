@@ -21,6 +21,7 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
 
 @interface NDTrendingPlacesViewController () {
     
+    BOOL _locationServiceIsWorking;
     __weak IBOutlet UIButton *_nearbyButton;
     __weak IBOutlet UISearchBar *_searchBar;
     __weak IBOutlet NSLayoutConstraint *_searchBarWidthConstraint;
@@ -76,16 +77,31 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
 
 - (IBAction)nearbyButtonPressed:(id)sender {
     
-    [_loadingIndicator startAnimating];
-    [self.view bringSubviewToFront:_loadingIndicator];
-    NSError *locationServiceError = [_locationService currentLocation];
-    
+    NSError *locationServiceError = [_locationService currentLocationWithErrorHandler:^(NSError *error) {
+        if (error) {
+            if (_locationServiceIsWorking) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                [alert show];
+                [_loadingIndicator stopAnimating];
+                _locationServiceIsWorking = NO;
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            }
+        }
+    }];
     if (locationServiceError) {
         if (locationServiceError.code == 998) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[locationServiceError.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
             [alert show];
+            [_loadingIndicator stopAnimating];
+            _locationServiceIsWorking = NO;
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         }
-        [_loadingIndicator stopAnimating];
+    }
+    else {
+        [self.view bringSubviewToFront:_loadingIndicator];
+        [_loadingIndicator startAnimating];
+        _locationServiceIsWorking = YES;
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     }
 }
 
@@ -175,7 +191,7 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
+
     if (locations.count > 0) {
         CLLocation *lastLocation = [locations lastObject];
         _lastLocationCoorindate = lastLocation.coordinate;
@@ -187,6 +203,7 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
         [_loadingIndicator stopAnimating];
     }
     [_locationService stopMonitoring];
+    _locationServiceIsWorking = NO;
 }
 
 - (void)startAPIServiceWithLocationString:(NSString *)locationString {
@@ -203,6 +220,7 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
                     [_trendingPlacesMapView removeAnnotations:annotationsToRemove];
                 }
                 [_loadingIndicator stopAnimating];
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                 [self addTrendingPlacesToMap];
                 [self zoomToTrendingPlaces];
             });
@@ -216,6 +234,7 @@ CGFloat const TrendingPlacesLoadingIndicatorWidthAndHeight = 20.0f;
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
             [alert show];
             [_loadingIndicator stopAnimating];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         });
     }];
 }

@@ -34,7 +34,10 @@
     
     [super viewDidAppear:animated];
     [_locationService setDelegate:self];
-    [_locationService currentLocation];
+    [_locationService currentLocationWithErrorHandler:^(NSError *error) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:[error.userInfo objectForKey:NSLocalizedDescriptionKey] delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alert show];
+    }];
     [PRARManager sharedManagerWithRadarAndSize:self.view.frame.size andDelegate:self];
 }
 

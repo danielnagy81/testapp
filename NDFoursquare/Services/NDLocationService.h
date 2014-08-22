@@ -11,8 +11,10 @@
 
 @interface NDLocationService : NSObject
 
+typedef void (^NDLocationServiceErrorHandler) (NSError *error);
+
 + (NDLocationService *)sharedInstance;
-- (NSError *)currentLocation;
+- (NSError *)currentLocationWithErrorHandler:(NDLocationServiceErrorHandler)errorHandler;
 - (void)stopMonitoring;
 - (void)setDelegate:(id<CLLocationManagerDelegate>)delegate;
 

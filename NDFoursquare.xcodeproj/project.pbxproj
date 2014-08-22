@@ -635,6 +635,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NDFoursquare/NDFoursquare-Prefix.pch";
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7s armv7 arm64";
@@ -652,6 +653,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NDFoursquare/NDFoursquare-Prefix.pch";
 				INFOPLIST_FILE = "NDFoursquare/NDFoursquare-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = "armv7s armv7 arm64";

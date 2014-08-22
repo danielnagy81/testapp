@@ -22,7 +22,8 @@ int64_t const DownloadTimeout = 10;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, DownloadTimeout * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             
             if (!_downloadingFinished) {
-                NSError *downloadError =  [NDErrorFactory errorWithDetails:@"TIMEOUT! There was a problem during the downloading process." withCode:993];
+                _downloadingFinished = YES;
+                NSError *downloadError =  [NDErrorFactory errorWithDetails:@"Try again later, the service is not responding." withCode:993];
                 completion(nil, downloadError);
             }
         });
@@ -33,9 +34,11 @@ int64_t const DownloadTimeout = 10;
             completion(data, nil);
         }
         else {
-            _downloadingFinished = YES;
-            NSError *downloadError = [NDErrorFactory errorWithDetails:@"The returned data is nil." withCode:994];
-            completion(nil, downloadError);
+            if (!_downloadingFinished) {
+                _downloadingFinished = YES;
+                NSError *downloadError = [NDErrorFactory errorWithDetails:@"The returned data is nil." withCode:994];
+                completion(nil, downloadError);
+            }
         }
     }
     else {

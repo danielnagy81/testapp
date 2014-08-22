@@ -10,11 +10,13 @@
 #import "NDNetworkStatusService.h"
 #import "NDErrorFactory.h"
 
+int64_t const LocationManagerTimeout = 10;
+
 static NDLocationService *locationService;
 
 @implementation NDLocationService {
     
-    BOOL _updating;
+    __block BOOL _updating;
     NDNetworkStatusService *_networkService;
     CLLocationManager *_locationManager;
 }
@@ -42,13 +44,23 @@ static NDLocationService *locationService;
     _locationManager.delegate = delegate;
 }
 
-- (NSError *)currentLocation {
+- (NSError *)currentLocationWithErrorHandler:(NDLocationServiceErrorHandler)errorHandler {
     
     NSError *error = nil;
     if ([_networkService isNetworkReachable]) {
         if (!_updating) {
             [_locationManager startUpdatingLocation];
             _updating = YES;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, LocationManagerTimeout * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                _updating = NO;
+                if (errorHandler) {
+                    NSError *timeoutError = [NDErrorFactory errorWithDetails:@"Try again later, the service is not responding." withCode:993];
+                    errorHandler(timeoutError);
+                }
+                else {
+                    NSLog(@"Error: the errorHandler block is nil.");
+                }
+            });
         }
         else {
             error = [NDErrorFactory errorWithDetails:@"The location manager is already updating the location." withCode:997];
